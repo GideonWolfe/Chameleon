@@ -6,11 +6,19 @@ If the script detects you have certain programs on your system, it will try to g
 
 The current programs are ones that I use, but feel free to add more and send a PR!
 
+## Installation
+
+```bash
+git clone https://github.com/GideonWolfe/autoTheme/
+cd autoTheme
+sudo ./install.sh
+```
+
 ## Usage
 
 `theme [path to picture] [options for wal]`
 
-There are so many programs called from this script, it is easier to just edit the script to change the flags to your liking. for example, `wal_steam` is set to always use the `-w` option to take colors from wal. If you would rather use `-w` for a wpgtk theme, just change it in the script.
+There are so many programs called from this script, it is easier to just edit the script to change the flags to your liking. for example, `wal_steam` is set to always use the `-w` option to take colors from wal. If you would rather use `-g` for a wpgtk theme, just change it in the script.
 
 ## Programs supported
 [oomox](https://github.com/themix-project/oomox) for GTK and Spotify
@@ -27,3 +35,6 @@ There are so many programs called from this script, it is easier to just edit th
 
 ## Planned support
 DuckDuckGo search colors
+
+## Notes
+To get the most complete theme possible, check out my [dotfiles](https://github.com/GideonWolfe/PC-dotfiles). Here you can find the configurations to get these colors on many other programs, such as rofi, polybar, firefox, and more. Since they update automatically, there was no need to include them in this script.
