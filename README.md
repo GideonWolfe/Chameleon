@@ -14,10 +14,15 @@ There are so many programs called from this script, it is easier to just edit th
 
 ## Programs supported
 [oomox](https://github.com/themix-project/oomox) for GTK and Spotify
+
 [Zathura-Pywal](https://github.com/GideonWolfe/Zathura-Pywal)
+
 [Gnuplot-Pywal](https://github.com/GideonWolfe/Gnuplot-Pywal)
+
 [wal_steam](https://github.com/kotajacob/wal_steam) for steam
+
 [ckb-next](https://github.com/ckb-next/ckb-next) for corsair keyboards
+
 [telegram-palette-gen](https://github.com/matgua/telegram-palette-gen) for telegram-desktop
 
 ## Planned support
