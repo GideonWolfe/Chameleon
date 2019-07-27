@@ -6,6 +6,14 @@ If the script detects you have certain programs on your system, it will try to g
 
 The current programs are ones that I use, but feel free to add more and send a PR!
 
+## Installation
+
+```bash
+git clone https://github.com/GideonWolfe/autoTheme/
+cd autoTheme
+sudo ./install.sh
+```
+
 ## Usage
 
 `theme [path to picture] [options for wal]`
