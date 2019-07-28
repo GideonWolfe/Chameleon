@@ -35,6 +35,8 @@ There are so many programs called from this script, it is easier to just edit th
 
 ## Planned support
 DuckDuckGo search colors
+IntelliJ IDE's
+Discord
 
 ## Notes
 To get the most complete theme possible, check out my [dotfiles](https://github.com/GideonWolfe/PC-dotfiles). Here you can find the configurations to get these colors on many other programs, such as rofi, polybar, firefox, and more. Since they update automatically, there was no need to include them in this script.
