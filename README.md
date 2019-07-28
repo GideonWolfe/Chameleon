@@ -33,9 +33,10 @@ There are so many programs called from this script, it is easier to just edit th
 
 * [telegram-palette-gen](https://github.com/matgua/telegram-palette-gen) for telegram-desktop
 
+* [intelliJPywal](https://github.com/0x6C38/intellijPywal) for IntelliJ and other JetBrains IDEs (requires configuration in script)
+
 ## Planned support
 DuckDuckGo search colors
-IntelliJ IDE's
 Discord
 
 ## Notes
