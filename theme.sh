@@ -27,6 +27,20 @@ if [ -x "$(command -v oomox-cli)" ]; then
     echo ""
 fi
 
+# Set the icon theme. Requires archdroid icons
+# https://aur.archlinux.org/packages/archdroid-icon-theme/
+# To use other icons, there are other oomox commands ie.
+# oomox-gnome-colors-icons-cli
+# use lxappearance to select the oomox-xresources-flat icon theme
+if [ -d /usr/share/icons/Archdroid-Red ]; then
+    echo "##########################"
+    echo "# Updating Icon theme     #"
+    echo "##########################"
+    oomox-archdroid-icons-cli /opt/oomox/scripted_colors/xresources/xresources2
+    echo "Icon Theme Generated"
+    echo ""
+fi
+
 # Set wallpaper to stretch all monitors
 #feh $FILEPATH --bg-fill --no-xinerama
 
