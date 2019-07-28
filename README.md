@@ -1,5 +1,7 @@
 # autoTheme
 
+![alt text](https://media.giphy.com/media/lnCisuSf7w1tdI2HYu/giphy.gif)
+
 This script acts as an extension to wal, by taking the generated colors and theming anything that can be themed, all in one script. 
 
 If the script detects you have certain programs on your system, it will try to generate themes for them.
