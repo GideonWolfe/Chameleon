@@ -47,7 +47,7 @@ fi
 # Set the colors for telegram-desktop
 # Chat background not setting for some reason, must set manually
 if [ -x "$(command -v telegram-desktop)" ]; then
-    if ! [ test -f "$HOME/.telegram-palette-gen/telegram-palette-gen" ]; then
+    if ! [ -d $HOME/.telegram-palette-gen/ ]; then
         echo "Install telegram palette gen: https://github.com/matgua/telegram-palette-gen"
     else
         echo "##########################"
@@ -77,7 +77,7 @@ if [ -x "$(command -v ckb-next)" ]; then
     echo "###########################"
     echo "# Updating Keyboard Color #"
     echo "###########################"
-    KEYBOARDCOLOR=$(cat colors.css | grep color6 | awk '{print $2}' | cut -c2- | rev | cut -c2- | rev)
+    KEYBOARDCOLOR=$(cat $HOME/.cache/wal/colors.css | grep color6 | awk '{print $2}' | cut -c2- | rev | cut -c2- | rev)
     echo rgb $KEYBOARDCOLOR > /dev/input/ckb1/cmd
     echo "Keyboard Color Set"
     echo ""
@@ -112,5 +112,20 @@ if [ -x "$(command -v gengnuplotconfig)" ]; then
     echo "##########################"
     gengnuplotconfig > $HOME/.gnuplot
     echo "Gnuplot Theme Set"
+    echo ""
+fi
+
+# Update IntelliJ colors (requires https://github.com/0x6C38/intellijPywal)
+# Symlink intellijPywalGen.sh to /usr/bin or /usr/local/bin
+# sudo ln -s /path/to/intelliJPywalGen.sh /usr/local/intelliJPywalGen
+# You also must hardcode in your IntelliJ direcntory to pass into the script.
+# example: intellijPywalGen $HOME/.IdeaIC2019.2/config/
+if [ -x "$(command -v intelliJPywalGen)" ]; then
+    CONFIGDIR=$HOME/.IdeaIC2019.2/config/
+    echo "##################################"
+    echo "# Updating IntelliJ Color Scheme #"
+    echo "##################################"
+    intelliJPywalGen $CONFIGDIR
+    echo "IntelliJ Theme Set"
     echo ""
 fi
