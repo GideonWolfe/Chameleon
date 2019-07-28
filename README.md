@@ -1,6 +1,6 @@
-# autoTheme
+![alt text](https://media.giphy.com/media/WRXd64lryjPN4Rkj9K/giphy.gif)
 
-![alt text](https://media.giphy.com/media/lnCisuSf7w1tdI2HYu/giphy.gif)
+# autoTheme
 
 This script acts as an extension to wal, by taking the generated colors and theming anything that can be themed, all in one script. 
 
