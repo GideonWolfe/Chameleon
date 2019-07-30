@@ -38,8 +38,9 @@ There are so many programs called from this script, it is easier to just edit th
 * [intelliJPywal](https://github.com/0x6C38/intellijPywal) for IntelliJ and other JetBrains IDEs (requires configuration in script)
 
 ## Planned support
-DuckDuckGo search colors
-Discord
+* DuckDuckGo search colors
+* Discord (wal-discord seems broken for me)
+* razer keyboards with [openrazer_pywal](https://github.com/bisspector/openrazer_pywal). I don't have a razer keyboard to test.
 
 ## Notes
 To get the most complete theme possible, check out my [dotfiles](https://github.com/GideonWolfe/PC-dotfiles). Here you can find the configurations to get these colors on many other programs, such as rofi, polybar, firefox, and more. Since they update automatically, there was no need to include them in this script.
