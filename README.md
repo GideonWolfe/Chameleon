@@ -43,7 +43,7 @@ sudo ./install.sh
 
 ## Usage
 
-`theme [path to picture] [options for wal]`
+`chameleon [path to picture] [options for wal]`
 
 There are so many programs called from this script, it is easier to just edit the script to change the flags to your liking. for example, `wal_steam` is set to always use the `-w` option to take colors from wal. If you would rather use `-g` for a wpgtk theme, just change it in the script.
 
