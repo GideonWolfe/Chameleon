@@ -1,5 +1,3 @@
-![alt text](https://media.giphy.com/media/WRXd64lryjPN4Rkj9K/giphy.gif)
-
 
 
 
@@ -27,7 +25,9 @@ _.-''{    { ; ; ,', '  :
  \____/_/ /_/\__,_/_/ /_/ /_/\___/_/\___/\____/_/ /_/ 
 
 
+![alt text](https://media.giphy.com/media/WRXd64lryjPN4Rkj9K/giphy.gif)
 
+=======
 
 This script acts as an extension to wal, by taking the generated colors and theming anything that can be themed, all in one script. 
 
