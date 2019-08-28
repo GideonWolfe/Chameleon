@@ -1,4 +1,33 @@
-# autoTheme
+![alt text](https://media.giphy.com/media/WRXd64lryjPN4Rkj9K/giphy.gif)
+
+
+
+
+                      _       _._
+               _,,-''' ''-,_ }'._''.,_.=._
+            ,-'      _ _    '        (  @)'-,
+          ,'  _..==;;::_::'-     __..----'''}
+         :  .'::_;==''       ,'',: : : '' '}
+        }  '::-'            /   },: : : :_,'
+       :  :'     _..,,_    '., '._-,,,--\'    _
+      :  ;   .-'       :      '-, ';,__\.\_.-'
+     {   '  :    _,,,   :__,,--::',,}___}^}_.-'
+     }        _,'__''',  ;_.-''_.-'
+    :      ,':-''  ';, ;  ;_..-'
+_.-' }    ,',' ,''',  : ^^
+_.-''{    { ; ; ,', '  :
+      }   } :  ;_,' ;  }
+       {   ',',___,'   '
+        ',           ,'
+          '-,,__,,-'
+   ________                         __               
+   / ____/ /_  ____ _____ ___  ___  / /__  ____  ____ 
+  / /   / __ \/ __  / __  __ \/ _ \/ / _ \/ __ \/ __ \ 
+ / /___/ / / / /_/ / / / / / /  __/ /  __/ /_/ / / / / 
+ \____/_/ /_/\__,_/_/ /_/ /_/\___/_/\___/\____/_/ /_/ 
+
+
+
 
 This script acts as an extension to wal, by taking the generated colors and theming anything that can be themed, all in one script. 
 
@@ -9,8 +38,8 @@ The current programs are ones that I use, but feel free to add more and send a P
 ## Installation
 
 ```bash
-git clone https://github.com/GideonWolfe/autoTheme/
-cd autoTheme
+git clone https://github.com/GideonWolfe/Chameleon/
+cd Chameleon
 sudo ./install.sh
 ```
 
@@ -36,8 +65,9 @@ There are so many programs called from this script, it is easier to just edit th
 * [intelliJPywal](https://github.com/0x6C38/intellijPywal) for IntelliJ and other JetBrains IDEs (requires configuration in script)
 
 ## Planned support
-DuckDuckGo search colors
-Discord
+* DuckDuckGo search colors
+* Discord (wal-discord seems broken for me)
+* razer keyboards with [openrazer_pywal](https://github.com/bisspector/openrazer_pywal). I don't have a razer keyboard to test.
 
 ## Notes
 To get the most complete theme possible, check out my [dotfiles](https://github.com/GideonWolfe/PC-dotfiles). Here you can find the configurations to get these colors on many other programs, such as rofi, polybar, firefox, and more. Since they update automatically, there was no need to include them in this script.

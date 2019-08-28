@@ -8,6 +8,33 @@ if (( $# < 1 )); then
     exit 1
 fi
 
+echo "                      _       _._"
+echo "               _,,-''' ''-,_ }'._''.,_.=._"
+echo "            ,-'      _ _    '        (  @)'-,"
+echo "          ,'  _..==;;::_::'-     __..----'''}"
+echo "         :  .'::_;==''       ,'',: : : '' '}"
+echo "        }  '::-'            /   },: : : :_,'"
+echo "       :  :'     _..,,_    '., '._-,,,--\'    _"
+echo "      :  ;   .-'       :      '-, ';,__\.\_.-'"
+echo "     {   '  :    _,,,   :__,,--::',,}___}^}_.-'"
+echo "     }        _,'__''',  ;_.-''_.-'"
+echo "    :      ,':-''  ';, ;  ;_..-'"
+echo "_.-' }    ,',' ,''',  : ^^"
+echo "_.-''{    { ; ; ,', '  :"
+echo "      }   } :  ;_,' ;  }"
+echo "       {   ',',___,'   '"
+echo "        ',           ,'"
+echo "          '-,,__,,-'"
+echo "   ________                         __               "
+echo "   / ____/ /_  ____ _____ ___  ___  / /__  ____  ____ "
+echo "  / /   / __ \/ __  / __  __ \/ _ \/ / _ \/ __ \/ __ \ "
+echo " / /___/ / / / /_/ / / / / / /  __/ /  __/ /_/ / / / / "
+echo " \____/_/ /_/\__,_/_/ /_/ /_/\___/_/\___/\____/_/ /_/ "
+
+
+
+
+
 # Extract the filepath of the image and call wal on it
 # You can pass wal command flags to this script and they are passed to wal
 echo "#######################"
@@ -23,7 +50,7 @@ if [ -x "$(command -v oomox-cli)" ]; then
     echo "##########################"
     echo "# Updating GTK theme     #"
     echo "##########################"
-    oomox-cli /opt/oomox/scripted_colors/xresources/xresources2
+    oomox-cli /opt/oomox/scripted_colors/xresources/xresources-dark
     echo ""
 fi
 
@@ -36,7 +63,7 @@ if [ -d /usr/share/icons/Archdroid-Red ]; then
     echo "##########################"
     echo "# Updating Icon theme     #"
     echo "##########################"
-    oomox-archdroid-icons-cli /opt/oomox/scripted_colors/xresources/xresources2
+    oomox-archdroid-icons-cli /opt/oomox/scripted_colors/xresources/xresources-dark
     echo "Icon Theme Generated"
     echo ""
 fi
