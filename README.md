@@ -1,4 +1,4 @@
-
+![alt text](https://media.giphy.com/media/WRXd64lryjPN4Rkj9K/giphy.gif)
 ```
 
                       _       _._
@@ -24,8 +24,6 @@ _.-''{    { ; ; ,', '  :
  / /___/ / / / /_/ / / / / / /  __/ /  __/ /_/ / / / / 
  \____/_/ /_/\__,_/_/ /_/ /_/\___/_/\___/\____/_/ /_/ 
 ```
-
-![alt text](https://media.giphy.com/media/WRXd64lryjPN4Rkj9K/giphy.gif)
 
 =======
 
