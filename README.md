@@ -58,6 +58,8 @@ There are so many programs called from this script, it is easier to just edit th
 
 * [ckb-next](https://github.com/ckb-next/ckb-next) for corsair keyboards
 
+* [razer-cli](https://github.com/LoLei/razer-cli) for razer keyboards
+
 * [telegram-palette-gen](https://github.com/matgua/telegram-palette-gen) for telegram-desktop
 
 * [intelliJPywal](https://github.com/0x6C38/intellijPywal) for IntelliJ and other JetBrains IDEs (requires configuration in script)

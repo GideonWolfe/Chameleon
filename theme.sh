@@ -110,6 +110,17 @@ if [ -x "$(command -v ckb-next)" ]; then
     echo ""
 fi
 
+# Update Keyboard colors (razer keyboards)
+if [ -x "$(command -v razer-cli)" ]; then
+    echo "###########################"
+    echo "# Updating Keyboard Color #"
+    echo "###########################"
+    razer-cli -a
+    echo "Keyboard Color Set"
+    echo ""
+fi
+
+
 # Update Spotify colors (requires app restart)
 if [ -x "$(command -v spotify)" ]; then
     if [ -x "$(command -v oomoxify-cli)" ]; then
