@@ -58,7 +58,7 @@ There are so many programs called from this script, it is easier to just edit th
 
 * [ckb-next](https://github.com/ckb-next/ckb-next) for corsair keyboards
 
-* [razer-cli](https://github.com/LoLei/razer-cli) for razer keyboards
+* [razer-cli](https://github.com/LoLei/razer-cli) for razer devices
 
 * [telegram-palette-gen](https://github.com/matgua/telegram-palette-gen) for telegram-desktop
 
@@ -67,7 +67,6 @@ There are so many programs called from this script, it is easier to just edit th
 ## Planned support
 * DuckDuckGo search colors
 * Discord (wal-discord seems broken for me)
-* razer keyboards with [openrazer_pywal](https://github.com/bisspector/openrazer_pywal). I don't have a razer keyboard to test.
 
 ## Notes
 To get the most complete theme possible, check out my [dotfiles](https://github.com/GideonWolfe/PC-dotfiles). Here you can find the configurations to get these colors on many other programs, such as rofi, polybar, firefox, and more. Since they update automatically, there was no need to include them in this script.
