@@ -113,10 +113,10 @@ fi
 # Update Keyboard colors (razer keyboards)
 if [ -x "$(command -v razer-cli)" ]; then
     echo "###########################"
-    echo "# Updating Keyboard Color #"
+    echo "# Updating Razer Devices Color #"
     echo "###########################"
     razer-cli -a
-    echo "Keyboard Color Set"
+    echo "Razer Devices Color Set"
     echo ""
 fi
 
