@@ -1,6 +1,8 @@
-![alt text](https://media.giphy.com/media/WRXd64lryjPN4Rkj9K/giphy.gif)
-```
+<p align="center">
+  <img src="https://media.giphy.com/media/WRXd64lryjPN4Rkj9K/giphy.gif", width="800", height="600", title="chameleon"/>
+</p>
 
+```
                       _       _._
                _,,-''' ''-,_ }'._''.,_.=._
             ,-'      _ _    '        (  @)'-,
