@@ -50,7 +50,7 @@ if [ -x "$(command -v oomox-cli)" ]; then
     echo "##########################"
     echo "# Updating GTK theme     #"
     echo "##########################"
-    oomox-cli /opt/oomox/scripted_colors/xresources/xresources-dark
+    oomox-cli /opt/oomox/scripted_colors/xresources/xresources-reverse
     echo ""
 fi
 
@@ -63,7 +63,7 @@ if [ -d /usr/share/icons/Archdroid-Red ]; then
     echo "##########################"
     echo "# Updating Icon theme     #"
     echo "##########################"
-    oomox-archdroid-icons-cli /opt/oomox/scripted_colors/xresources/xresources-dark
+    oomox-archdroid-icons-cli /opt/oomox/scripted_colors/xresources/xresources-reverse
     echo "Icon Theme Generated"
     echo ""
 fi
