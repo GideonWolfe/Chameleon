@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://media.giphy.com/media/WRXd64lryjPN4Rkj9K/giphy.gif", width="800", height="600", title="chameleon"/>
-</p>
-
 ```
                       _       _._
                _,,-''' ''-,_ }'._''.,_.=._
@@ -20,20 +16,24 @@ _.-''{    { ; ; ,', '  :
        {   ',',___,'   '
         ',           ,'
           '-,,__,,-'
-   ________                         __               
-   / ____/ /_  ____ _____ ___  ___  / /__  ____  ____ 
-  / /   / __ \/ __  / __  __ \/ _ \/ / _ \/ __ \/ __ \ 
- / /___/ / / / /_/ / / / / / /  __/ /  __/ /_/ / / / / 
- \____/_/ /_/\__,_/_/ /_/ /_/\___/_/\___/\____/_/ /_/ 
 ```
 
-=======
 
 This script acts as an extension to wal, by taking the generated colors and theming anything that can be themed, all in one script. 
 
 If the script detects you have certain programs on your system, it will try to generate themes for them.
 
 The current programs are ones that I use, but feel free to add more and send a PR!
+
+# Examples
+
+![alt-text](https://i.imgur.com/C3znJJJ.png)
+
+Programs that use GTK themes like Thunar and Baobab should just pick up the theme, assuming you have selected the `oomox-xresources-reverse` theme in `lxappearance`. Spotify and Telegram shown here rocking their custom generated themes.
+
+![alt-text](https://i.imgur.com/j4SEVpE.png)
+
+Programs that use Qt themes can also be configured to take themes from GTK, meaning we can theme them as well! The programs must be launched with the `--style gtk2` flag, and you must install and configure [qt5-styleplugins](https://www.archlinux.org/packages/community/x86_64/qt5-styleplugins/).
 
 ## Installation
 
@@ -56,7 +56,7 @@ There are so many programs called from this script, it is easier to just edit th
 
 * [Gnuplot-Pywal](https://github.com/GideonWolfe/Gnuplot-Pywal)
 
-* [wal_steam](https://github.com/kotajacob/wal_steam) for steam
+* [wal_steam](https://github.com/kotajacob/wal_steam) for steam: **NOTE**: Not guarunteed to work with steam library overhaul
 
 * [ckb-next](https://github.com/ckb-next/ckb-next) for corsair keyboards
 
