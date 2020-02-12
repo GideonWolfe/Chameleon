@@ -14,7 +14,7 @@ slickconf="/etc/lightdm/slick-greeter.conf"
 if ! [[ -f $slickconf ]]; then
   touch $slickconf
   echo "[Greeter]" >> $slickconf
-  echo "background=/usr/share/wallpapers/wal"
+  echo "background=/usr/share/wallpapers/wal" >> $slickconf
 else
   sed -i.chmlnbk "s/background=.*/background=\/usr\/share\/wallpapers\/wal/g" /etc/lightdm/slick-greeter.conf
 fi
