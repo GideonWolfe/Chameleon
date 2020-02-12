@@ -167,3 +167,16 @@ if [ -x "$(command -v intelliJPywalGen)" ]; then
     echo "IntelliJ Theme Set"
     echo ""
 fi
+
+
+#Update leds (requires https://github.com/Paul-Houser/pyWalNeopixels)
+if [ -x "$(command -v startLEDS)" ]; then
+  if [ -x "$(command -v stopLEDS)" ]; then
+    echo "###########################"
+    echo "# Updating PywalNeopixels #"
+    echo "###########################"
+    startLEDS
+    echo "PywalNeopixels set"
+    echo ""
+  fi
+fi
