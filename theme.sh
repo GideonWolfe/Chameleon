@@ -37,12 +37,22 @@ echo " \____/_/ /_/\__,_/_/ /_/ /_/\___/_/\___/\____/_/ /_/ "
 
 # Extract the filepath of the image and call wal on it
 # You can pass wal command flags to this script and they are passed to wal
-echo "#######################"
-echo "# Running Wal On Image#"
-echo "#######################"
+echo "########################"
+echo "# Running Wal On Image #"
+echo "########################"
 FILEPATH=$(readlink -f "$1")
 wal -i $FILEPATH ${@:2}
 echo ""
+
+# Copy wallpaper to usr/share/wallpapers/wal for lightdm background
+echo "#####################################"
+echo "# Updating Slick-Greeter Background #"
+echo "#####################################"
+if ! [ -d /usr/share/wallpapers ]; then
+  echo "Run the install script as root to generate the directories needed."
+else
+  cp "$1" "/usr/share/wallpapers/wal"
+fi
 
 # Set the GTK theme
 # use lxappearance to select the oomox-xresources theme 
@@ -171,12 +181,10 @@ fi
 
 #Update leds (requires https://github.com/Paul-Houser/pyWalNeopixels)
 if [ -x "$(command -v startLEDS)" ]; then
-  if [ -x "$(command -v stopLEDS)" ]; then
-    echo "###########################"
-    echo "# Updating PywalNeopixels #"
-    echo "###########################"
-    startLEDS
-    echo "PywalNeopixels set"
-    echo ""
-  fi
+  echo "###########################"
+  echo "# Updating PywalNeopixels #"
+  echo "###########################"
+  startLEDS
+  echo "PywalNeopixels set"
+  echo ""
 fi
