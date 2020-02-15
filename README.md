@@ -70,8 +70,6 @@ There are so many programs called from this script, it is easier to just edit th
 
 * [intelliJPywal](https://github.com/0x6C38/intellijPywal) for IntelliJ and other JetBrains IDEs (requires configuration in script)
 
-* [pyWalNeopixels](https://github.com/Paul-Houser/pyWalNeopixels)
-
 ## Planned support
 * DuckDuckGo search colors
 * Discord (wal-discord seems broken for me)
