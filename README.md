@@ -56,6 +56,10 @@ There are so many programs called from this script, it is easier to just edit th
 
 * [Gnuplot-Pywal](https://github.com/GideonWolfe/Gnuplot-Pywal)
 
+* [pyWalNeopixels](https://github.com/Paul-Houser/pyWalNeopixels)
+
+* [slickgreeter-pywal](https://github.com/Paul-Houser/slickgreeter-pywal)
+
 * [wal_steam](https://github.com/kotajacob/wal_steam) for steam: **NOTE**: Not guarunteed to work with steam library overhaul
 
 * [ckb-next](https://github.com/ckb-next/ckb-next) for corsair keyboards
