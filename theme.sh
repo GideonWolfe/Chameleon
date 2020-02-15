@@ -169,7 +169,7 @@ if [ -x "$(command -v intelliJPywalGen)" ]; then
 fi
 
 
-#Update leds (requires https://github.com/Paul-Houser/pyWalNeopixels)
+# Update leds (requires https://github.com/Paul-Houser/pyWalNeopixels)
 if [ -x "$(command -v startLEDS)" ]; then
   echo "###########################"
   echo "# Updating PywalNeopixels #"
@@ -177,4 +177,14 @@ if [ -x "$(command -v startLEDS)" ]; then
   startLEDS
   echo "PywalNeopixels set"
   echo ""
+fi
+
+
+# Update slickgreeter-pywal (requires https://github.com/Paul-Houser/slickgreeter-pywal)
+if [ -x "$(command -v slick-pywal)" ]; then
+  echo "##########################"
+  echo "# Updating Slick-Greeter #"
+  echo "##########################"
+  slick-pywal
+  echo""
 fi
