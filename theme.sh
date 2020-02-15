@@ -37,9 +37,9 @@ echo " \____/_/ /_/\__,_/_/ /_/ /_/\___/_/\___/\____/_/ /_/ "
 
 # Extract the filepath of the image and call wal on it
 # You can pass wal command flags to this script and they are passed to wal
-echo "#######################"
-echo "# Running Wal On Image#"
-echo "#######################"
+echo "########################"
+echo "# Running Wal On Image #"
+echo "########################"
 FILEPATH=$(readlink -f "$1")
 wal -i $FILEPATH ${@:2}
 echo ""
@@ -166,4 +166,15 @@ if [ -x "$(command -v intelliJPywalGen)" ]; then
     intelliJPywalGen $CONFIGDIR
     echo "IntelliJ Theme Set"
     echo ""
+fi
+
+
+#Update leds (requires https://github.com/Paul-Houser/pyWalNeopixels)
+if [ -x "$(command -v startLEDS)" ]; then
+  echo "###########################"
+  echo "# Updating PywalNeopixels #"
+  echo "###########################"
+  startLEDS
+  echo "PywalNeopixels set"
+  echo ""
 fi
