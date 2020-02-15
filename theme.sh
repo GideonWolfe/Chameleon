@@ -44,18 +44,6 @@ FILEPATH=$(readlink -f "$1")
 wal -i $FILEPATH ${@:2}
 echo ""
 
-# Copy wallpaper to usr/share/wallpapers/wal for lightdm background
-echo "#####################################"
-echo "# Updating Slick-Greeter Background #"
-echo "#####################################"
-if ! [ -d /usr/share/wallpapers ]; then
-  echo "ERROR: Run the install script as root to generate the directories needed."
-else
-  cp "$1" "/usr/share/wallpapers/wal"
-  echo "Background Set"
-fi
-echo ""
-
 # Set the GTK theme
 # use lxappearance to select the oomox-xresources theme 
 if [ -x "$(command -v oomox-cli)" ]; then
