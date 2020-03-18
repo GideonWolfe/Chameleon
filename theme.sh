@@ -122,12 +122,21 @@ fi
 
 
 # Update Spotify colors (requires app restart)
+# You can opt for the GTK theme generated from oomox or spicetify wal theme
 if [ -x "$(command -v spotify)" ]; then
     if [ -x "$(command -v oomoxify-cli)" ]; then
         echo "##########################"
         echo "# Updating Spotify Color #"
         echo "##########################"
         oomoxify-cli  $HOME/.cache/wal/colors-oomox -s /opt/spotify/Apps/
+        echo "Spotify Theme Set"
+        echo ""
+    fi
+    if [ -x "$(command -v spicetify)" ]; then
+        echo "##########################"
+        echo "# Updating Spotify Color #"
+        echo "##########################"
+        spicetify update
         echo "Spotify Theme Set"
         echo ""
     fi
