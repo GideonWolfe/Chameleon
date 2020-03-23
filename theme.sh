@@ -168,7 +168,7 @@ fi
 # You also must hardcode in your IntelliJ direcntory to pass into the script.
 # example: intellijPywalGen $HOME/.IdeaIC2019.2/config/
 if [ -x "$(command -v intelliJPywalGen)" ]; then
-    CONFIGDIR=$HOME/.IdeaIC2019.2/config/
+    CONFIGDIR=$HOME/.PyCharmCE2019.2/config/
     echo "##################################"
     echo "# Updating IntelliJ Color Scheme #"
     echo "##################################"
@@ -189,11 +189,24 @@ if [ -x "$(command -v startLEDS)" ]; then
 fi
 
 
-# Update slickgreeter-pywal (requires https://github.com/Paul-Houser/slickgreeter-pywal)
+# update slickgreeter-pywal (requires https://github.com/paul-houser/slickgreeter-pywal)
 if [ -x "$(command -v slick-pywal)" ]; then
   echo "##########################"
-  echo "# Updating Slick-Greeter #"
+  echo "# updating slick-greeter #"
   echo "##########################"
   slick-pywal
   echo""
+fi
+
+
+# update pywalfox (requires https://github.com/Frewacom/Pywalfox)
+# set variable to location of pywalfox.py
+# /some/directory/Pywalfox/daemon
+PYWALFOXDIR=
+if test -d "$PYWALFOXDIR"; then
+ echo "####################"
+ echo "# updating firefox #"
+ echo "####################"
+ python3 $PYWALFOXDIR/pywalfox.py update
+ echo""
 fi
