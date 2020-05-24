@@ -188,6 +188,16 @@ if [ -x "$(command -v startLEDS)" ]; then
   echo ""
 fi
 
+# Update Discord
+if [ -x "$(command -v pywal-discord)" ]; then
+  echo "###########################"
+  echo "# Updating pywal-discord  #"
+  echo "###########################"
+  pywal-discord
+  echo "Discord theme set"
+  echo ""
+fi
+
 
 # update slickgreeter-pywal (requires https://github.com/paul-houser/slickgreeter-pywal)
 if [ -x "$(command -v slick-pywal)" ]; then
@@ -202,7 +212,7 @@ fi
 # update pywalfox (requires https://github.com/Frewacom/Pywalfox)
 # set variable to location of pywalfox.py
 # /some/directory/Pywalfox/daemon
-PYWALFOXDIR=
+PYWALFOXDIR=$HOME/Programs/Pywalfox/daemon
 if test -d "$PYWALFOXDIR"; then
  echo "####################"
  echo "# updating firefox #"
