@@ -203,7 +203,7 @@ if [ -x "$(command -v wal-discord)" ]; then
   echo "###########################"
   echo "# Updating wal-discord  #"
   echo "###########################"
-  wal-discord
+  wal-discord -t
   echo "Discord theme set"
   echo ""
 fi
