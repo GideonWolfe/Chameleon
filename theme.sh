@@ -198,6 +198,16 @@ if [ -x "$(command -v pywal-discord)" ]; then
   echo ""
 fi
 
+# Update Discord
+if [ -x "$(command -v wal-discord)" ]; then
+  echo "###########################"
+  echo "# Updating wal-discord  #"
+  echo "###########################"
+  wal-discord
+  echo "Discord theme set"
+  echo ""
+fi
+
 
 # update slickgreeter-pywal (requires https://github.com/paul-houser/slickgreeter-pywal)
 if [ -x "$(command -v slick-pywal)" ]; then

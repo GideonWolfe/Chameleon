@@ -74,6 +74,8 @@ There are so many programs called from this script, it is easier to just edit th
 
 * [pywal-discord](https://github.com/FilipLitwora/pywal-discord) to theme Discord
 
+* [wal-discord](https://github.com/guglicap/wal-discord) to theme Discord
+
 ## Planned support
 
 ## Notes
