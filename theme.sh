@@ -233,6 +233,9 @@ fi
 
 # Pywal theme for cordless! 
 # Must have my custom pywal cordless template installed
+# needed go deps: github.com/Bios-Marcel/cordless/config
+# github.com/Bios-Marcel/cordless/tview
+# github.com/gdamore/tcell
 if test -f "$HOME/.config/wal/templates/cordless.go"; then
  echo "#####################"
  echo "# updating cordless #"
