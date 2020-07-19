@@ -230,3 +230,13 @@ if test -d "$PYWALFOXDIR"; then
  python3 $PYWALFOXDIR/pywalfox.py update
  echo""
 fi
+
+# Pywal theme for cordless! 
+# Must have my custom pywal cordless template installed
+if test -f "$HOME/.config/wal/templates/cordless.go"; then
+ echo "#####################"
+ echo "# updating cordless #"
+ echo "#####################"
+ go run $HOME/.cache/wal/cordless.go > $HOME/.config/cordless/theme.json
+ echo""
+fi
