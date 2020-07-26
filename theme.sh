@@ -243,3 +243,14 @@ if test -f "$HOME/.config/wal/templates/cordless.go"; then
  go run $HOME/.cache/wal/cordless.go > $HOME/.config/cordless/theme.json
  echo""
 fi
+
+# Pywal theme for xmenu! 
+# symlink $HOME/.config/wal/templates/xmenu-config.h to config.h where xmenu lives
+XMENUDIR=/home/gideon/Programs/xmenu/
+if [ -x "$(command -v xmenu)" ]; then
+ echo "##################"
+ echo "# updating xmenu #"
+ echo "##################"
+ (cd $XMENUDIR && make && sudo make install) 
+ echo""
+fi
