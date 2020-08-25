@@ -16,7 +16,7 @@ config_path = home + '/.config/chameleon/config.yaml'
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('--scheme', '-s', type=str, nargs='+', help='a color scheme name to use as a theme')
+    parser.add_argument('--theme', '-t', type=str, nargs='+', help='a color scheme name to use as a theme')
     parser.add_argument('--image', '-i', type=str, nargs='+', help='an image file to use as a theme')
     args = parser.parse_args()
     return args
@@ -34,14 +34,24 @@ def print_keys(dictionary):
             print_keys(dictionary[key])
 
 def call_wal(args):
-    imagepath = os.path.abspath()
-    commandstring = "wal -i " + imagepath
+    # if we are calling wal on an image
+    if(args.image):
+        imagepath = os.path.abspath(args.image[0])
+        commandstring = "wal -i "+imagepath
+        print(commandstring)
+        os.system(commandstring)
+    # if we are using a prebuilt or custom colorscheme
+    if(args.theme):
+        commandstring = "wal --theme "+args.theme[0]
+        print(commandstring)
+    else:
+        print("Error, missing required argument")
 
 def main():
     #  file_dict = parse_yaml()
     #  print_keys(file_dict)
     args = parse_args()
-    print(args)
+    call_wal(args)
 
 if __name__ == '__main__':
     main()
