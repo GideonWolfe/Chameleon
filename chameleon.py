@@ -10,6 +10,19 @@ from bs4 import BeautifulSoup
 from whichcraft import which
 from shutil import which
 
+#  _   _ _   _ _ _ _   _           
+# | | | | |_(_) (_) |_(_) ___  ___ 
+# | | | | __| | | | __| |/ _ \/ __|
+# | |_| | |_| | | | |_| |  __/\__ \
+#  \___/ \__|_|_|_|\__|_|\___||___/
+
+def print_status(status, program):
+    if(status == 0):
+        print("⚡ Themed "+program)
+
+def is_tool(name):
+    """Check whether `name` is on PATH and marked as executable."""
+    return which(name) is not None
 
 #   ____             __ _       
 #  / ___|___  _ __  / _(_) __ _ 
@@ -90,7 +103,7 @@ def call_pywalneopixels(config):
         os.system("startLEDs")
     else:
         return
-    print("⚡ Pywal NeoPixel Themed")
+    print_status(0, "Pywal NeoPixel")
     return
 
 
@@ -104,7 +117,7 @@ def call_wal_discord(config):
         os.system("wal-discord -t")
     else:
         return
-    print("⚡ Themed Discord")
+    print_status(0, "Discord")
     return
 
 def call_xmenu(config):
@@ -118,12 +131,8 @@ def call_xmenu(config):
     # Check to see if it exists somewhere in the path
     else:
         return
-    print("⚡ Themed xmenu")
+    print_status(0, "Xmenu")
     return
-
-def is_tool(name):
-    """Check whether `name` is on PATH and marked as executable."""
-    return which(name) is not None
 
 def theme(config, args):
     #  call_wal(args)
@@ -131,13 +140,10 @@ def theme(config, args):
     #  call_pywalneopixels(config)
     call_xmenu(config)
 
-
 def main():
     config = parse_yaml()
     args = parse_args()
     theme(config, args)
-    #  print_keys(file_dict)
-    #  print(file_dict["slickpywal"]["path"])
 
 if __name__ == '__main__':
     main()
