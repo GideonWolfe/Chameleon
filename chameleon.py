@@ -59,7 +59,9 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Chameleon Arguments', usage='%(prog)s -i/t [image/theme] [arguments for wal]')
     parser.add_argument('--theme', '-t', metavar='theme', type=str, nargs='?', help='a color scheme name to use as a theme')
     parser.add_argument('--image', '-i', metavar='image', type=str, nargs='?', help='an image file to use as a theme')
-    args = parser.parse_args()
+    #  parser.add_argument('wal args', metavar='N', type=str, nargs='?', help='arguments to pass to wal')
+    #  args = parser.parse_args()
+    args = parser.parse_known_args()
     return args
 
 # Parse user config file
@@ -112,19 +114,33 @@ def user_hooks(config):
                     return
             print_status(3, value[0])
 
-def call_wal(args):
+def call_wal(args, walargs):
     # if we are calling wal on an image
     if(args.image):
-        imagepath = os.path.abspath(args.image[0])
-        commandstring = "wal -i "+imagepath
-        print(commandstring)
-        os.system(commandstring)
+        try:
+            imagepath = os.path.abspath(args.image)
+            commandlist = ["wal", "-i", imagepath]
+            commandlist.extend(walargs)
+            p = subprocess.Popen(commandlist)
+            p.wait()
+        except:
+            print_status(1, "pywal")
+            return
     # if we are using a prebuilt or custom colorscheme
-    if(args.theme):
-        commandstring = "wal --theme "+args.theme[0]
-        os.system(commandstring)
+    elif(args.theme):
+        try:
+            commandlist = ["wal", "--theme", args.theme]
+            commandlist.extend(walargs)
+            p = subprocess.Popen(commandlist)
+            p.wait()
+        except:
+            print_status(1, "pywal")
+            return
     else:
         print("Error, missing required argument")
+        exit()
+    print_status(0, "pywal")
+
 
 
 def call_slickpywal(config):
@@ -369,8 +385,8 @@ def call_pywalfox(config):
             return
     print_status(0, "Pywalfox")
 
-def theme(config, args):
-    #  call_wal(args)
+def theme(config, args, walargs):
+    call_wal(args, walargs)
     #  call_slickpywal(config)
     #  call_pywalneopixels(config)
     #  call_wal_discord(config)
@@ -382,13 +398,14 @@ def theme(config, args):
     #  call_oomoxicons(config)
     #  call_oomoxgtk(config)
     #  call_oomoxspotify(config)
-    call_pywalfox(config)
+    #  call_pywalfox(config)
     #  user_hooks(config)
 
 def main():
     config = parse_yaml()
-    args = parse_args()
-    theme(config, args)
+    args, walargs = parse_args()
+    #  print(walargs)
+    theme(config, args, walargs)
 
 if __name__ == '__main__':
     main()
