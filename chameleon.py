@@ -293,6 +293,23 @@ def call_spicetify(config):
             return
     print_status(0, "Spicetify")
 
+def call_tellegrampallettegen(config):
+    if("telegrampalletegen" in config):
+        try:
+            path = config['telegrampalletegen']['path']
+            p = subprocess.Popen([path+"telegram-pallete-gen", '--wal'])
+            p.wait()
+        except:
+            print_status(1, "Telegram Pallete")
+            return
+    elif(is_tool("telegram-palette-gen")):
+        try:
+            p = subprocess.Popen(["telegram-pallete-gen", "--wal"])
+            p.wait()
+        except:
+            print_status(1, "Telegram Pallete")
+            return
+    print_status(0, "Telegram Pallete")
 
 def theme(config, args):
     #  call_wal(args)
