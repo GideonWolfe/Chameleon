@@ -32,6 +32,6 @@ oomoxicons:
 # Use at your own risk
 hooks:
   echosuccess: "echo 'success, theme applied'"
-  testhook:
-    command: "ls"
-    directory: "/home/gideon/Projects/"
+  startTree:
+    command: "docker-compose -f docker-compose.yaml restart StartTree"
+    directory: "/home/gideon/Projects/StartTree/docker/"
