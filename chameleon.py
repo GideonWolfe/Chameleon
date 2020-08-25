@@ -122,15 +122,24 @@ def call_pywalneopixels(config):
 def call_wal_discord(config):
     # Check to see if the user defined a custom path
     if("waldiscord" in config):
-        commandstring = config["waldiscord"]["path"]+"wal-discord -t"
-        os.system(commandstring)
+        try:
+            m = subprocess.Popen(["wal-discord", "-t"], cwd=config["waldiscord"]["path"])
+            m.wait()
+        except:
+            print_status(1, "Discord")
+            return
+        print_status(0, "Discord")
     # Check to see if it exists somewhere in the path
     elif(is_tool("wal-discord")):
-        os.system("wal-discord -t")
+        try:
+            n = subprocess.Popen(["wal-discord", "-t"])
+            n.wait()
+        except:
+            print_status(1, "Discord")
+            return
+        print_status(0, "Discord")
     else:
         return
-    print_status(0, "Discord")
-    return
 
 def call_xmenu(config):
     # Check to see if the user defined a custom path
@@ -165,7 +174,8 @@ def theme(config, args):
     #  call_wal(args)
     #  call_slickpywal(config)
     #  call_pywalneopixels(config)
-    call_xmenu(config)
+    call_wal_discord(config)
+    #  call_xmenu(config)
 
 def main():
     config = parse_yaml()
