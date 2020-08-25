@@ -95,28 +95,44 @@ def call_wal(args):
 def call_slickpywal(config):
     # Check to see if the user defined a custom path
     if("slickpywal" in config):
-        commandstring = config["slickpywal"]["path"]+"slick-pywal"
-        os.system(commandstring)
+        try:
+            p = subprocess.Popen(["slick-pywal"], cwd=config["slickpywal"]["path"])
+            p.wait()
+        except:
+            print_status(1, "SlickGreeter Pywal")
+            return
     # Check to see if it exists somewhere in the path
     elif(is_tool("slick-pywal")):
-        os.system("slick-pywal")
+        try:
+            p = subprocess.Popen(["slick-pywal"])
+            p.wait()
+        except:
+            print_status(1, "SlickGreeter Pywal")
+            return
     else:
         return
-    print("⚡ Themed Slick Greeter")
+    print_status(0, "SlickGreeter Pywal")
     return
 
 def call_pywalneopixels(config):
     # Check to see if the user defined a custom path
     if("pywalneopixels" in config):
-        commandstring = config["pywalneopixels"]["path"]+"startLEDs"
-        os.system(commandstring)
+        try:
+            commandstring = config["pywalneopixels"]["path"]+"startLEDs"
+            os.system(commandstring)
+        except:
+            print_status(1, "Pywal NeoPixel")
     # Check to see if it exists somewhere in the path
     elif(is_tool("startLEDs")):
-        os.system("startLEDs")
+        try:
+            os.system("startLEDs")
+        except:
+            print_status(1, "Pywal NeoPixel")
+            return
+    # it is not detected it all
     else:
         return
     print_status(0, "Pywal NeoPixel")
-    return
 
 
 def call_wal_discord(config):
@@ -172,9 +188,9 @@ def call_xmenu(config):
 
 def theme(config, args):
     #  call_wal(args)
-    #  call_slickpywal(config)
+    call_slickpywal(config)
     #  call_pywalneopixels(config)
-    call_wal_discord(config)
+    #  call_wal_discord(config)
     #  call_xmenu(config)
 
 def main():
