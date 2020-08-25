@@ -54,6 +54,7 @@ home = expanduser("~")
 config_dir = home + '/.config/chameleon'
 config_path = home + '/.config/chameleon/config.yaml'
 
+# Parse command line arguments
 def parse_args():
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument('--theme', '-t', type=str, nargs='+', help='a color scheme name to use as a theme')
@@ -61,12 +62,14 @@ def parse_args():
     args = parser.parse_args()
     return args
 
+# Parse user config file
 def parse_yaml():
     with open(config_path, mode='r') as file:
         file_dict = yaml.full_load(file)
         file.close()
     return file_dict
 
+# Print keys from a dictionary
 def print_keys(dictionary):
     for key in dictionary:
         print(key)
@@ -81,20 +84,32 @@ def print_keys(dictionary):
 #   |_| |_| |_|\___|_| |_| |_|_|_| |_|\__, |
 #                                     |___/ 
 
+# Detects and runs hooks set by user
 def user_hooks(config):
     # if the user has defined hooks
     if("hooks" in config):
         # iterate through the hooks
         for value in config["hooks"].items():
-            #  print(value[1])
-            try:
-                arglist = value[1].split(' ')
-                #  print(arglist)
-                p = subprocess.Popen(arglist)
-                p.wait()
-            except:
-                print_status(2, value[0])
-                return
+            # If the user has a simple command to run
+            if(type(value[1]) == str):
+                #  print("single command found")
+                try:
+                    arglist = value[1].split(' ')
+                    p = subprocess.Popen(arglist)
+                    p.wait()
+                except:
+                    print_status(2, value[0])
+                    return
+            # User has specified options for the hook
+            elif(type(value[1]) == dict):
+                path = value[1].get('directory', './')
+                arglist = value[1].get('command').split(' ')
+                try:
+                    p = subprocess.Popen(arglist, cwd=path)
+                    p.wait()
+                except:
+                    print_status(2, value[0])
+                    return
             print_status(3, value[0])
 
 def call_wal(args):
