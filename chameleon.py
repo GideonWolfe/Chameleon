@@ -57,8 +57,8 @@ config_path = home + '/.config/chameleon/config.yaml'
 # Parse command line arguments
 def parse_args():
     parser = argparse.ArgumentParser(description='Chameleon Arguments')
-    parser.add_argument('--theme', '-t', type=str, nargs='+', help='a color scheme name to use as a theme')
-    parser.add_argument('--image', '-i', type=str, nargs='+', help='an image file to use as a theme')
+    parser.add_argument('--theme', '-t', metavar='theme', type=str, nargs='?', help='a color scheme name to use as a theme')
+    parser.add_argument('--image', '-i', metavar='image', type=str, nargs='?', help='an image file to use as a theme')
     args = parser.parse_args()
     return args
 
@@ -224,10 +224,10 @@ def call_xmenu(config):
 def theme(config, args):
     #  call_wal(args)
     #  call_slickpywal(config)
-    #  call_pywalneopixels(config)
+    call_pywalneopixels(config)
     #  call_wal_discord(config)
     #  call_xmenu(config)
-    user_hooks(config)
+    #  user_hooks(config)
 
 def main():
     config = parse_yaml()
