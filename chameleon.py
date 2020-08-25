@@ -56,7 +56,7 @@ config_path = home + '/.config/chameleon/config.yaml'
 
 # Parse command line arguments
 def parse_args():
-    parser = argparse.ArgumentParser(description='Chameleon Arguments')
+    parser = argparse.ArgumentParser(description='Chameleon Arguments', usage='%(prog)s -i/t [image/theme] [arguments for wal]')
     parser.add_argument('--theme', '-t', metavar='theme', type=str, nargs='?', help='a color scheme name to use as a theme')
     parser.add_argument('--image', '-i', metavar='image', type=str, nargs='?', help='an image file to use as a theme')
     args = parser.parse_args()
