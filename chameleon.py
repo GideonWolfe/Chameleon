@@ -334,6 +334,23 @@ def call_oomoxgtk(config):
             return
     print_status(0, "Oomox GTK")
 
+#  Spicetify is preferred
+def call_oomoxspotify(config):
+    if("oomoxspotify" in config):
+        if(config['oomoxspotify']['enabled'] == "True"):
+            try:
+                spotifypath = config['oomoxspotify']['spotifypath']
+                fullcommand = "oomoxify-cli"+" "+home+"/.cache/wal/colors-oomox"+" -s "+spotifypath
+                os.system(fullcommand)
+            except:
+                print_status(1, "Oomox Spotify")
+                return
+            print_status(0, "Oomox Spofify")
+        else:
+            return
+    else:
+        return
+
 def theme(config, args):
     #  call_wal(args)
     #  call_slickpywal(config)
@@ -345,7 +362,8 @@ def theme(config, args):
     #  call_spicetify(config)
     #  call_tellegrampallettegen(config)
     #  call_oomoxicons(config)
-    call_oomoxgtk(config)
+    #  call_oomoxgtk(config)
+    call_oomoxspotify(config)
     #  user_hooks(config)
 
 def main():
