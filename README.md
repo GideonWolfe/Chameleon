@@ -48,6 +48,17 @@ sudo ./install.sh
 * `chameleon -i [path to picture] [options for wal]`
 * `chameleon -t [wal theme] [options for wal]`
 
+## Configuration
+
+Configuration of `chameleon` is done through the file `$HOME/.config/chameleon/config.yaml`
+
+Here, one can specify options specific to a single program, or even specify custom commands to be run every time you apply a theme.
+
+Most programs will have a `path` attribute which may or may not be necessary depending on your setup. For example, if you were using a cloned, local version of `wal-discord`, one
+might want to specify a specific path where `chameleon` can find this specific executable.
+
+If the `path` attribute is not given for a program, it is assumed that the program is located in your `$PATH` and will be run as a standalone command.
+
 ## Programs supported
 * [oomox](https://github.com/themix-project/oomox) for GTK and Spotify
 
