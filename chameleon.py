@@ -311,6 +311,18 @@ def call_tellegrampallettegen(config):
             return
     print_status(0, "Telegram Pallete")
 
+def call_oomoxicons(config):
+    if("oomoxicons" in config):
+        try:
+            command = config['oomoxicons']['command']
+            themepath = config['oomoxicons']['themepath']
+            fullcommand = command+" "+themepath
+            os.system(fullcommand)
+        except:
+            print_status(1, "Oomox Icons")
+            return
+    print_status(0, "Oomox Icons")
+
 def theme(config, args):
     #  call_wal(args)
     #  call_slickpywal(config)
@@ -320,7 +332,9 @@ def theme(config, args):
     #  user_hooks(config)
     #  call_cordless(config)
     #  call_razercli(config)
-    call_spicetify(config)
+    #  call_spicetify(config)
+    #  call_tellegrampallettegen(config)
+    call_oomoxicons(config)
 
 def main():
     config = parse_yaml()

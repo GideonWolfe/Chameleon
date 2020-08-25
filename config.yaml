@@ -7,10 +7,29 @@ archdroid_icons:
 # slickpywal:
   # path: "/path/to/slickpywal/"
 
+cordless:
+  # This is a GO program that generates a cordless colorscheme.
+  # The color values have been turned into pywal variables.
+  # This program is run, and the produced
+  # theme.json is put into $HOME/.config/cordless/
+  path: /home/gideon/.cache/wal/cordless.go
+
+# razer-cli:
+  # path: 
+
+oomoxicons:
+  # This changes depending on your iconset
+  command: "oomox-archdroid-icons-cli"
+  # Path to the desired theme you want to apply
+  themepath: "/opt/oomox/scripted_colors/xresources/xresources-reverse"
+
+# spicetify:
+  # path: 
+
 # Custom commands to be run when chameleon is run.
 # Use at your own risk
 hooks:
   echosuccess: "echo 'success, theme applied'"
   testhook:
     command: "ls"
-    directory: "/home/me/Projects/"
+    directory: "/home/gideon/Projects/"
