@@ -16,6 +16,10 @@ oomoxicons:
   # Path to the desired theme you want to apply
   themepath: "/opt/oomox/scripted_colors/xresources/xresources-reverse"
 
+oomoxgtk:
+  # Path to the desired theme you want to apply
+  themepath: "/opt/oomox/scripted_colors/xresources/xresources-reverse"
+
 # spicetify:
   # path: 
 
