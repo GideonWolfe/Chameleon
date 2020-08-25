@@ -6,6 +6,16 @@ import os
 from os.path import expanduser
 from shutil import copyfile
 from bs4 import BeautifulSoup
+from whichcraft import which
+from shutil import which
+
+
+#   ____             __ _       
+#  / ___|___  _ __  / _(_) __ _ 
+# | |   / _ \| '_ \| |_| |/ _` |
+# | |__| (_) | | | |  _| | (_| |
+#  \____\___/|_| |_|_| |_|\__, |
+#                         |___/ 
 
 # get home directory
 home = expanduser("~")
@@ -33,6 +43,14 @@ def print_keys(dictionary):
         if isinstance(dictionary[key], dict):
             print_keys(dictionary[key])
 
+
+#  _____ _                    _             
+# |_   _| |__   ___ _ __ ___ (_)_ __   __ _ 
+#   | | | '_ \ / _ \ '_ ` _ \| | '_ \ / _` |
+#   | | | | | |  __/ | | | | | | | | | (_| |
+#   |_| |_| |_|\___|_| |_| |_|_|_| |_|\__, |
+#                                     |___/ 
+
 def call_wal(args):
     # if we are calling wal on an image
     if(args.image):
@@ -47,11 +65,35 @@ def call_wal(args):
     else:
         print("Error, missing required argument")
 
+
+def call_slickpywal(config):
+    # Check to see if the user defined a custom path
+    if("slickpywal" in config):
+        if("path" in config["slickpywal"]):
+            commandstring = config["slickpywal"]["path"]+"slick-pywal"
+            print(commandstring)
+    # Check to see if it exists somewhere in the path
+    elif(is_tool("slick-pywal")):
+        os.system("slick-pywal")
+    return
+
+
+
+def is_tool(name):
+    """Check whether `name` is on PATH and marked as executable."""
+    return which(name) is not None
+
+def theme(config, args):
+    #  call_wal(args)
+    call_slickpywal(config)
+
+
 def main():
-    #  file_dict = parse_yaml()
-    #  print_keys(file_dict)
+    config = parse_yaml()
     args = parse_args()
-    call_wal(args)
+    theme(config, args)
+    #  print_keys(file_dict)
+    #  print(file_dict["slickpywal"]["path"])
 
 if __name__ == '__main__':
     main()
