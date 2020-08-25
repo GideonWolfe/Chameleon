@@ -249,7 +249,6 @@ def call_cordless(config):
         templatepath = config['cordless']['path'] 
         try:
             with open(home+"/.config/cordless/theme.json", "w") as theme:
-                #  commandstring = "go run "+templatepath+" > "+home+"/.config/cordless/theme.json"
                 commandstring = "go run "+templatepath
                 commandstring = commandstring.split(' ')
                 g = subprocess.Popen(commandstring, stdout=theme)
@@ -262,7 +261,7 @@ def call_cordless(config):
 def call_razercli(config):
     if("razercli" in config):
         try:
-            p = subprocess.Popen(["razer-cli", '-a'])
+            p = subprocess.Popen([config['razercli']['path']+"razer-cli", '-a'])
             p.wait()
         except:
             print_status(1, "Razer Devices")
@@ -276,6 +275,24 @@ def call_razercli(config):
             return
     print_status(0, "Razer Devices")
 
+def call_spicetify(config):
+    if("spicetify" in config):
+        try:
+            path = config['spicetify']['path']
+            p = subprocess.Popen([path+"spicetify", 'update'])
+            p.wait()
+        except:
+            print_status(1, "Spicetify")
+            return
+    elif(is_tool("spicetify")):
+        try:
+            p = subprocess.Popen(["spicetify", "update"])
+            p.wait()
+        except:
+            print_status(1, "Spicetify")
+            return
+    print_status(0, "Spicetify")
+
 
 def theme(config, args):
     #  call_wal(args)
@@ -283,9 +300,10 @@ def theme(config, args):
     #  call_pywalneopixels(config)
     #  call_wal_discord(config)
     #  call_xmenu(config)
-    user_hooks(config)
+    #  user_hooks(config)
     #  call_cordless(config)
     #  call_razercli(config)
+    call_spicetify(config)
 
 def main():
     config = parse_yaml()
