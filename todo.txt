@@ -1,0 +1,4 @@
+Pass rest of arguments to wal
+
+Add rest of programs to theme
+
