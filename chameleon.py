@@ -43,7 +43,7 @@ def call_wal(args):
     # if we are using a prebuilt or custom colorscheme
     if(args.theme):
         commandstring = "wal --theme "+args.theme[0]
-        print(commandstring)
+        os.system(commandstring)
     else:
         print("Error, missing required argument")
 
