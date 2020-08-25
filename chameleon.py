@@ -259,6 +259,22 @@ def call_cordless(config):
             return
         print_status(0, "cordless")
 
+def call_razercli(config):
+    if("razercli" in config):
+        try:
+            p = subprocess.Popen(["razer-cli", '-a'])
+            p.wait()
+        except:
+            print_status(1, "Razer Devices")
+            return
+    elif(is_tool("razer-cli")):
+        try:
+            p = subprocess.Popen(["razer-cli", "-a"])
+            p.wait()
+        except:
+            print_status(1, "Razer Devices")
+            return
+    print_status(0, "Razer Devices")
 
 
 def theme(config, args):
@@ -267,8 +283,9 @@ def theme(config, args):
     #  call_pywalneopixels(config)
     #  call_wal_discord(config)
     #  call_xmenu(config)
-    #  user_hooks(config)
-    call_cordless(config)
+    user_hooks(config)
+    #  call_cordless(config)
+    #  call_razercli(config)
 
 def main():
     config = parse_yaml()
