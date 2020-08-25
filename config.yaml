@@ -20,8 +20,9 @@ oomoxgtk:
   # Path to the desired theme you want to apply
   themepath: "/opt/oomox/scripted_colors/xresources/xresources-reverse"
 
-# spicetify:
-  # path: 
+oomoxspotify:
+  spotifypath: "/opt/spotify/Apps"
+  enabled: "False"
 
 # slickpywal:
   # path: "/path/to/slickpywal/"
