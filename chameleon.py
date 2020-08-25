@@ -29,6 +29,8 @@ class bcolors:
 def print_status(status, program):
     if(status == 0):
         print(bcolors.OKGREEN + "⚡"+bcolors.ENDC+bcolors.OKBLUE+" Themed "+program + bcolors.ENDC)
+    elif(status == 1):
+        print(bcolors.FAIL + "X"+bcolors.ENDC+bcolors.WARNING+" Failed to theme "+program + bcolors.ENDC)
 
 def is_tool(name):
     """Check whether `name` is on PATH and marked as executable."""
@@ -133,16 +135,31 @@ def call_wal_discord(config):
 def call_xmenu(config):
     # Check to see if the user defined a custom path
     if("xmenu" in config):
-        #  os.system(commandstring)
-        p = subprocess.Popen(["make"], cwd=config["xmenu"]["path"])
-        p.wait()
-        p = subprocess.Popen(["sudo", "make", "install"], cwd=config["xmenu"]["path"])
-        p.wait()
-    # Check to see if it exists somewhere in the path
+        try:
+            # make xmenu
+            m = subprocess.Popen(["make"], cwd=config["xmenu"]["path"])
+            m.wait()
+            retval = m.returncode
+            # if making failed
+            if(retval != 0):
+                print_status(1, "Xmenu")
+                return
+            # Install the new files
+            i = subprocess.Popen(["sudo", "make", "install"], cwd=config["xmenu"]["path"])
+            i.wait()
+            retval = m.returncode
+            # if installation failed
+            if(retval != 0):
+                print_status(1, "Xmenu")
+                return
+        # If we found a config but something went wrong
+        except:
+            print_status(1, "Xmenu")
+            return
+        print_status(0, "Xmenu")
+    # no config for xmenu, just return
     else:
         return
-    print_status(0, "Xmenu")
-    return
 
 def theme(config, args):
     #  call_wal(args)
