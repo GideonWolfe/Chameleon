@@ -1,11 +1,6 @@
 xmenu:
   path: "/home/gideon/Programs/xmenu"
 
-archdroid_icons:
-  path: "/usr/share/icons/Archdroid-Red" # just to check if they exist
-
-# slickpywal:
-  # path: "/path/to/slickpywal/"
 
 cordless:
   # This is a GO program that generates a cordless colorscheme.
@@ -14,8 +9,6 @@ cordless:
   # theme.json is put into $HOME/.config/cordless/
   path: /home/gideon/.cache/wal/cordless.go
 
-# razer-cli:
-  # path: 
 
 oomoxicons:
   # This changes depending on your iconset
@@ -24,6 +17,15 @@ oomoxicons:
   themepath: "/opt/oomox/scripted_colors/xresources/xresources-reverse"
 
 # spicetify:
+  # path: 
+
+# slickpywal:
+  # path: "/path/to/slickpywal/"
+
+# razer-cli:
+  # path: 
+
+# telegrampalletegen:
   # path: 
 
 # Custom commands to be run when chameleon is run.
