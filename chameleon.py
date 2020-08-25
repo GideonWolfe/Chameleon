@@ -323,18 +323,30 @@ def call_oomoxicons(config):
             return
     print_status(0, "Oomox Icons")
 
+def call_oomoxgtk(config):
+    if("oomoxgtk" in config):
+        try:
+            themepath = config['oomoxgtk']['themepath']
+            fullcommand = "oomox-cli"+" "+themepath
+            os.system(fullcommand)
+        except:
+            print_status(1, "Oomox GTK")
+            return
+    print_status(0, "Oomox GTK")
+
 def theme(config, args):
     #  call_wal(args)
     #  call_slickpywal(config)
     #  call_pywalneopixels(config)
     #  call_wal_discord(config)
     #  call_xmenu(config)
-    #  user_hooks(config)
     #  call_cordless(config)
     #  call_razercli(config)
     #  call_spicetify(config)
     #  call_tellegrampallettegen(config)
-    call_oomoxicons(config)
+    #  call_oomoxicons(config)
+    call_oomoxgtk(config)
+    #  user_hooks(config)
 
 def main():
     config = parse_yaml()
