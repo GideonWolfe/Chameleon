@@ -9,3 +9,8 @@ intelliJ:
 
 pywalfox:
   path:
+
+# Custom commands to be run when chameleon is run.
+# Use at your own risk
+hooks:
+  command1: "some script or command"
