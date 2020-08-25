@@ -3,6 +3,7 @@
 import argparse
 import yaml
 import os
+import subprocess
 from os.path import expanduser
 from shutil import copyfile
 from bs4 import BeautifulSoup
@@ -106,6 +107,19 @@ def call_wal_discord(config):
     print("⚡ Themed Discord")
     return
 
+def call_xmenu(config):
+    # Check to see if the user defined a custom path
+    if("xmenu" in config):
+        #  os.system(commandstring)
+        p = subprocess.Popen(["make"], cwd=config["xmenu"]["path"])
+        p.wait()
+        p = subprocess.Popen(["sudo", "make", "install"], cwd=config["xmenu"]["path"])
+        p.wait()
+    # Check to see if it exists somewhere in the path
+    else:
+        return
+    print("⚡ Themed xmenu")
+    return
 
 def is_tool(name):
     """Check whether `name` is on PATH and marked as executable."""
@@ -113,7 +127,9 @@ def is_tool(name):
 
 def theme(config, args):
     #  call_wal(args)
-    call_slickpywal(config)
+    #  call_slickpywal(config)
+    #  call_pywalneopixels(config)
+    call_xmenu(config)
 
 
 def main():
