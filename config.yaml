@@ -1,16 +1,14 @@
 xmenu:
-  path:
+  path: "/home/gideon/Programs/xmenu"
 
 archdroid_icons:
-  path:
+  path: "/usr/share/icons/Archdroid-Red" # just to check if they exist
 
-intelliJ:
-  path:
-
-pywalfox:
-  path:
+slickpywal:
+  path: "/path/to/slickpywal/"
 
 # Custom commands to be run when chameleon is run.
 # Use at your own risk
 hooks:
   command1: "some script or command"
+  echosuccess: "echo 'success, theme applied'"
