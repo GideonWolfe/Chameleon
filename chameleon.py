@@ -192,6 +192,28 @@ def call_wal_discord(config):
     else:
         return
 
+def call_pywal_discord(config):
+    # Check to see if the user defined a custom path
+    if("pywaldiscord" in config):
+        try:
+            m = subprocess.Popen(["pywal-discord"], cwd=config["pywaldiscord"]["path"])
+            m.wait()
+        except:
+            print_status(1, "Discord")
+            return
+        print_status(0, "Discord")
+    # Check to see if it exists somewhere in the path
+    elif(is_tool("pywal-discord")):
+        try:
+            n = subprocess.Popen(["pywal-discord"])
+            n.wait()
+        except:
+            print_status(1, "Discord")
+            return
+        print_status(0, "Discord")
+    else:
+        return
+
 def call_xmenu(config):
     # Check to see if the user defined a custom path
     if("xmenu" in config):
