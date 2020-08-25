@@ -221,13 +221,32 @@ def call_xmenu(config):
     else:
         return
 
+def call_cordless(config):
+    if("cordless" in config):
+        # the full path to the cordless theme template
+        templatepath = config['cordless']['path'] 
+        try:
+            with open(home+"/.config/cordless/theme.json", "w") as theme:
+                #  commandstring = "go run "+templatepath+" > "+home+"/.config/cordless/theme.json"
+                commandstring = "go run "+templatepath
+                commandstring = commandstring.split(' ')
+                g = subprocess.Popen(commandstring, stdout=theme)
+                g.wait()
+        except:
+            print_status(1, "cordless")
+            return
+        print_status(0, "cordless")
+
+
+
 def theme(config, args):
     #  call_wal(args)
     #  call_slickpywal(config)
-    call_pywalneopixels(config)
+    #  call_pywalneopixels(config)
     #  call_wal_discord(config)
     #  call_xmenu(config)
     #  user_hooks(config)
+    call_cordless(config)
 
 def main():
     config = parse_yaml()
