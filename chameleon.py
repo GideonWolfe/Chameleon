@@ -16,7 +16,8 @@ config_path = home + '/.config/chameleon/config.yaml'
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('--scheme', '-s', type=str, nargs='+', help='an image file or color scheme name to use as a theme')
+    parser.add_argument('--scheme', '-s', type=str, nargs='+', help='a color scheme name to use as a theme')
+    parser.add_argument('--image', '-i', type=str, nargs='+', help='an image file to use as a theme')
     args = parser.parse_args()
     return args
 
