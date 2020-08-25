@@ -31,6 +31,10 @@ def print_status(status, program):
         print(bcolors.OKGREEN + "⚡"+bcolors.ENDC+bcolors.OKBLUE+" Themed "+program + bcolors.ENDC)
     elif(status == 1):
         print(bcolors.FAIL + "X"+bcolors.ENDC+bcolors.WARNING+" Failed to theme "+program + bcolors.ENDC)
+    elif(status == 2):
+        print(bcolors.FAIL + "X"+bcolors.ENDC+bcolors.WARNING+" User hook "+program + " failed"+bcolors.ENDC)
+    elif(status == 3):
+        print(bcolors.OKGREEN + "⚡"+bcolors.ENDC+bcolors.OKBLUE+" User hook "+program + " succeeded"+bcolors.ENDC)
 
 def is_tool(name):
     """Check whether `name` is on PATH and marked as executable."""
@@ -76,6 +80,22 @@ def print_keys(dictionary):
 #   | | | | | |  __/ | | | | | | | | | (_| |
 #   |_| |_| |_|\___|_| |_| |_|_|_| |_|\__, |
 #                                     |___/ 
+
+def user_hooks(config):
+    # if the user has defined hooks
+    if("hooks" in config):
+        # iterate through the hooks
+        for value in config["hooks"].items():
+            #  print(value[1])
+            try:
+                arglist = value[1].split(' ')
+                #  print(arglist)
+                p = subprocess.Popen(arglist)
+                p.wait()
+            except:
+                print_status(2, value[0])
+                return
+            print_status(3, value[0])
 
 def call_wal(args):
     # if we are calling wal on an image
@@ -188,10 +208,11 @@ def call_xmenu(config):
 
 def theme(config, args):
     #  call_wal(args)
-    call_slickpywal(config)
+    #  call_slickpywal(config)
     #  call_pywalneopixels(config)
     #  call_wal_discord(config)
     #  call_xmenu(config)
+    user_hooks(config)
 
 def main():
     config = parse_yaml()
