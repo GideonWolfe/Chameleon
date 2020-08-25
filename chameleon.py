@@ -16,9 +16,19 @@ from shutil import which
 # | |_| | |_| | | | |_| |  __/\__ \
 #  \___/ \__|_|_|_|\__|_|\___||___/
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 def print_status(status, program):
     if(status == 0):
-        print("⚡ Themed "+program)
+        print(bcolors.OKGREEN + "⚡"+bcolors.ENDC+bcolors.OKBLUE+" Themed "+program + bcolors.ENDC)
 
 def is_tool(name):
     """Check whether `name` is on PATH and marked as executable."""
