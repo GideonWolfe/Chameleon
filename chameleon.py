@@ -351,6 +351,24 @@ def call_oomoxspotify(config):
     else:
         return
 
+def call_pywalfox(config):
+    if("pywalfox" in config):
+        try:
+            path = config['pywalfox']['path']
+            p = subprocess.Popen([path+"pywalfox", 'update'])
+            p.wait()
+        except:
+            print_status(1, "Pywalfox")
+            return
+    elif(is_tool("pywalfox")):
+        try:
+            p = subprocess.Popen(["pywalfox", "update"])
+            p.wait()
+        except:
+            print_status(1, "Pywalfox")
+            return
+    print_status(0, "Pywalfox")
+
 def theme(config, args):
     #  call_wal(args)
     #  call_slickpywal(config)
@@ -363,7 +381,8 @@ def theme(config, args):
     #  call_tellegrampallettegen(config)
     #  call_oomoxicons(config)
     #  call_oomoxgtk(config)
-    call_oomoxspotify(config)
+    #  call_oomoxspotify(config)
+    call_pywalfox(config)
     #  user_hooks(config)
 
 def main():
