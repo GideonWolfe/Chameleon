@@ -69,14 +69,42 @@ def call_wal(args):
 def call_slickpywal(config):
     # Check to see if the user defined a custom path
     if("slickpywal" in config):
-        if("path" in config["slickpywal"]):
-            commandstring = config["slickpywal"]["path"]+"slick-pywal"
-            print(commandstring)
+        commandstring = config["slickpywal"]["path"]+"slick-pywal"
+        os.system(commandstring)
     # Check to see if it exists somewhere in the path
     elif(is_tool("slick-pywal")):
         os.system("slick-pywal")
+    else:
+        return
+    print("⚡ Themed Slick Greeter")
     return
 
+def call_pywalneopixels(config):
+    # Check to see if the user defined a custom path
+    if("pywalneopixels" in config):
+        commandstring = config["pywalneopixels"]["path"]+"startLEDs"
+        os.system(commandstring)
+    # Check to see if it exists somewhere in the path
+    elif(is_tool("startLEDs")):
+        os.system("startLEDs")
+    else:
+        return
+    print("⚡ Pywal NeoPixel Themed")
+    return
+
+
+def call_wal_discord(config):
+    # Check to see if the user defined a custom path
+    if("waldiscord" in config):
+        commandstring = config["waldiscord"]["path"]+"wal-discord -t"
+        os.system(commandstring)
+    # Check to see if it exists somewhere in the path
+    elif(is_tool("wal-discord")):
+        os.system("wal-discord -t")
+    else:
+        return
+    print("⚡ Themed Discord")
+    return
 
 
 def is_tool(name):
