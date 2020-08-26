@@ -288,6 +288,8 @@ def call_razercli(config):
         except:
             print_status(1, "Razer Devices")
             return
+    else:
+        return
     print_status(0, "Razer Devices")
 
 def call_spicetify(config):
@@ -310,6 +312,7 @@ def call_spicetify(config):
 
 def call_tellegrampallettegen(config):
     if("telegrampalletegen" in config):
+        print("telegram was found in config")
         try:
             path = config['telegrampalletegen']['path']
             p = subprocess.Popen([path+"telegram-pallete-gen", '--wal'])
@@ -318,12 +321,15 @@ def call_tellegrampallettegen(config):
             print_status(1, "Telegram Pallete")
             return
     elif(is_tool("telegram-palette-gen")):
+        print("telegram was found to be tool")
         try:
             p = subprocess.Popen(["telegram-pallete-gen", "--wal"])
             p.wait()
         except:
             print_status(1, "Telegram Pallete")
             return
+    else:
+        return
     print_status(0, "Telegram Pallete")
 
 def call_oomoxicons(config):
@@ -388,15 +394,19 @@ def call_zathura_pywal(config):
     if("zathurapywal" in config):
         try:
             path = config['zathurapywal']['path']
-            p = subprocess.Popen([path+"genzathurarc"], stdout=home+"/.config/zathura/zathurarc")
+            file = open(home+"/.config/zathura/zathurarc", "w+")
+            p = subprocess.Popen([path+"genzathurarc"], stdout=file)
             p.wait()
+            file.close()
         except:
             print_status(1, "Zathura")
             return
     elif(is_tool("genzathurarc")):
         try:
-            p = subprocess.Popen(["genzathurarc"], stdout=home+"/.config/zathura/zathurarc")
+            file = open(home+"/.config/zathura/zathurarc", "w+")
+            p = subprocess.Popen(["genzathurarc"], stdout=file)
             p.wait()
+            file.close()
         except:
             print_status(1, "Zathura")
             return
@@ -406,15 +416,19 @@ def call_gnuplot_pywal(config):
     if("gnuplotpywal" in config):
         try:
             path = config['gnuplotpywal']['path']
-            p = subprocess.Popen([path+"gengnuplotconfig"], stdout=home+"/.gnuplot")
+            file = open(home+"/.gnuplot", "w+")
+            p = subprocess.Popen([path+"gengnuplotconfig"], stdout=file)
             p.wait()
+            file.close()
         except:
             print_status(1, "Gnuplot")
             return
     elif(is_tool("gengnuplotconfig")):
         try:
-            p = subprocess.Popen(["gengnuplotconfig"], stdout=home+"/.gnuplot")
+            file = open(home+"/.gnuplot", "w+")
+            p = subprocess.Popen(["gengnuplotconfig"], stdout=file)
             p.wait()
+            file.close()
         except:
             print_status(1, "Gnuplot")
             return
@@ -422,21 +436,21 @@ def call_gnuplot_pywal(config):
 
 def theme(config, args, walargs):
     call_wal(args, walargs)
-    call_slickpywal(config)
-    call_pywalneopixels(config)
-    call_wal_discord(config)
-    call_xmenu(config)
-    call_cordless(config)
-    call_razercli(config)
-    call_spicetify(config)
-    call_tellegrampallettegen(config)
-    call_oomoxicons(config)
-    call_oomoxgtk(config)
-    call_oomoxspotify(config)
-    call_pywalfox(config)
+    #  call_slickpywal(config)
+    #  call_pywalneopixels(config)
+    #  call_wal_discord(config)
+    #  call_xmenu(config)
+    #  call_cordless(config)
+    #  call_razercli(config)
+    #  call_spicetify(config)
+    #  call_tellegrampallettegen(config)
+    #  call_oomoxicons(config)
+    #  call_oomoxgtk(config)
+    #  call_oomoxspotify(config)
+    #  call_pywalfox(config)
     call_zathura_pywal(config)
     call_gnuplot_pywal(config)
-    user_hooks(config)
+    #  user_hooks(config)
 
 def main():
     config = parse_yaml()
