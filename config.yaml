@@ -1,14 +1,9 @@
-xmenu:
-  path: "/home/gideon/Programs/xmenu"
-
-
 cordless:
   # This is a GO program that generates a cordless colorscheme.
   # The color values have been turned into pywal variables.
   # This program is run, and the produced
   # theme.json is put into $HOME/.config/cordless/
   path: /home/gideon/.cache/wal/cordless.go
-
 
 oomoxicons:
   # This changes depending on your iconset
@@ -20,18 +15,33 @@ oomoxgtk:
   # Path to the desired theme you want to apply
   themepath: "/opt/oomox/scripted_colors/xresources/xresources-reverse"
 
-oomoxspotify:
-  spotifypath: "/opt/spotify/Apps"
-  enabled: "False"
+# oomoxspotify:
+  # spotifypath: "/opt/spotify/Apps"
+  # enabled: "False"
 
 # slickpywal:
-  # path: "/path/to/slickpywal/"
+  # path:
 
+# pywalneopixels:
+  # path:
+
+# waldiscord:
+  # path:
+ 
 # razer-cli:
   # path: 
 
 # telegrampalletegen:
   # path: 
+
+# spicetify:
+  # path: 
+
+# pywalfox:
+  # path: 
+
+xmenu:
+  path: "/home/gideon/Programs/xmenu"
 
 # Custom commands to be run when chameleon is run.
 # Use at your own risk
