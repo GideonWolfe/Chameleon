@@ -58,8 +58,6 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Chameleon Arguments', usage='%(prog)s -i/t [image/theme] [arguments for wal]')
     parser.add_argument('--theme', '-t', metavar='theme', type=str, nargs='?', help='a color scheme name to use as a theme')
     parser.add_argument('--image', '-i', metavar='image', type=str, nargs='?', help='an image file to use as a theme')
-    #  parser.add_argument('wal args', metavar='N', type=str, nargs='?', help='arguments to pass to wal')
-    #  args = parser.parse_args()
     args = parser.parse_known_args()
     return args
 
@@ -428,7 +426,7 @@ def call_starttree(config):
             return
     elif(is_tool("starttree.py")):
         try:
-            p = subprocess.Popen(["starttree.py"])
+            p = subprocess.Popen(["starttree.py"], stdout=subprocess.DEVNULL)
             p.wait()
         except:
             print_status(1, "StartTree")
