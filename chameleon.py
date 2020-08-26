@@ -421,7 +421,7 @@ def call_starttree(config):
     if("starttree" in config):
         try:
             path = config['starttree']['path']
-            p = subprocess.Popen([path+"starttree.py"])
+            p = subprocess.Popen([path+"generate.py"])
             p.wait()
         except:
             print_status(1, "StartTree")
@@ -433,6 +433,8 @@ def call_starttree(config):
         except:
             print_status(1, "StartTree")
             return
+    else:
+        return
     print_status(0, "StartTree")
 
 def theme(config, args, walargs):
