@@ -96,3 +96,9 @@ To apply icon themes, you need one of the icon sets supported by oomox. Change t
 * [gnome-color-icons](https://aur.archlinux.org/packages/gnome-colors-icon-theme/)
 * [archdroid icons](https://aur.archlinux.org/packages/archdroid-icon-theme/)
 * [Materia icons](https://aur.archlinux.org/packages/materia-theme-git/)
+
+## Upgrade from v1 to v2
+
+Simply delete the old `chameleon` executable at `/usr/local/bin/chameleon`. Now use `chameleon.py` which should be symlinked to `$HOME/.local/bin/chameleon.py`.
+
+`$HOME/.local/bin/` must be on your `$PATH`
