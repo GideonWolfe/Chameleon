@@ -6,7 +6,6 @@ import os
 import subprocess
 from os.path import expanduser
 from shutil import copyfile
-from bs4 import BeautifulSoup
 from whichcraft import which
 from shutil import which
 
@@ -384,6 +383,42 @@ def call_pywalfox(config):
             print_status(1, "Pywalfox")
             return
     print_status(0, "Pywalfox")
+
+def call_zathura_pywal(config):
+    if("zathurapywal" in config):
+        try:
+            path = config['zathurapywal']['path']
+            p = subprocess.Popen([path+"genzathurarc"], stdout=home+"/.config/zathura/zathurarc")
+            p.wait()
+        except:
+            print_status(1, "Zathura")
+            return
+    elif(is_tool("genzathurarc")):
+        try:
+            p = subprocess.Popen(["genzathurarc"], stdout=home+"/.config/zathura/zathurarc")
+            p.wait()
+        except:
+            print_status(1, "Zathura")
+            return
+    print_status(0, "Zathura")
+
+def call_gnuplot_pywal(config):
+    if("gnuplotpywal" in config):
+        try:
+            path = config['gnuplotpywal']['path']
+            p = subprocess.Popen([path+"gengnuplotconfig"], stdout=home+"/.gnuplot")
+            p.wait()
+        except:
+            print_status(1, "Gnuplot")
+            return
+    elif(is_tool("gengnuplotconfig")):
+        try:
+            p = subprocess.Popen(["gengnuplotconfig"], stdout=home+"/.gnuplot")
+            p.wait()
+        except:
+            print_status(1, "Gnuplot")
+            return
+    print_status(0, "Gnuplot")
 
 def theme(config, args, walargs):
     #  call_wal(args, walargs)
