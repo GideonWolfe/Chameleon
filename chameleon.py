@@ -135,9 +135,6 @@ def call_wal(args, walargs):
         except:
             print_status(1, "pywal")
             return
-    else:
-        print("Error, missing required argument")
-        exit()
     print_status(0, "pywal")
 
 
