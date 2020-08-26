@@ -337,7 +337,7 @@ def call_oomoxicons(config):
         try:
             command = config['oomoxicons']['command']
             themepath = config['oomoxicons']['themepath']
-            fullcommand = command+" "+themepath
+            fullcommand = command+" "+themepath+" > /dev/null"
             os.system(fullcommand)
         except:
             print_status(1, "Oomox Icons")
@@ -348,7 +348,7 @@ def call_oomoxgtk(config):
     if("oomoxgtk" in config):
         try:
             themepath = config['oomoxgtk']['themepath']
-            fullcommand = "oomox-cli"+" "+themepath
+            fullcommand = "oomox-cli"+" "+themepath+" > /dev/null"
             os.system(fullcommand)
         except:
             print_status(1, "Oomox GTK")
@@ -434,28 +434,46 @@ def call_gnuplot_pywal(config):
             return
     print_status(0, "Gnuplot")
 
+def call_starttree(config):
+    if("starttree" in config):
+        try:
+            path = config['starttree']['path']
+            p = subprocess.Popen([path+"starttree.py"])
+            p.wait()
+        except:
+            print_status(1, "StartTree")
+            return
+    elif(is_tool("starttree.py")):
+        try:
+            p = subprocess.Popen(["starttree.py"])
+            p.wait()
+        except:
+            print_status(1, "StartTree")
+            return
+    print_status(0, "StartTree")
+
 def theme(config, args, walargs):
-    call_wal(args, walargs)
-    call_slickpywal(config)
-    call_pywalneopixels(config)
-    call_wal_discord(config)
-    call_xmenu(config)
-    call_cordless(config)
-    call_razercli(config)
-    call_spicetify(config)
-    call_tellegrampallettegen(config)
+    #  call_wal(args, walargs)
+    #  call_slickpywal(config)
+    #  call_pywalneopixels(config)
+    #  call_wal_discord(config)
+    #  call_xmenu(config)
+    #  call_cordless(config)
+    #  call_razercli(config)
+    #  call_spicetify(config)
+    #  call_tellegrampallettegen(config)
     call_oomoxicons(config)
-    call_oomoxgtk(config)
-    call_oomoxspotify(config)
-    call_pywalfox(config)
-    call_zathura_pywal(config)
-    call_gnuplot_pywal(config)
-    user_hooks(config)
+    #  call_oomoxgtk(config)
+    #  call_oomoxspotify(config)
+    #  call_pywalfox(config)
+    #  call_zathura_pywal(config)
+    #  call_gnuplot_pywal(config)
+    #  call_starttree(config)
+    #  user_hooks(config)
 
 def main():
     config = parse_yaml()
     args, walargs = parse_args()
-    #  print(walargs)
     theme(config, args, walargs)
 
 if __name__ == '__main__':
