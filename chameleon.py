@@ -295,19 +295,25 @@ def call_razercli(config):
 def call_spicetify(config):
     if("spicetify" in config):
         try:
+            null = open("/dev/null")
             path = config['spicetify']['path']
-            p = subprocess.Popen([path+"spicetify", 'update'])
+            p = subprocess.Popen([path+"spicetify", 'update'], stdout=null)
             p.wait()
+            null.close()
         except:
             print_status(1, "Spicetify")
             return
     elif(is_tool("spicetify")):
         try:
-            p = subprocess.Popen(["spicetify", "update"])
+            null = open("/dev/null")
+            p = subprocess.Popen(["spicetify", "update"], stdout=null)
             p.wait()
+            null.close()
         except:
             print_status(1, "Spicetify")
             return
+    else:
+        return
     print_status(0, "Spicetify")
 
 def call_tellegrampallettegen(config):
@@ -390,28 +396,6 @@ def call_pywalfox(config):
             return
     print_status(0, "Pywalfox")
 
-def call_zathura_pywal(config):
-    if("zathurapywal" in config):
-        try:
-            path = config['zathurapywal']['path']
-            file = open(home+"/.config/zathura/zathurarc", "w+")
-            p = subprocess.Popen([path+"genzathurarc"], stdout=file)
-            p.wait()
-            file.close()
-        except:
-            print_status(1, "Zathura")
-            return
-    elif(is_tool("genzathurarc")):
-        try:
-            file = open(home+"/.config/zathura/zathurarc", "w+")
-            p = subprocess.Popen(["genzathurarc"], stdout=file)
-            p.wait()
-            file.close()
-        except:
-            print_status(1, "Zathura")
-            return
-    print_status(0, "Zathura")
-
 def call_gnuplot_pywal(config):
     if("gnuplotpywal" in config):
         try:
@@ -454,22 +438,22 @@ def call_starttree(config):
 
 def theme(config, args, walargs):
     call_wal(args, walargs)
-    call_slickpywal(config)
-    call_pywalneopixels(config)
-    call_wal_discord(config)
-    call_xmenu(config)
-    call_cordless(config)
-    call_razercli(config)
-    call_spicetify(config)
-    call_tellegrampallettegen(config)
-    call_oomoxicons(config)
-    call_oomoxgtk(config)
-    call_oomoxspotify(config)
-    call_pywalfox(config)
+    #  call_slickpywal(config)
+    #  call_pywalneopixels(config)
+    #  call_wal_discord(config)
+    #  call_xmenu(config)
+    #  call_cordless(config)
+    #  call_razercli(config)
+    #  call_spicetify(config)
+    #  call_tellegrampallettegen(config)
+    #  call_oomoxicons(config)
+    #  call_oomoxgtk(config)
+    #  call_oomoxspotify(config)
+    #  call_pywalfox(config)
     call_zathura_pywal(config)
-    call_gnuplot_pywal(config)
-    call_starttree(config)
-    user_hooks(config)
+    #  call_gnuplot_pywal(config)
+    #  call_starttree(config)
+    #  user_hooks(config)
 
 def main():
     config = parse_yaml()
