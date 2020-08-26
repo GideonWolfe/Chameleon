@@ -43,6 +43,9 @@ oomoxgtk:
 xmenu:
   path: "/home/gideon/Programs/xmenu"
 
+starttree:
+  path: "/home/Projects/StartTree/"
+
 # Custom commands to be run when chameleon is run.
 # Use at your own risk
 hooks:
