@@ -70,7 +70,7 @@ If the `path` attribute is not given for a program, it is assumed that the progr
 
 * [slickgreeter-pywal](https://github.com/Paul-Houser/slickgreeter-pywal)
 
-* [wal_steam](https://github.com/kotajacob/wal_steam) for steam: **NOTE**: Not guarunteed to work with steam library overhaul
+* [StartTree](https://github.com/Paul-Houser/StartTree): Dynamic browser startpage
 
 * [ckb-next](https://github.com/ckb-next/ckb-next) for corsair keyboards
 
