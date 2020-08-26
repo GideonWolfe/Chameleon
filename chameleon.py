@@ -234,15 +234,17 @@ def call_xmenu(config):
     if("xmenu" in config):
         try:
             # make xmenu
-            m = subprocess.Popen(["make"], cwd=config["xmenu"]["path"])
+            null = open("/dev/null")
+            m = subprocess.Popen(["make"], cwd=config["xmenu"]["path"], stdout=subprocess.DEVNULL)
             m.wait()
             retval = m.returncode
+            null.close()
             # if making failed
             if(retval != 0):
                 print_status(1, "Xmenu")
                 return
             # Install the new files
-            i = subprocess.Popen(["sudo", "make", "install"], cwd=config["xmenu"]["path"])
+            i = subprocess.Popen(["sudo", "make", "install"], cwd=config["xmenu"]["path"], stdout=subprocess.DEVNULL)
             i.wait()
             retval = m.returncode
             # if installation failed
@@ -437,22 +439,22 @@ def call_starttree(config):
     print_status(0, "StartTree")
 
 def theme(config, args, walargs):
-    call_wal(args, walargs)
-    call_slickpywal(config)
-    call_pywalneopixels(config)
-    call_wal_discord(config)
+    #  call_wal(args, walargs)
+    #  call_slickpywal(config)
+    #  call_pywalneopixels(config)
+    #  call_wal_discord(config)
     call_xmenu(config)
-    call_cordless(config)
-    call_razercli(config)
-    call_spicetify(config)
-    call_tellegrampallettegen(config)
-    call_oomoxicons(config)
-    call_oomoxgtk(config)
-    call_oomoxspotify(config)
-    call_pywalfox(config)
-    call_gnuplot_pywal(config)
-    call_starttree(config)
-    user_hooks(config)
+    #  call_cordless(config)
+    #  call_razercli(config)
+    #  call_spicetify(config)
+    #  call_tellegrampallettegen(config)
+    #  call_oomoxicons(config)
+    #  call_oomoxgtk(config)
+    #  call_oomoxspotify(config)
+    #  call_pywalfox(config)
+    #  call_gnuplot_pywal(config)
+    #  call_starttree(config)
+    #  user_hooks(config)
 
 def main():
     config = parse_yaml()
