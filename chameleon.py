@@ -174,9 +174,9 @@ def call_pywalneopixels(config):
         except:
             print_status(1, "Pywal NeoPixel")
     # Check to see if it exists somewhere in the path
-    elif(is_tool("startLEDs")):
+    elif(is_tool("startLEDS")):
         try:
-            os.system("startLEDs")
+            os.system("startLEDS")
         except:
             print_status(1, "Pywal NeoPixel")
             return
@@ -386,9 +386,9 @@ def call_pywalfox(config):
     print_status(0, "Pywalfox")
 
 def theme(config, args, walargs):
-    call_wal(args, walargs)
+    #  call_wal(args, walargs)
     #  call_slickpywal(config)
-    #  call_pywalneopixels(config)
+    call_pywalneopixels(config)
     #  call_wal_discord(config)
     #  call_xmenu(config)
     #  call_cordless(config)
