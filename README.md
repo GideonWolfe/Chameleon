@@ -29,11 +29,9 @@ The current programs are ones that I use, but feel free to add more and send a P
 
 
 
-![alt-text](https://i.imgur.com/NsLbfmO.jpg)
+![alt-text](https://i.imgur.com/araXbD4.jpg)
 
 Programs that use GTK themes like Thunar and Baobab should just pick up the theme, assuming you have selected the `oomox-xresources-reverse` theme in `lxappearance`. Spotify and Telegram shown here rocking their custom generated themes.
-
-![alt-text](https://i.imgur.com/j4SEVpE.png)
 
 Programs that use Qt themes can also be configured to take themes from GTK, meaning we can theme them as well! The programs must be launched with the `--style gtk2` flag, and you must install and configure [qt5-styleplugins](https://www.archlinux.org/packages/community/x86_64/qt5-styleplugins/).
 
