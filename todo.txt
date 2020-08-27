@@ -1,3 +1,0 @@
-Add rest of programs to theme
-
-require at least -t or -i
