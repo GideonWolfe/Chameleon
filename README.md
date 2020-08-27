@@ -27,7 +27,9 @@ The current programs are ones that I use, but feel free to add more and send a P
 
 # Examples
 
-![alt-text](https://i.imgur.com/C3znJJJ.png)
+
+
+![alt-text](https://i.imgur.com/NsLbfmO.jpg)
 
 Programs that use GTK themes like Thunar and Baobab should just pick up the theme, assuming you have selected the `oomox-xresources-reverse` theme in `lxappearance`. Spotify and Telegram shown here rocking their custom generated themes.
 
