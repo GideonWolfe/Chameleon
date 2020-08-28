@@ -78,7 +78,7 @@ If the `path` attribute is not given for a program, it is assumed that the progr
 
 * [telegram-palette-gen](https://github.com/matgua/telegram-palette-gen) for telegram-desktop
 
-* [intelliJPywal](https://github.com/0x6C38/intellijPywal) for IntelliJ and other JetBrains IDEs (requires configuration in script)
+* [spicetify](https://github.com/khanhas/spicetify-cli): CSS Customization engine for spotify
 
 * [Pywalfox](https://github.com/Frewacom/Pywalfox) to theme FireFox and DuckDuckGo on the fly
 
