@@ -303,7 +303,7 @@ def call_spicetify(config):
     elif(is_tool("spicetify")):
         try:
             null = open("/dev/null")
-            p = subprocess.Popen(["spicetify", "update"], stdout=null)
+            p = subprocess.Popen(["spicetify", "apply"], stdout=null)
             p.wait()
             null.close()
         except:
