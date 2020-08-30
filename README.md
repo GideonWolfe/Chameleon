@@ -1,22 +1,5 @@
-```
-                      _       _._
-               _,,-''' ''-,_ }'._''.,_.=._
-            ,-'      _ _    '        (  @)'-,
-          ,'  _..==;;::_::'-     __..----'''}
-         :  .'::_;==''       ,'',: : : '' '}
-        }  '::-'            /   },: : : :_,'
-       :  :'     _..,,_    '., '._-,,,--\'    _
-      :  ;   .-'       :      '-, ';,__\.\_.-'
-     {   '  :    _,,,   :__,,--::',,}___}^}_.-'
-     }        _,'__''',  ;_.-''_.-'
-    :      ,':-''  ';, ;  ;_..-'
-_.-' }    ,',' ,''',  : ^^
-_.-''{    { ; ; ,', '  :
-      }   } :  ;_,' ;  }
-       {   ',',___,'   '
-        ',           ,'
-          '-,,__,,-'
-```
+
+![alt-text](/demo.gif)
 
 
 This script acts as an extension to wal, by taking the generated colors and theming anything that can be themed, all in one script. 
@@ -30,6 +13,7 @@ The current programs are ones that I use, but feel free to add more and send a P
 
 
 ![alt-text](https://i.imgur.com/araXbD4.jpg)
+
 
 Programs that use GTK themes like Thunar and Baobab should just pick up the theme, assuming you have selected the `oomox-xresources-reverse` theme in `lxappearance`. Spotify, Discord, Firefox, and gnuplot are shown here rocking their custom generated themes.
 
