@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/env python3
 
 import argparse
 import yaml
@@ -9,8 +9,8 @@ from shutil import copyfile
 from whichcraft import which
 from shutil import which
 
-#  _   _ _   _ _ _ _   _           
-# | | | | |_(_) (_) |_(_) ___  ___ 
+#  _   _ _   _ _ _ _   _
+# | | | | |_(_) (_) |_(_) ___  ___
 # | | | | __| | | | __| |/ _ \/ __|
 # | |_| | |_| | | | |_| |  __/\__ \
 #  \___/ \__|_|_|_|\__|_|\___||___/
@@ -39,12 +39,12 @@ def is_tool(name):
     """Check whether `name` is on PATH and marked as executable."""
     return which(name) is not None
 
-#   ____             __ _       
-#  / ___|___  _ __  / _(_) __ _ 
+#   ____             __ _
+#  / ___|___  _ __  / _(_) __ _
 # | |   / _ \| '_ \| |_| |/ _` |
 # | |__| (_) | | | |  _| | (_| |
 #  \____\___/|_| |_|_| |_|\__, |
-#                         |___/ 
+#                         |___/
 
 # get home directory
 home = expanduser("~")
@@ -76,12 +76,12 @@ def print_keys(dictionary):
             print_keys(dictionary[key])
 
 
-#  _____ _                    _             
-# |_   _| |__   ___ _ __ ___ (_)_ __   __ _ 
+#  _____ _                    _
+# |_   _| |__   ___ _ __ ___ (_)_ __   __ _
 #   | | | '_ \ / _ \ '_ ` _ \| | '_ \ / _` |
 #   | | | | | |  __/ | | | | | | | | | (_| |
 #   |_| |_| |_|\___|_| |_| |_|_|_| |_|\__, |
-#                                     |___/ 
+#                                     |___/
 
 # Detects and runs hooks set by user
 def user_hooks(config):
@@ -258,7 +258,7 @@ def call_xmenu(config):
 def call_cordless(config):
     if("cordless" in config):
         # the full path to the cordless theme template
-        templatepath = config['cordless']['path'] 
+        templatepath = config['cordless']['path']
         try:
             with open(home+"/.config/cordless/theme.json", "w") as theme:
                 commandstring = "go run "+templatepath
