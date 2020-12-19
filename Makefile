@@ -2,8 +2,8 @@
 PREFIX = ~/.local
 PIPVER = pip3
 install:
-	@ln -sf chameleon.py $(DESTDIR)$(PREFIX)/bin/chameleon.py
-	@echo "chameleon.py has been linked to $(DESTDIR)$(PREFIX)/bin/chameleon.py"
+	@cp -f chameleon.py $(DESTDIR)$(PREFIX)/bin/chameleon.py
+	@echo "chameleon.py has been installed to $(DESTDIR)$(PREFIX)/bin/chameleon.py"
 	@echo "installing $(PIPVER) dependencies"
 	@$(PIPVER) install --user whichcraft
 uninstall:
