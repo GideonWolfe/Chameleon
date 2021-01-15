@@ -7,7 +7,7 @@ install:
 	@echo "installing $(PIPVER) dependencies"
 	@$(PIPVER) install --user whichcraft || echo "dependencies couldn't be installed install pip and rerun"
 uninstall:
-	rm -rf $(DESTDIR)$(PREFIX)/bin/chameleon.py
+	rm -f $(DESTDIR)$(PREFIX)/bin/chameleon.py
 	@echo "removed $(DESTDIR)$(PREFIX)/bin/chameleon.py"
 	$(PIPVER) uninstall whichcraft
 .PHONY: install uninstall pipversion
