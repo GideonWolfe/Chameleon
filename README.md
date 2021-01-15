@@ -25,7 +25,7 @@ Programs that use Qt themes can also be configured to take themes from GTK, mean
 ```bash
 git clone https://github.com/GideonWolfe/Chameleon/
 cd Chameleon
-sudo make install
+make install
 ```
 
 ## Usage

@@ -1,13 +1,13 @@
 .POSIX:
 PREFIX = ~/.local
-PIPVER = pip3
+PIPVER = $(shell which pip3 || which pip)
 install:
-	@cp -f chameleon.py $(DESTDIR)$(PREFIX)/bin/chameleon.py
+	cp -f chameleon.py $(DESTDIR)$(PREFIX)/bin/chameleon.py
 	@echo "chameleon.py has been installed to $(DESTDIR)$(PREFIX)/bin/chameleon.py"
 	@echo "installing $(PIPVER) dependencies"
-	@$(PIPVER) install --user whichcraft
+	$(PIPVER) install --user whichcraft
 uninstall:
-	@rm -rf $(DESTDIR)$(PREFIX)/bin/chameleon.py
+	rm -rf $(DESTDIR)$(PREFIX)/bin/chameleon.py
 	@echo "removed $(DESTDIR)$(PREFIX)/bin/chameleon.py"
-	@$(PIPVER) uninstall --user whichcraft
-.PHONY: install uninstall
+	$(PIPVER) uninstall --user whichcraft
+.PHONY: install uninstall pipversion
