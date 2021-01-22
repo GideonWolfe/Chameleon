@@ -3,7 +3,7 @@
 ![alt-text](/demo.gif)
 
 
-This script acts as an extension to wal, by taking the generated colors and theming anything that can be themed, all in one script. 
+This script acts as an extension to wal, by taking the generated colors and theming anything that can be themed, all in one script.
 
 If the script detects you have certain programs on your system, it will try to generate themes for them.
 
@@ -25,7 +25,7 @@ Programs that use Qt themes can also be configured to take themes from GTK, mean
 ```bash
 git clone https://github.com/GideonWolfe/Chameleon/
 cd Chameleon
-sudo ./install.sh
+make install
 ```
 
 ## Usage
