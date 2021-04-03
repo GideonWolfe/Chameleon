@@ -14,7 +14,7 @@ install:
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/chameleon.py
 	@echo "removed $(DESTDIR)$(PREFIX)/bin/chameleon.py"
-	rm -f $(DESTDIR)$(CONFIG)/chameleon/config.yaml
-	@echo "removed $(DESTDIR)$(CONFIG)/chameleon/config.yaml"
+	rm -rf $(DESTDIR)$(CONFIG)/chameleon
+	@echo "removed $(DESTDIR)$(CONFIG)/chameleon"
 	$(PIPVER) uninstall whichcraft
 .PHONY: install uninstall pipversion
