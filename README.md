@@ -76,7 +76,7 @@ If the `path` attribute is not given for a program, it is assumed that the progr
 ## Notes
 To get the most complete theme possible, check out my [dotfiles](https://github.com/GideonWolfe/dots). Here you can find the configurations to get these colors on many other programs, such as rofi, polybar, firefox, and more. Since they update automatically, there was no need to include them in this script.
 
-To apply icon themes, you need one of the icon sets supported by oomox. Change the icons section of the script to look for the folder your desired icons are in, and change the command to the appropriate variant.
+To apply icon themes, you need one of the icon sets supported by oomox. Change the icons section of the config file to look for the folder your desired icons are in, and change the command to the appropriate variant.
 
 * [gnome-color-icons](https://aur.archlinux.org/packages/gnome-colors-icon-theme/)
 * [archdroid icons](https://aur.archlinux.org/packages/archdroid-icon-theme/)
