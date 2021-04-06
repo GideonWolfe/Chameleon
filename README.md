@@ -82,6 +82,14 @@ To apply icon themes, you need one of the icon sets supported by oomox. Change t
 * [archdroid icons](https://aur.archlinux.org/packages/archdroid-icon-theme/)
 * [Materia icons](https://aur.archlinux.org/packages/materia-theme-git/)
 
+To use the new icon themes added to oomox, you have to create a executable file in ```$HOME/.local/bin``` with a similar naming schema like the example command used for gnome colors icon theme in ```config.yaml```. The content of the executable should be something like:
+```
+#!/bin/bash
+cd /opt/oomox
+exec ./plugins/{path to change_color.sh file for your respective icon theme under plugins} "$@"
+```
+With the above executable created, all you have to do is to give it execute permission by using ```chmod +x``` and use the name of the executable as the command for your icon theme in the ```config.yaml``` file. **Note: Make sure ```$HOME/.local/bin``` is added to your PATH.**
+
 ## Upgrade from v1 to v2
 
 Simply delete the old `chameleon` executable at `/usr/local/bin/chameleon`. Now use `chameleon.py` which should be symlinked to `$HOME/.local/bin/chameleon.py`.
