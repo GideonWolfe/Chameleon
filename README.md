@@ -76,11 +76,19 @@ If the `path` attribute is not given for a program, it is assumed that the progr
 ## Notes
 To get the most complete theme possible, check out my [dotfiles](https://github.com/GideonWolfe/dots). Here you can find the configurations to get these colors on many other programs, such as rofi, polybar, firefox, and more. Since they update automatically, there was no need to include them in this script.
 
-To apply icon themes, you need one of the icon sets supported by oomox. Change the icons section of the script to look for the folder your desired icons are in, and change the command to the appropriate variant.
+To apply icon themes, you need one of the icon sets supported by oomox. Change the icons section of the config file to look for the folder your desired icons are in, and change the command to the appropriate variant.
 
 * [gnome-color-icons](https://aur.archlinux.org/packages/gnome-colors-icon-theme/)
 * [archdroid icons](https://aur.archlinux.org/packages/archdroid-icon-theme/)
 * [Materia icons](https://aur.archlinux.org/packages/materia-theme-git/)
+
+To use the new icon themes added to oomox, you have to create a executable file in ```$HOME/.local/bin``` with a similar naming schema like the example command used for gnome colors icon theme in ```config.yaml```. The content of the executable should be something like:
+```
+#!/bin/bash
+cd /opt/oomox
+exec ./plugins/{path to change_color.sh file for your respective icon theme under plugins} "$@"
+```
+With the above executable created, all you have to do is to give it execute permission by using ```chmod +x``` and use the name of the executable as the command for your icon theme in the ```config.yaml``` file. **Note: Make sure ```$HOME/.local/bin``` is added to your PATH.**
 
 ## Upgrade from v1 to v2
 
