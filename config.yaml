@@ -1,10 +1,10 @@
-cordless:
-  # This is a GO program that generates a cordless colorscheme.
-  # The color values have been turned into pywal variables.
-  # This program is run, and the produced
-  # theme.json is put into $HOME/.config/cordless/
-  path: /home/gideon/.cache/wal/cordless.go
-
+# cordless:
+#   # This is a GO program that generates a cordless colorscheme.
+#   # The color values have been turned into pywal variables.
+#   # This program is run, and the produced
+#   # theme.json is put into $HOME/.config/cordless/
+#   path: /home/gideon/.cache/wal/cordless.go
+#
 oomoxicons:
   # This changes depending on your iconset
   command: "oomox-archdroid-icons-cli"
@@ -16,8 +16,8 @@ oomoxgtk:
   themepath: "/opt/oomox/scripted_colors/xresources/xresources-reverse"
 
 # oomoxspotify:
-  # spotifypath: "/opt/spotify/Apps"
-  # enabled: "False"
+#   spotifypath: "/opt/spotify/Apps"
+#   enabled: "True"
 
 # slickpywal:
   # path:
@@ -27,29 +27,36 @@ oomoxgtk:
 
 # waldiscord:
   # path:
- 
+
 # razer-cli:
-  # path: 
+  # path:
 
 # telegrampalletegen:
-  # path: 
+  # path:
 
 # spicetify:
-  # path: 
+  # path:
 
 # pywalfox:
-  # path: 
+  # path:
+
+zathura:
+  path: "/home/hashedupforyou101/.config/zathura"
+
+zathura-pywal:
+  path: "/home/hashedupforyou101/Singularis/vendor/zathura-pywal"
+
+xfce4-terminal:
+  path: "/home/hashedupforyou101/.config/xfce4/terminal"
+
+xfce4-theme:
+  path: "/home/hashedupforyou101/Singularis/vendor/xfce4-pywal"
+
+dwm:
+  path: "/home/hashedupforyou101/.config/dwm/dwm-config/"
 
 xmenu:
-  path: "/home/gideon/Programs/xmenu"
+  path: "/home/hashedupforyou101/Singularis/aspects/xmenu/"
 
 starttree:
-  path: "/home/Projects/StartTree/"
-
-# Custom commands to be run when chameleon is run.
-# Use at your own risk
-hooks:
-  echosuccess: "echo 'success, theme applied'"
-  startTree:
-    command: "docker-compose -f docker-compose.yaml restart StartTree"
-    directory: "/home/gideon/Projects/StartTree/docker/"
+  path: "/home/hashedupforyou101/Singularis/vendor/start-tree/"
