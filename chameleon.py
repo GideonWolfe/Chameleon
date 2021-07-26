@@ -301,6 +301,28 @@ def call_pywal_discord(config):
     else:
         return
 
+def call_dunst(config):
+    # Check to see if the user defined a custom path
+    if 'dunst' in config:
+        try:
+            if 'dunst-pywal' in config:
+                # Run the theme file
+                dunst_pywal = subprocess.getoutput('{}/gendunstrc'.format(
+                    config['dunst-pywal']['path']))
+                # Open file
+                file = open('{}/dunstrc'.format(
+                    config['dunst']['path']), 'w+')
+                file.write(dunst_pywal)
+                file.close()
+        # If we found a config but something went wrong
+        except:
+            print_status(1, "Dunst")
+            return
+        print_status(0, "Dunst")
+    # no config for dunst, just return
+    else:
+        return
+
 def call_xmenu(config):
     # Check to see if the user defined a custom path
     if 'xmenu' in config:
@@ -398,10 +420,10 @@ def call_xfce4(config):
     # Check to see if the user defined a custom path
     if 'xfce4-terminal' in config:
         try:
-            if 'xfce4-theme' in config:
+            if 'xfce4-pywal' in config:
                 # Run the theme file
                 xfce4_pywal = subprocess.getoutput('{}/genxfce4'.format(
-                    config['xfce4-theme']['path']))
+                    config['xfce4-pywal']['path']))
                 # Open file
                 file = open('{}/terminalrc'.format(
                     config['xfce4-terminal']['path']), 'w+')
@@ -596,7 +618,7 @@ def call_starttree(config):
     if "starttree" in config:
         try:
             path = config['starttree']['path']
-            p = subprocess.Popen(['{}generate.py'.format(path)])
+            p = subprocess.Popen(['{}/generate.py'.format(path)])
             p.wait()
         except:
             print_status(1, 'StartTree')
@@ -622,6 +644,7 @@ def theme(config, args, walargs):
     call_dwm(config)
     call_zathura(config)
     call_xfce4(config)
+    call_dunst(config)
     call_cordless(config)
     call_razercli(config)
     call_spicetify(config)
