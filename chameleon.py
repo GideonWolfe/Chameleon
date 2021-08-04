@@ -184,6 +184,7 @@ def call_wal(args, walargs):
             commandlist.extend(walargs)
             p = subprocess.Popen(commandlist)
             p.wait()
+            os.system('feh --bg-scale {}'.format(args.image))
         except:
             print_status(1, 'pywal')
             return
