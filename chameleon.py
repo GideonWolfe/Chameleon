@@ -184,7 +184,7 @@ def call_wal(args, walargs):
             commandlist.extend(walargs)
             p = subprocess.Popen(commandlist)
             p.wait()
-            os.system('feh --bg-scale {}'.format(args.image))
+            os.system('feh --bg-scale {} && cp {} ~/.config/wall.jpg'.format(args.image, args.image))
         except:
             print_status(1, 'pywal')
             return
@@ -416,6 +416,27 @@ def call_zathura(config):
     else:
         return
 
+def call_matplotlib(config):
+    # Check to see if the user defined a custom path
+    if 'matplotlib' in config:
+        try:
+            if 'matplotlib-pywal' in config:
+                # Run the theme file
+                matplotlib_pywal = subprocess.getoutput('{}/genmatplotlibrc'.format(
+                    config['matplotlib-pywal']['path']))
+                # Open file
+                file = open('{}/matplotlibrc'.format(
+                    config['matplotlib']['path']), 'w+')
+                file.write(matplotlib_pywal)
+                file.close()
+        # If we found a config but something went wrong
+        except:
+            print_status(1, "Matplotlib")
+            return
+        print_status(0, "Matplotlib")
+    # No config for matplotlib, just return
+    else:
+        return
 
 def call_xfce4(config):
     # Check to see if the user defined a custom path
@@ -644,6 +665,7 @@ def theme(config, args, walargs):
     call_xmenu(config)
     call_dwm(config)
     call_zathura(config)
+    call_matplotlib(config)
     call_xfce4(config)
     call_dunst(config)
     call_cordless(config)
