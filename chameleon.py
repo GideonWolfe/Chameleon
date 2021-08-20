@@ -328,6 +328,16 @@ def call_xmenu(config):
     # Check to see if the user defined a custom path
     if 'xmenu' in config:
         try:
+            if 'xmenu-pywal' in config:
+                # Run the theme file
+                xmenu_pywal = subprocess.getoutput('{}/gencolors'.format(
+                    config['xmenu-pywal']['path']))
+                # Open file
+                file = open('{}/colors-xmenu.h'.format(
+                    config['xmenu']['path']), 'w+')
+                file.write(xmenu_pywal)
+                file.close()
+
             # Make xmenu
             null = open('/dev/null')
             m = subprocess.Popen(['make'], cwd=config['xmenu']['path'],
@@ -349,6 +359,7 @@ def call_xmenu(config):
             if retval != 0:
                 print_status(1, 'Xmenu')
                 return
+
         # If we found a config but something went wrong
         except:
             print_status(1, 'Xmenu')
