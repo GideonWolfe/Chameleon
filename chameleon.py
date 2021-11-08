@@ -7,6 +7,7 @@ import subprocess
 from os.path import expanduser
 from whichcraft import which
 import yaml
+import time
 
 
 #  _   _ _   _ _ _ _   _
@@ -85,6 +86,9 @@ home = expanduser("~")
 # get config path
 config_dir = home + '/.config/chameleon'
 config_path = home + '/.config/chameleon/config.yaml'
+
+# store location of the scripts file
+scripts_location = home + '/Singularis/third-party-tools/chameleon/scripts'
 
 
 # Parse command line arguments
@@ -306,15 +310,12 @@ def call_dunst(config):
     # Check to see if the user defined a custom path
     if 'dunst' in config:
         try:
-            if 'dunst-pywal' in config:
-                # Run the theme file
-                dunst_pywal = subprocess.getoutput('{}/gendunstrc'.format(
-                    config['dunst-pywal']['path']))
-                # Open file
-                file = open('{}/dunstrc'.format(
-                    config['dunst']['path']), 'w+')
-                file.write(dunst_pywal)
-                file.close()
+            # Run the theme file
+            dunst_pywal = subprocess.getoutput('{}/dunst.sh'.format(scripts_location))
+            # Open file
+            file = open('{}/dunstrc'.format(config['dunst']['path']), 'w+')
+            file.write(dunst_pywal)
+            file.close()
         # If we found a config but something went wrong
         except:
             print_status(1, "Dunst")
@@ -330,8 +331,8 @@ def call_xmenu(config):
         try:
             if 'xmenu-pywal' in config:
                 # Run the theme file
-                xmenu_pywal = subprocess.getoutput('{}/gencolors'.format(
-                    config['xmenu-pywal']['path']))
+                xmenu_pywal = subprocess.getoutput('{}/xmenu.sh'.format(
+                    config['scripts_location']['path']))
                 # Open file
                 file = open('{}/colors-xmenu.h'.format(
                     config['xmenu']['path']), 'w+')
@@ -409,15 +410,12 @@ def call_zathura(config):
     # Check to see if the user defined a custom path
     if 'zathura' in config:
         try:
-            if 'zathura-pywal' in config:
-                # Run the theme file
-                zathura_pywal = subprocess.getoutput('{}/genzathurarc'.format(
-                    config['zathura-pywal']['path']))
-                # Open file
-                file = open('{}/zathurarc'.format(
-                    config['zathura']['path']), 'w+')
-                file.write(zathura_pywal)
-                file.close()
+            # Run the theme file
+            zathura_pywal = subprocess.getoutput('{}/zathura.sh'.format(scripts_location))
+            # Open file
+            file = open('{}/zathurarc'.format(config['zathura']['path']), 'w+')
+            file.write(zathura_pywal)
+            file.close()
         # If we found a config but something went wrong
         except:
             print_status(1, "Zathura")
@@ -431,21 +429,18 @@ def call_matplotlib(config):
     # Check to see if the user defined a custom path
     if 'matplotlib' in config:
         try:
-            if 'matplotlib-pywal' in config:
-                # Run the theme file
-                matplotlib_pywal = subprocess.getoutput('{}/genmatplotlibrc'.format(
-                    config['matplotlib-pywal']['path']))
-                # Open file
-                file = open('{}/matplotlibrc'.format(
-                    config['matplotlib']['path']), 'w+')
-                file.write(matplotlib_pywal)
-                file.close()
+            # Run the theme file
+            matplotlib_pywal = subprocess.getoutput('{}/matplotlib.sh'.format(scripts_location))
+            # Open file
+            file = open('{}/matplotlibrc'.format(config['matplotlib']['path']), 'w+')
+            file.write(matplotlib_pywal)
+            file.close()
         # If we found a config but something went wrong
         except:
             print_status(1, "Matplotlib")
             return
         print_status(0, "Matplotlib")
-    # No config for matplotlib, just return
+    # no config for matplotlib, just return
     else:
         return
 
@@ -453,15 +448,12 @@ def call_xfce4(config):
     # Check to see if the user defined a custom path
     if 'xfce4-terminal' in config:
         try:
-            if 'xfce4-pywal' in config:
-                # Run the theme file
-                xfce4_pywal = subprocess.getoutput('{}/genxfce4'.format(
-                    config['xfce4-pywal']['path']))
-                # Open file
-                file = open('{}/terminalrc'.format(
-                    config['xfce4-terminal']['path']), 'w+')
-                file.write(xfce4_pywal)
-                file.close()
+            # Run the theme file
+            xfce4_pywal = subprocess.getoutput('{}/xfce4-terminal.sh'.format(scripts_location))
+            # Open file
+            file = open('{}/terminalrc'.format(config['xfce4-terminal']['path']), 'w+')
+            file.write(xfce4_pywal)
+            file.close()
         # If we found a config but something went wrong
         except:
             print_status(1, 'Xfce4 Terminal')
@@ -633,6 +625,8 @@ def call_gnuplot_pywal(config):
             p.wait()
             file.close()
         except:
+            path = config['gnuplotpywal']['path']
+            print(path)
             print_status(1, 'Gnuplot')
             return
     elif is_tool('gengnuplotconfig'):

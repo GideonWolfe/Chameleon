@@ -37,13 +37,16 @@ zathura:
   path: "/home/hashedupforyou101/.config/zathura"
 
 xfce4-terminal:
-  path: "/home/hashedupforyou101/.config/xfce4/terminal"
+  path: "/home/hashedupforyou101/.config/xfce4"
 
 dunst:
   path: "/home/hashedupforyou101/.config/dunst"
 
 dwm:
   path: "/home/hashedupforyou101/.config/dwm/dwm-config"
+
+matplotlib:
+  path: "/home/hashedupforyou101/.config/matplotlib"
 
 xmenu:
   path: "/home/hashedupforyou101/Singularis/aspects/xmenu"
