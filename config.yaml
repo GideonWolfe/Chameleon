@@ -33,38 +33,20 @@ oomoxgtk:
 # pywalfox:
   # path:
 
-
 zathura:
   path: "/home/hashedupforyou101/.config/zathura"
-
-zathura-pywal:
-  path: "/home/hashedupforyou101/Singularis/third-party-tools/zathura-pywal"
-
 
 xfce4-terminal:
   path: "/home/hashedupforyou101/.config/xfce4/terminal"
 
-xfce4-pywal:
-  path: "/home/hashedupforyou101/Singularis/third-party-tools/xfce4-pywal"
-
-
 dunst:
   path: "/home/hashedupforyou101/.config/dunst"
-
-dunst-pywal:
-  path: "/home/hashedupforyou101/Singularis/third-party-tools/dunst-pywal"
-
 
 dwm:
   path: "/home/hashedupforyou101/.config/dwm/dwm-config"
 
-
 xmenu:
   path: "/home/hashedupforyou101/Singularis/aspects/xmenu"
-
-xmenu-pywal:
-  path: "/home/hashedupforyou101/Singularis/third-party-tools/xmenu-pywal"
-
 
 starttree:
   path: "/home/hashedupforyou101/Singularis/third-party-tools/start-tree"
