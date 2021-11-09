@@ -7,7 +7,6 @@ import subprocess
 from os.path import expanduser
 from whichcraft import which
 import yaml
-import time
 
 
 #  _   _ _   _ _ _ _   _
@@ -28,6 +27,7 @@ class BColors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
 
 def print_status(status, program):
     """
@@ -72,6 +72,7 @@ def print_status(status, program):
 def is_tool(name):
     """Check whether `name` is on PATH and marked as executable."""
     return which(name) is not None
+
 
 #   ____             __ _
 #  / ___|___  _ __  / _(_) __ _
@@ -143,7 +144,6 @@ def print_keys(dictionary):
 #   | | | | | |  __/ | | | | | | | | | (_| |
 #   |_| |_| |_|\___|_| |_| |_|_|_| |_|\__, |
 #                                     |___/
-
 
 # Detects and runs hooks set by user
 def user_hooks(config):
@@ -451,7 +451,7 @@ def call_xfce4(config):
             # Run the theme file
             xfce4_pywal = subprocess.getoutput('{}/xfce4-terminal.sh'.format(scripts_location))
             # Open file
-            file = open('{}/terminalrc'.format(config['xfce4-terminal']['path']), 'w+')
+            file = open('{}/terminal/terminalrc'.format(config['xfce4-terminal']['path']), 'w+')
             file.write(xfce4_pywal)
             file.close()
         # If we found a config but something went wrong
