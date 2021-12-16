@@ -34,22 +34,22 @@ oomoxgtk:
   # path:
 
 zathura:
-  path: "/home/hashedupforyou101/.config/zathura"
+  path: "/home/hashem/.config/zathura"
 
 xfce4-terminal:
-  path: "/home/hashedupforyou101/.config/xfce4"
+  path: "/home/hashem/.config/xfce4"
 
 dunst:
-  path: "/home/hashedupforyou101/.config/dunst"
+  path: "/home/hashem/.config/dunst"
 
 dwm:
-  path: "/home/hashedupforyou101/.config/dwm/dwm-config"
+  path: "/home/hashem/.config/dwm/dwm-config"
 
 matplotlib:
-  path: "/home/hashedupforyou101/.config/matplotlib"
+  path: "/home/hashem/.config/matplotlib"
 
 xmenu:
-  path: "/home/hashedupforyou101/Singularis/aspects/xmenu"
+  path: "/home/hashem/Singularis/aspects/xmenu"
 
 starttree:
-  path: "/home/hashedupforyou101/Singularis/third-party-tools/start-tree"
+  path: "/home/hashem/Singularis/third-party-tools/start-tree"

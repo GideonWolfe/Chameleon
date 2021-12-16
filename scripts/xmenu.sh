@@ -9,7 +9,7 @@ static struct Config config = {
 		/* font */
   .font = "HackNerdFont:size=9,FontAwesome:size=9,FontAwesomeBrands:size=11",
 	/* colors */
-	.background_color = "${backaground}",
+	.background_color = "${background}",
 	.foreground_color = "${foreground}",
 	.selbackground_color = "${cursor}",
 	.selforeground_color = "${color0}",
