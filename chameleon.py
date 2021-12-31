@@ -316,6 +316,8 @@ def call_dunst(config):
             file = open('{}/dunstrc'.format(config['dunst']['path']), 'w+')
             file.write(dunst_pywal)
             file.close()
+            print('You must restart dunst via: killall dunst && dunst')
+            time.sleep(2)
         # If we found a config but something went wrong
         except:
             print_status(1, "Dunst")
