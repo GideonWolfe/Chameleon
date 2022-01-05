@@ -2,11 +2,12 @@
 
 
 import os
+import time
+import yaml
 import argparse
 import subprocess
 from os.path import expanduser
 from whichcraft import which
-import yaml
 
 
 #  _   _ _   _ _ _ _   _
@@ -49,7 +50,8 @@ def print_status(status, program):
             BColors.FAIL,
             BColors.ENDC,
             BColors.WARNING,
-            BColors.ENDC
+            program,
+            BColors.ENDC,
         ))
     elif status == 2:
         print('{} X {} {} User Hook {} failed {}'.format(
@@ -160,7 +162,7 @@ def user_hooks(config):
                     arglist = value[1].split(' ')
                     p = subprocess.Popen(arglist)
                     p.wait()
-                except:
+                except Exception:
                     print_status(2, value[0])
                     return
             # User has specified options for the hook
@@ -170,7 +172,7 @@ def user_hooks(config):
                 try:
                     p = subprocess.Popen(arglist, cwd=path)
                     p.wait()
-                except:
+                except Exception:
                     print_status(2, value[0])
                     return
             print_status(3, value[0])
@@ -189,7 +191,7 @@ def call_wal(args, walargs):
             p = subprocess.Popen(commandlist)
             p.wait()
             os.system('feh --bg-scale {} && cp {} ~/.config/wall.jpg'.format(args.image, args.image))
-        except:
+        except Exception:
             print_status(1, 'pywal')
             return
     # If we are using a prebuilt or custom colorscheme
@@ -199,7 +201,7 @@ def call_wal(args, walargs):
             commandlist.extend(walargs)
             p = subprocess.Popen(commandlist)
             p.wait()
-        except:
+        except Exception:
             print_status(1, 'pywal')
             return
     print_status(0, 'pywal')
@@ -214,7 +216,7 @@ def call_slickpywal(config):
         try:
             p = subprocess.Popen(['slick-pywal'], cwd=config['slickpywal']['path'])
             p.wait()
-        except:
+        except Exception:
             print_status(1, 'SlickGreeter Pywal')
             return
     # Check to see if it exists somewhere in the path
@@ -222,7 +224,7 @@ def call_slickpywal(config):
         try:
             p = subprocess.Popen(['slick-pywal'])
             p.wait()
-        except:
+        except Exception:
             print_status(1, 'SlickGreeter Pywal')
             return
     else:
@@ -241,13 +243,13 @@ def call_pywalneopixels(config):
             command_string = '{}startLEDs'.format(
                 config['pywalneopixels']['path'])
             os.system(command_string)
-        except:
+        except Exception:
             print_status(1, 'Pywal NeoPixel')
     # Check to see if it exists somewhere in the path
     elif is_tool('startLEDS'):
         try:
             os.system('startLEDS')
-        except:
+        except Exception:
             print_status(1, 'Pywal NeoPixel')
             return
     # It is not detected it all
@@ -266,7 +268,7 @@ def call_wal_discord(config):
             m = subprocess.Popen(['wal-discord', '-t'],
                                  cwd=config['waldiscord']['path'])
             m.wait()
-        except:
+        except Exception:
             print_status(1, 'Discord')
             return
         print_status(0, 'Discord')
@@ -275,7 +277,7 @@ def call_wal_discord(config):
         try:
             n = subprocess.Popen(['wal-discord', '-t'])
             n.wait()
-        except:
+        except Exception:
             print_status(1, 'Discord')
             return
         print_status(0, 'Discord')
@@ -290,7 +292,7 @@ def call_pywal_discord(config):
             m = subprocess.Popen ["pywal-discord"], \
                 cwd=config['pywaldiscord']['path']
             m.wait()
-        except:
+        except Exception:
             print_status(1, 'Discord')
             return
         print_status(0, 'Discord')
@@ -299,7 +301,7 @@ def call_pywal_discord(config):
         try:
             n = subprocess.Popen(['pywal-discord'])
             n.wait()
-        except:
+        except Exception:
             print_status(1, 'Discord')
             return
         print_status(0, 'Discord')
@@ -319,7 +321,7 @@ def call_dunst(config):
             print('You must restart dunst via: killall dunst && dunst')
             time.sleep(2)
         # If we found a config but something went wrong
-        except:
+        except Exception:
             print_status(1, "Dunst")
             return
         print_status(0, "Dunst")
@@ -364,7 +366,7 @@ def call_xmenu(config):
                 return
 
         # If we found a config but something went wrong
-        except:
+        except Exception:
             print_status(1, 'Xmenu')
             return
         print_status(0, 'Xmenu')
@@ -399,7 +401,7 @@ def call_dwm(config):
                 print_status(1, 'Dwm')
                 return
         # If we found a config but something went wrong
-        except:
+        except Exception:
             print_status(1, 'Dwm')
             return
         print_status(0, 'Dwm')
@@ -419,7 +421,7 @@ def call_zathura(config):
             file.write(zathura_pywal)
             file.close()
         # If we found a config but something went wrong
-        except:
+        except Exception:
             print_status(1, "Zathura")
             return
         print_status(0, "Zathura")
@@ -438,7 +440,7 @@ def call_matplotlib(config):
             file.write(matplotlib_pywal)
             file.close()
         # If we found a config but something went wrong
-        except:
+        except Exception:
             print_status(1, "Matplotlib")
             return
         print_status(0, "Matplotlib")
@@ -457,7 +459,7 @@ def call_xfce4(config):
             file.write(xfce4_pywal)
             file.close()
         # If we found a config but something went wrong
-        except:
+        except Exception:
             print_status(1, 'Xfce4 Terminal')
             return
         print_status(0, 'Xfce4 Terminal')
@@ -477,7 +479,7 @@ def call_cordless(config):
                 command_string = command_string.split(' ')
                 g = subprocess.Popen(commandstring, stdout=theme)
                 g.wait()
-        except:
+        except Exception:
             print_status(1, 'cordless')
             return
         print_status(0, 'cordless')
@@ -488,14 +490,14 @@ def call_razercli(config):
         try:
             p = subprocess.Popen([config['razercli']['path']+'razer-cli', '-a'])
             p.wait()
-        except:
+        except Exception:
             print_status(1, 'Razer Devices')
             return
     elif is_tool('razer-cli'):
         try:
             p = subprocess.Popen(['razer-cli', '-a'])
             p.wait()
-        except:
+        except Exception:
             print_status(1, 'Razer Devices')
             return
     else:
@@ -512,7 +514,7 @@ def call_spicetify(config):
                                  stdout=null)
             p.wait()
             null.close()
-        except:
+        except Exception:
             print_status(1, 'Spicetify')
             return
     elif is_tool('spicetify'):
@@ -521,7 +523,7 @@ def call_spicetify(config):
             p = subprocess.Popen(['spicetify', 'apply'], stdout=null)
             p.wait()
             null.close()
-        except:
+        except Exception:
             print_status(1, 'Spicetify')
             return
     else:
@@ -537,7 +539,7 @@ def call_tellegrampallettegen(config):
             p = subprocess.Popen(['{}telegram-pallete-gen'.format(path),
                                   '--wal'])
             p.wait()
-        except:
+        except Exception:
             print_status(1, 'Telegram Pallete')
             return
     elif is_tool('telegram-palette-gen'):
@@ -545,7 +547,7 @@ def call_tellegrampallettegen(config):
         try:
             p = subprocess.Popen(['telegram-pallete-gen', '--wal'])
             p.wait()
-        except:
+        except Exception:
             print_status(1, 'Telegram Pallete')
             return
     else:
@@ -560,7 +562,7 @@ def call_oomoxicons(config):
             theme_path = config['oomoxicons']['themepath']
             full_command = '{} {} > /dev/null'.format(command, theme_path)
             os.system(full_command)
-        except:
+        except Exception:
             print_status(1, 'Oomox Icons')
             return
     print_status(0, 'Oomox Icons')
@@ -574,7 +576,7 @@ def call_oomoxgtk(config):
             theme_path = config['oomoxgtk']['themepath']
             full_command = 'oomox-cli {} > /dev/null'.format(theme_path)
             os.system(full_command)
-        except:
+        except Exception:
             print_status(1, 'Oomox GTK')
             return
     print_status(0, 'Oomox GTK')
@@ -589,7 +591,7 @@ def call_oomoxspotify(config):
                 full_command = 'oomoxify-cli {}/.cache/wal/colors-oomox' \
                     '-s '.format(home, spotifypath)
                 os.system(full_command)
-            except:
+            except Exception:
                 print_status(1, 'Oomox Spotify')
                 return
             print_status(0, 'Oomox Spofify')
@@ -605,14 +607,14 @@ def call_pywalfox(config):
             path = config['pywalfox']['path']
             p = subprocess.Popen(['{}pywalfox'.format(path), 'update'])
             p.wait()
-        except:
+        except Exception:
             print_status(1, 'Pywalfox')
             return
     elif is_tool('pywalfox'):
         try:
             p = subprocess.Popen(['pywalfox', 'update'])
             p.wait()
-        except:
+        except Exception:
             print_status(1, 'Pywalfox')
             return
     print_status(0, 'Pywalfox')
@@ -623,10 +625,11 @@ def call_gnuplot_pywal(config):
         try:
             path = config['gnuplotpywal']['path']
             file = open('{}/.gnuplot'.format(home), 'w+')
-            p = subprocess.Popen(['{}gengnuplotconfig'.format(path)], stdout=file)
+            p = subprocess.Popen(['{}gengnuplotconfig'.format(path)],
+                                 stdout=file)
             p.wait()
             file.close()
-        except:
+        except Exception:
             path = config['gnuplotpywal']['path']
             print(path)
             print_status(1, 'Gnuplot')
@@ -637,7 +640,7 @@ def call_gnuplot_pywal(config):
             p = subprocess.Popen(['gengnuplotconfig'], stdout=file)
             p.wait()
             file.close()
-        except:
+        except Exception:
             print_status(1, 'Gnuplot')
             return
     print_status(0, 'Gnuplot')
@@ -649,14 +652,14 @@ def call_starttree(config):
             path = config['starttree']['path']
             p = subprocess.Popen(['{}/generate.py'.format(path)])
             p.wait()
-        except:
+        except Exception:
             print_status(1, 'StartTree')
             return
     elif is_tool('starttree.py'):
         try:
             p = subprocess.Popen(['starttree.py'], stdout=subprocess.DEVNULL)
             p.wait()
-        except:
+        except Exception:
             print_status(1, 'StartTree')
             return
     else:
