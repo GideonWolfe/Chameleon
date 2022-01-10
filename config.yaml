@@ -39,6 +39,9 @@ zathura:
 xfce4-terminal:
   path: "/home/hashem/.config/xfce4"
 
+rofi:
+  path: "/home/hashem/.config/rofi"
+
 dunst:
   path: "/home/hashem/.config/dunst"
 

@@ -308,6 +308,7 @@ def call_pywal_discord(config):
     else:
         return
 
+
 def call_dunst(config):
     # Check to see if the user defined a custom path
     if 'dunst' in config:
@@ -328,6 +329,7 @@ def call_dunst(config):
     # no config for dunst, just return
     else:
         return
+
 
 def call_xmenu(config):
     # Check to see if the user defined a custom path
@@ -415,7 +417,8 @@ def call_zathura(config):
     if 'zathura' in config:
         try:
             # Run the theme file
-            zathura_pywal = subprocess.getoutput('{}/zathura.sh'.format(scripts_location))
+            zathura_pywal = subprocess.getoutput('{}/zathura.sh'.format(
+                scripts_location))
             # Open file
             file = open('{}/zathurarc'.format(config['zathura']['path']), 'w+')
             file.write(zathura_pywal)
@@ -429,12 +432,14 @@ def call_zathura(config):
     else:
         return
 
+
 def call_matplotlib(config):
     # Check to see if the user defined a custom path
     if 'matplotlib' in config:
         try:
             # Run the theme file
-            matplotlib_pywal = subprocess.getoutput('{}/matplotlib.sh'.format(scripts_location))
+            matplotlib_pywal = subprocess.getoutput('{}/matplotlib.sh'.format(
+                scripts_location))
             # Open file
             file = open('{}/matplotlibrc'.format(config['matplotlib']['path']), 'w+')
             file.write(matplotlib_pywal)
@@ -447,6 +452,7 @@ def call_matplotlib(config):
     # no config for matplotlib, just return
     else:
         return
+
 
 def call_xfce4(config):
     # Check to see if the user defined a custom path
@@ -464,6 +470,26 @@ def call_xfce4(config):
             return
         print_status(0, 'Xfce4 Terminal')
     # No config for xfce4-terminal, just return
+    else:
+        return
+
+
+def call_rofi(config):
+    # Check to see if the user defined a custom path
+    if 'rofi' in config:
+        try:
+            # Run the theme file
+            rofi_pywal = subprocess.getoutput('{}/rofi.sh'.format(scripts_location))
+            # Open file
+            file = open('{}/config.rasi'.format(config['rofi']['path']), 'w+')
+            file.write(rofi_pywal)
+            file.close()
+        # If we found a config but something went wrong
+        except Exception:
+            print_status(1, 'Rofi Terminal')
+            return
+        print_status(0, 'Rofi Terminal')
+    # No config for rofi just return
     else:
         return
 
@@ -677,6 +703,7 @@ def theme(config, args, walargs):
     call_zathura(config)
     call_matplotlib(config)
     call_xfce4(config)
+    call_rofi(config)
     call_dunst(config)
     call_cordless(config)
     call_razercli(config)
