@@ -474,6 +474,17 @@ def call_xfce4(config):
         return
 
 
+def call_alacritty(config):
+    try:
+        # Run the theme file
+        alacritty_pywal = subprocess.getoutput('{}/alacritty.sh'.format(scripts_location))
+    # If we found a config but something went wrong
+    except Exception:
+        print_status(1, 'Alacritty')
+        return
+    print_status(0, 'Alacritty')
+
+
 def call_rofi(config):
     # Check to see if the user defined a custom path
     if 'rofi' in config:
@@ -703,6 +714,7 @@ def theme(config, args, walargs):
     call_zathura(config)
     call_matplotlib(config)
     call_xfce4(config)
+    call_alacritty(config)
     call_rofi(config)
     call_dunst(config)
     call_cordless(config)
