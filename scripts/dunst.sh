@@ -415,8 +415,4 @@ cat <<CONF
 #[stack-volumes]
   #appname = "some_volume_notifiers"
   #set_stack_tag = "volume"
-
-[play_sound]
-  summary = "*"
-  script = "${HOME}/Singularis/local/scripts/sound"
 CONF
