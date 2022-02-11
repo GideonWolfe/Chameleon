@@ -1,3 +1,6 @@
+#!/usr/bin/bash
+
+cat <<EOF
 oomoxicons:
   # This changes depending on your iconset
   command: "oomox-archdroid-icons-cli"
@@ -34,25 +37,29 @@ oomoxgtk:
   # path:
 
 zathura:
-  path: "/home/hashem/.config/zathura"
+  path: "${HOME}/.config/zathura"
 
 xfce4-terminal:
-  path: "/home/hashem/.config/xfce4"
+  path: "${HOME}/.config/xfce4"
 
 rofi:
-  path: "/home/hashem/.config/rofi"
+  path: "${HOME}/.config/rofi"
 
 dunst:
-  path: "/home/hashem/.config/dunst"
+  path: "${HOME}/.config/dunst"
 
 dwm:
-  path: "/home/hashem/.config/dwm/dwm-config"
+  path: "${HOME}/.config/dwm/dwm-config"
 
 matplotlib:
-  path: "/home/hashem/.config/matplotlib"
+  path: "${HOME}/.config/matplotlib"
 
 xmenu:
-  path: "/home/hashem/Singularis/aspects/xmenu"
+  path: "${HOME}/Singularis/aspects/xmenu"
 
 starttree:
-  path: "/home/hashem/Singularis/third-party-tools/start-tree"
+  path: "${HOME}/Singularis/third-party-tools/start-tree"
+
+gnuplot:
+  path: "${HOME}/.config/gnuplot"
+EOF

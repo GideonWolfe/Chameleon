@@ -11,6 +11,10 @@ install:
 	@echo "config file for chameleon.py created in $(DESTDIR)$(PREFIX)/config/config.yaml"
 	@echo "installing $(PIPVER) dependencies"
 	@$(PIPVER) install --user whichcraft || echo "dependencies couldn't be installed install pip and rerun"
+	@echo "setup config.yaml"
+	@echo "backing up old config file"
+	mv config.yaml config.yaml.bak
+	./setup-config >> config.yaml
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/chameleon.py
 	@echo "removed $(DESTDIR)$(PREFIX)/bin/chameleon.py"

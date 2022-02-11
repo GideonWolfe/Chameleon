@@ -658,29 +658,24 @@ def call_pywalfox(config):
 
 
 def call_gnuplot_pywal(config):
-    if 'gnuplotpywal' in config:
+    # Check to see if the user defined a custom path
+    if 'gnuplot' in config:
         try:
-            path = config['gnuplotpywal']['path']
-            file = open('{}/.gnuplot'.format(home), 'w+')
-            p = subprocess.Popen(['{}gengnuplotconfig'.format(path)],
-                                 stdout=file)
-            p.wait()
+            # Run the theme file
+            gnuplot_pywal = subprocess.getoutput('{}/gnuplot.sh'.format(
+                scripts_location))
+            # Open file
+            file = open('{}/qtterminal.conf'.format(config['gnuplot']['path']), 'w+')
+            file.write(gnuplot_pywal)
             file.close()
+        # If we found a config but something went wrong
         except Exception:
-            path = config['gnuplotpywal']['path']
-            print(path)
-            print_status(1, 'Gnuplot')
+            print_status(1, "Gnuplot")
             return
-    elif is_tool('gengnuplotconfig'):
-        try:
-            file = open('{}/.gnuplot'.format(home), 'w+')
-            p = subprocess.Popen(['gengnuplotconfig'], stdout=file)
-            p.wait()
-            file.close()
-        except Exception:
-            print_status(1, 'Gnuplot')
-            return
-    print_status(0, 'Gnuplot')
+        print_status(0, "Gnuplot")
+    # no config for gnuplot, just return
+    else:
+        return
 
 
 def call_starttree(config):
@@ -706,28 +701,28 @@ def call_starttree(config):
 
 def theme(config, args, walargs):
     call_wal(args, walargs)
-    call_slickpywal(config)
-    call_pywalneopixels(config)
-    call_wal_discord(config)
-    call_xmenu(config)
-    call_dwm(config)
-    call_zathura(config)
-    call_matplotlib(config)
-    call_xfce4(config)
-    call_alacritty(config)
-    call_rofi(config)
-    call_dunst(config)
-    call_cordless(config)
-    call_razercli(config)
-    call_spicetify(config)
-    call_tellegrampallettegen(config)
-    call_oomoxicons(config)
-    call_oomoxgtk(config)
-    call_oomoxspotify(config)
-    call_pywalfox(config)
+    # call_slickpywal(config)
+    # call_pywalneopixels(config)
+    # call_wal_discord(config)
+    # call_xmenu(config)
+    # call_dwm(config)
+    # call_zathura(config)
+    # call_matplotlib(config)
+    # call_xfce4(config)
+    # call_alacritty(config)
+    # call_rofi(config)
+    # call_dunst(config)
+    # call_cordless(config)
+    # call_razercli(config)
+    # call_spicetify(config)
+    # call_tellegrampallettegen(config)
+    # call_oomoxicons(config)
+    # call_oomoxgtk(config)
+    # call_oomoxspotify(config)
+    # call_pywalfox(config)
     call_gnuplot_pywal(config)
-    call_starttree(config)
-    user_hooks(config)
+    # call_starttree(config)
+    # user_hooks(config)
 
 
 def main():
@@ -738,4 +733,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
