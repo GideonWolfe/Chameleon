@@ -24,20 +24,6 @@ cat <<CONF
   # will be ignored.
   follow = mouse
 
-  # The geometry of the window:
-  #   [{width}]x{height}[+/-{x}+/-{y}]
-  # The geometry of the message window.
-  # The height is measured in number of notifications everything else
-  # in pixels.  If the width is omitted but the height is given
-  # ("-geometry x2"), the message window expands over the whole screen
-  # (dmenu-like).  If width is 0, the window expands to the longest
-  # message displayed.  A positive x is measured from the left, a
-  # negative from the right side of the screen.  Y is measured from
-  # the top and down respectively.
-  # The width can be negative.  In this case the actual width is the
-  # screen width minus the width defined in within the geometry option.
-  geometry = "0x0-30+20"
-
   # Show how many messages are currently hidden (because of geometry).
   indicate_hidden = yes
 
@@ -49,11 +35,6 @@ cat <<CONF
   # This option will only work if a compositing window manager is
   # present (e.g. xcompmgr, compiz, etc.).
   transparency = 10
-
-  # The height of the entire notification.  If the height is smaller
-  # than the font height and padding combined, it will be raised
-  # to the font height and padding.
-  notification_height = 0
 
   # Draw a line of "separator_height" pixel height between two
   # notifications.
@@ -185,9 +166,6 @@ cat <<CONF
 
   ### Misc/Advanced ###
 
-  # rofi path.
-  rofi = /usr/bin/rofi -dmenu:
-
   # Browser for opening urls in context menu.
   browser = /usr/bin/google-chrome-stable
 
@@ -199,20 +177,6 @@ cat <<CONF
 
   # Define the class of the windows spawned by dunst
   class = Dunst
-
-  # Print a notification on startup.
-  # This is mainly for error detection, since dbus (re-)starts dunst
-  # automatically after a crash.
-  startup_notification = false
-
-  # Manage dunst's desire for talking
-  # Can be one of the following values:
-  #  crit: Critical features. Dunst aborts
-  #  warn: Only non-fatal warnings
-  #  mesg: Important Messages
-  #  info: all unimportant stuff
-  # debug: all less than unimportant stuff
-  verbosity = mesg
 
   # Define the corner radius of the notification window
   # in pixel size. If the radius is 0, you have no rounded
@@ -256,163 +220,24 @@ cat <<CONF
   # where there are multiple screens with very different dpi values.
   per_monitor_dpi = false
 
-[shortcuts]
-  # Shortcuts are specified as [modifier+][modifier+]...key
-  # Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
-  # "mod3" and "mod4" (windows-key).
-  # Xev might be helpful to find names for keys.
-
-  # Close notification.
-  close = ctrl+space
-
-  # Close all notifications.
-  close_all = ctrl+shift+space
-
-  # Redisplay last message(s).
-  # On the US keyboard layout "grave" is normally above TAB and left
-  # of "1". Make sure this key actually exists on your keyboard layout,
-  # e.g. check output of 'xmodmap -pke'
-  history = ctrl+grave
-
-  # Context menu.
-  context = ctrl+shift+period
-
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    msg_urgency = low
     background = "${color0}"
     foreground = "${color1}"
-    timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
     icon = ${HOME}/.config/dunst/normal.png
 
 [urgency_normal]
-    msg_urgency = normal
     background = "${background}"
     foreground = "${foreground}"
-    timeout = 5
     # Icon for notifications with normal urgency, uncomment to enable
     icon = ${HOME}/.config/dunst/normal.png
 
 [urgency_critical]
-    msg_urgency = critical
     background = "#900000"
     foreground = "#ffffff"
     frame_color = "#ff0000"
-    timeout = 5
     # Icon for notifications with critical urgency, uncomment to enable
     icon = ${HOME}/.config/dunst/critical.png
-
-# Every section that isn't one of the above is interpreted as a rules to
-# override settings for certain messages.
-#
-# Messages can be matched by
-#    appname (discouraged, see desktop_entry)
-#    body
-#    category
-#    desktop_entry
-#    icon
-#    match_transient
-#    msg_urgency
-#    stack_tag
-#    summary
-#
-# and you can override the
-#    background
-#    foreground
-#    format
-#    frame_color
-#    fullscreen
-#    new_icon
-#    set_stack_tag
-#    set_transient
-#    timeout
-#    urgency
-#
-# Shell-like globbing will get expanded.
-#
-# Instead of the appname filter, it's recommended to use the desktop_entry filter.
-# GLib based applications export their desktop-entry name. In comparison to the appname,
-# the desktop-entry won't get localized.
-#
-# SCRIPTING
-# You can specify a script that gets run when the rule matches by setting the "script" option. The script will be called as follows:
-#   script appname summary body icon urgency
-# where urgency can be "LOW", "NORMAL" or "CRITICAL".
-#
-# NOTE: if you don't want a notification to be displayed, set the format
-# to "".
-# NOTE: It might be helpful to run dunst -print in a terminal in order
-# to find fitting options for rules.
-
-# Disable the transient hint so that idle_threshold cannot be bypassed from the
-# client
-#[transient_disable]
-  #match_transient = yes
-  #set_transient = no
-
-# Make the handling of transient notifications more strict by making them not
-# be placed in history.
-#[transient_history_ignore]
-  #match_transient = yes
-  #history_ignore = yes
-
-# fullscreen values
-# show: show the notifications, regardless if there is a fullscreen window opened
-# delay: displays the new notification, if there is no fullscreen window active
-#        If the notification is already drawn, it won't get undrawn. pushback: same as delay, but when switching into fullscreen, the notification will get
-#           withdrawn from screen again and will get delayed like a new notification
-#[fullscreen_delay_everything]
-  #fullscreen = delay
-#[fullscreen_show_critical]
-  #msg_urgency = critical
-  #fullscreen = show
-
-#[espeak]
-  #summary = "*"
-  #script = dunst_espeak.sh
-
-#[script-test]
-  #summary = "*script*"
-  #script = dunst_test.sh
-
-#[ignore]
-  # This notification will not be displayed
-  #summary = "foobar"
-  #format = ""
-
-#[history-ignore]
-  # This notification will not be saved in history
-  #summary = "foobar"
-  #history_ignore = yes
-
-#[skip-display]
-  # This notification will not be displayed, but will be included in the history
-  #summary = "foobar"
-  #skip_display = yes
-
-#[signed_on]
-  #appname = Pidgin
-  #summary = "*signed on*"
-  #urgency = low
-
-#[signed_off]
-  #appname = Pidgin
-  #summary = *signed off*
-  #urgency = low
-
-#[says]
-  #appname = Pidgin
-  #summary = *says*
-  #urgency = critical
-
-#[twitter]
-  #appname = Pidgin
-  #summary = *twitter.com*
-  #urgency = normal
-
-#[stack-volumes]
-  #appname = "some_volume_notifiers"
-  #set_stack_tag = "volume"
 CONF
