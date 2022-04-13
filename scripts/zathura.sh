@@ -34,4 +34,5 @@ set render-loading-fg "$foreground"
 set window-title-home-tilde true
 set statusbar-basename true
 set selection-clipboard clipboard
+set first-page-column 1
 CONF
