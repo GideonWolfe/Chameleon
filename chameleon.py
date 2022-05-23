@@ -190,7 +190,8 @@ def call_wal(args, walargs):
             commandlist.extend(walargs)
             p = subprocess.Popen(commandlist)
             p.wait()
-            os.system('feh --bg-scale {} && cp {} ~/.config/wall.jpg'.format(args.image, args.image))
+            os.system(
+                'feh --bg-scale {} && cp {} ~/.config/wall.jpg'.format(args.image, args.image))
         except Exception:
             print_status(1, 'pywal')
             return
@@ -214,7 +215,8 @@ def call_slickpywal(config):
     # Check to see if the user defined a custom path
     if 'slickpywal' in config:
         try:
-            p = subprocess.Popen(['slick-pywal'], cwd=config['slickpywal']['path'])
+            p = subprocess.Popen(
+                ['slick-pywal'], cwd=config['slickpywal']['path'])
             p.wait()
         except Exception:
             print_status(1, 'SlickGreeter Pywal')
@@ -289,8 +291,8 @@ def call_pywal_discord(config):
     # Check to see if the user defined a custom path
     if "pywaldiscord" in config:
         try:
-            m = subprocess.Popen ["pywal-discord"], \
-                cwd=config['pywaldiscord']['path']
+            m = subprocess.Popen["pywal-discord"], \
+                cwd = config['pywaldiscord']['path']
             m.wait()
         except Exception:
             print_status(1, 'Discord')
@@ -305,28 +307,6 @@ def call_pywal_discord(config):
             print_status(1, 'Discord')
             return
         print_status(0, 'Discord')
-    else:
-        return
-
-
-def call_dunst(config):
-    # Check to see if the user defined a custom path
-    if 'dunst' in config:
-        try:
-            # Run the theme file
-            dunst_pywal = subprocess.getoutput('{}/dunst.sh'.format(scripts_location))
-            # Open file
-            file = open('{}/dunstrc'.format(config['dunst']['path']), 'w+')
-            file.write(dunst_pywal)
-            file.close()
-            print('You must restart dunst via: killall dunst && dunst')
-            time.sleep(2)
-        # If we found a config but something went wrong
-        except Exception:
-            print_status(1, "Dunst")
-            return
-        print_status(0, "Dunst")
-    # no config for dunst, just return
     else:
         return
 
@@ -377,91 +357,16 @@ def call_xmenu(config):
         return
 
 
-def call_dwm(config):
-    # Check to see if the user defined a custom path
-    if 'dwm' in config:
-        try:
-            # Make dwm
-            null = open('/dev/null')
-            m = subprocess.Popen(['make'], cwd=config['dwm']['path'],
-                                 stdout=subprocess.DEVNULL)
-            m.wait()
-            retval = m.returncode
-            null.close()
-            # If making failed
-            if(retval != 0):
-                print_status(1, 'Dwm')
-                return
-            # Install the new files
-            i = subprocess.Popen(['sudo', 'make', 'clean', 'install'],
-                                 cwd=config['dwm']['path'],
-                                 stdout=subprocess.DEVNULL)
-            i.wait()
-            retval = m.returncode
-            # If installation failed
-            if retval != 0:
-                print_status(1, 'Dwm')
-                return
-        # If we found a config but something went wrong
-        except Exception:
-            print_status(1, 'Dwm')
-            return
-        print_status(0, 'Dwm')
-    # No config for dwm, just return
-    else:
-        return
-
-
-def call_zathura(config):
-    # Check to see if the user defined a custom path
-    if 'zathura' in config:
-        try:
-            # Run the theme file
-            zathura_pywal = subprocess.getoutput('{}/zathura.sh'.format(
-                scripts_location))
-            # Open file
-            file = open('{}/zathurarc'.format(config['zathura']['path']), 'w+')
-            file.write(zathura_pywal)
-            file.close()
-        # If we found a config but something went wrong
-        except Exception:
-            print_status(1, "Zathura")
-            return
-        print_status(0, "Zathura")
-    # no config for zathura, just return
-    else:
-        return
-
-
-def call_matplotlib(config):
-    # Check to see if the user defined a custom path
-    if 'matplotlib' in config:
-        try:
-            # Run the theme file
-            matplotlib_pywal = subprocess.getoutput('{}/matplotlib.sh'.format(
-                scripts_location))
-            # Open file
-            file = open('{}/matplotlibrc'.format(config['matplotlib']['path']), 'w+')
-            file.write(matplotlib_pywal)
-            file.close()
-        # If we found a config but something went wrong
-        except Exception:
-            print_status(1, "Matplotlib")
-            return
-        print_status(0, "Matplotlib")
-    # no config for matplotlib, just return
-    else:
-        return
-
-
 def call_xfce4(config):
     # Check to see if the user defined a custom path
     if 'xfce4-terminal' in config:
         try:
             # Run the theme file
-            xfce4_pywal = subprocess.getoutput('{}/xfce4-terminal.sh'.format(scripts_location))
+            xfce4_pywal = subprocess.getoutput(
+                '{}/xfce4-terminal.sh'.format(scripts_location))
             # Open file
-            file = open('{}/terminal/terminalrc'.format(config['xfce4-terminal']['path']), 'w+')
+            file = open(
+                '{}/terminal/terminalrc'.format(config['xfce4-terminal']['path']), 'w+')
             file.write(xfce4_pywal)
             file.close()
         # If we found a config but something went wrong
@@ -474,23 +379,13 @@ def call_xfce4(config):
         return
 
 
-def call_alacritty(config):
-    try:
-        # Run the theme file
-        alacritty_pywal = subprocess.getoutput('{}/alacritty.sh'.format(scripts_location))
-    # If we found a config but something went wrong
-    except Exception:
-        print_status(1, 'Alacritty')
-        return
-    print_status(0, 'Alacritty')
-
-
 def call_rofi(config):
     # Check to see if the user defined a custom path
     if 'rofi' in config:
         try:
             # Run the theme file
-            rofi_pywal = subprocess.getoutput('{}/rofi.sh'.format(scripts_location))
+            rofi_pywal = subprocess.getoutput(
+                '{}/rofi.sh'.format(scripts_location))
             # Open file
             file = open('{}/config.rasi'.format(config['rofi']['path']), 'w+')
             file.write(rofi_pywal)
@@ -525,7 +420,8 @@ def call_cordless(config):
 def call_razercli(config):
     if 'razercli' in config:
         try:
-            p = subprocess.Popen([config['razercli']['path']+'razer-cli', '-a'])
+            p = subprocess.Popen(
+                [config['razercli']['path']+'razer-cli', '-a'])
             p.wait()
         except Exception:
             print_status(1, 'Razer Devices')
@@ -665,7 +561,8 @@ def call_gnuplot_pywal(config):
             gnuplot_pywal = subprocess.getoutput('{}/gnuplot.sh'.format(
                 scripts_location))
             # Open file
-            file = open('{}/qtterminal.conf'.format(config['gnuplot']['path']), 'w+')
+            file = open(
+                '{}/qtterminal.conf'.format(config['gnuplot']['path']), 'w+')
             file.write(gnuplot_pywal)
             file.close()
         # If we found a config but something went wrong
@@ -705,13 +602,8 @@ def theme(config, args, walargs):
     call_pywalneopixels(config)
     call_wal_discord(config)
     call_xmenu(config)
-    call_dwm(config)
-    call_zathura(config)
-    call_matplotlib(config)
     call_xfce4(config)
-    call_alacritty(config)
     call_rofi(config)
-    call_dunst(config)
     call_cordless(config)
     call_razercli(config)
     call_spicetify(config)
