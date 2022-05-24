@@ -2,7 +2,6 @@
 
 
 import os
-import time
 import yaml
 import argparse
 import subprocess
@@ -62,7 +61,7 @@ def print_status(status, program):
               BColors.ENDC
               ))
     elif status == 3:
-        print('{} ⚡ {} {} User hook {} succeeded'.format(
+        print('{} ⚡ {} {} {} User hook {} succeeded'.format(
             BColors.OKGREEN,
             BColors.ENDC,
             BColors.OKBLUE,
@@ -190,8 +189,8 @@ def call_wal(args, walargs):
             commandlist.extend(walargs)
             p = subprocess.Popen(commandlist)
             p.wait()
-            os.system(
-                'feh --bg-scale {} && cp {} ~/.config/wall.jpg'.format(args.image, args.image))
+            os.system('feh --bg-scale {} && cp {} ~/.config/wall.jpg'.format(
+                args.image, args.image))
         except Exception:
             print_status(1, 'pywal')
             return
@@ -353,49 +352,6 @@ def call_xmenu(config):
             return
         print_status(0, 'Xmenu')
     # No config for xmenu, just return
-    else:
-        return
-
-
-def call_xfce4(config):
-    # Check to see if the user defined a custom path
-    if 'xfce4-terminal' in config:
-        try:
-            # Run the theme file
-            xfce4_pywal = subprocess.getoutput(
-                '{}/xfce4-terminal.sh'.format(scripts_location))
-            # Open file
-            file = open(
-                '{}/terminal/terminalrc'.format(config['xfce4-terminal']['path']), 'w+')
-            file.write(xfce4_pywal)
-            file.close()
-        # If we found a config but something went wrong
-        except Exception:
-            print_status(1, 'Xfce4 Terminal')
-            return
-        print_status(0, 'Xfce4 Terminal')
-    # No config for xfce4-terminal, just return
-    else:
-        return
-
-
-def call_rofi(config):
-    # Check to see if the user defined a custom path
-    if 'rofi' in config:
-        try:
-            # Run the theme file
-            rofi_pywal = subprocess.getoutput(
-                '{}/rofi.sh'.format(scripts_location))
-            # Open file
-            file = open('{}/config.rasi'.format(config['rofi']['path']), 'w+')
-            file.write(rofi_pywal)
-            file.close()
-        # If we found a config but something went wrong
-        except Exception:
-            print_status(1, 'Rofi Terminal')
-            return
-        print_status(0, 'Rofi Terminal')
-    # No config for rofi just return
     else:
         return
 
@@ -602,8 +558,6 @@ def theme(config, args, walargs):
     call_pywalneopixels(config)
     call_wal_discord(config)
     call_xmenu(config)
-    call_xfce4(config)
-    call_rofi(config)
     call_cordless(config)
     call_razercli(config)
     call_spicetify(config)
