@@ -264,94 +264,15 @@ def call_wal_discord(config):
     Changes the theme for discord.
     """
     # Check to see if the user defined a custom path
-    if 'waldiscord' in config:
+    if 'wal-discord' in config:
         try:
-            m = subprocess.Popen(['wal-discord', '-t'],
-                                 cwd=config['waldiscord']['path'])
+            os.chdir(config['waldiscord']['path'])
+            m = subprocess.Popen(['./wal-discord'])
             m.wait()
         except Exception:
             print_status(1, 'Discord')
             return
         print_status(0, 'Discord')
-    # Check to see if it exists somewhere in the path
-    elif is_tool('wal-discord'):
-        try:
-            n = subprocess.Popen(['wal-discord', '-t'])
-            n.wait()
-        except Exception:
-            print_status(1, 'Discord')
-            return
-        print_status(0, 'Discord')
-    else:
-        return
-
-
-def call_pywal_discord(config):
-    # Check to see if the user defined a custom path
-    if "pywaldiscord" in config:
-        try:
-            m = subprocess.Popen["pywal-discord"], \
-                cwd = config['pywaldiscord']['path']
-            m.wait()
-        except Exception:
-            print_status(1, 'Discord')
-            return
-        print_status(0, 'Discord')
-    # Check to see if it exists somewhere in the path
-    elif(is_tool('pywal-discord')):
-        try:
-            n = subprocess.Popen(['pywal-discord'])
-            n.wait()
-        except Exception:
-            print_status(1, 'Discord')
-            return
-        print_status(0, 'Discord')
-    else:
-        return
-
-
-def call_xmenu(config):
-    # Check to see if the user defined a custom path
-    if 'xmenu' in config:
-        try:
-            if 'xmenu-pywal' in config:
-                # Run the theme file
-                xmenu_pywal = subprocess.getoutput('{}/xmenu.sh'.format(
-                    config['scripts_location']['path']))
-                # Open file
-                file = open('{}/colors-xmenu.h'.format(
-                    config['xmenu']['path']), 'w+')
-                file.write(xmenu_pywal)
-                file.close()
-
-            # Make xmenu
-            null = open('/dev/null')
-            m = subprocess.Popen(['make'], cwd=config['xmenu']['path'],
-                                 stdout=subprocess.DEVNULL)
-            m.wait()
-            retval = m.returncode
-            null.close()
-            # If making failed
-            if retval != 0:
-                print_status(1, 'Xmenu')
-                return
-            # Install the new files
-            i = subprocess.Popen(['sudo', 'make', 'install'],
-                                 cwd=config['xmenu']['path'],
-                                 stdout=subprocess.DEVNULL)
-            i.wait()
-            retval = m.returncode
-            # If installation failed
-            if retval != 0:
-                print_status(1, 'Xmenu')
-                return
-
-        # If we found a config but something went wrong
-        except Exception:
-            print_status(1, 'Xmenu')
-            return
-        print_status(0, 'Xmenu')
-    # No config for xmenu, just return
     else:
         return
 
@@ -422,21 +343,14 @@ def call_spicetify(config):
 
 def call_tellegrampallettegen(config):
     if "telegrampalletegen" in config:
-        print('telegram was found in config')
         try:
             path = config['telegrampalletegen']['path']
-            p = subprocess.Popen(['{}telegram-pallete-gen'.format(path),
-                                  '--wal'])
+            print(path)
+            os.chdir(path)
+            p = subprocess.Popen(['./telegram-palette-gen', '--wal'])
             p.wait()
-        except Exception:
-            print_status(1, 'Telegram Pallete')
-            return
-    elif is_tool('telegram-palette-gen'):
-        print('telegram was found to be tool')
-        try:
-            p = subprocess.Popen(['telegram-pallete-gen', '--wal'])
-            p.wait()
-        except Exception:
+        except Exception as e:
+            raise e
             print_status(1, 'Telegram Pallete')
             return
     else:
@@ -557,7 +471,6 @@ def theme(config, args, walargs):
     call_slickpywal(config)
     call_pywalneopixels(config)
     call_wal_discord(config)
-    call_xmenu(config)
     call_cordless(config)
     call_razercli(config)
     call_spicetify(config)
