@@ -159,7 +159,7 @@ def user_hooks(config):
             if type(value[1]) == str:
                 try:
                     arglist = value[1].split(' ')
-                    p = subprocess.Popen(arglist)
+                    p = subprocess.Popen(arglist, stdout=subprocess.DEVNULL)
                     p.wait()
                 except Exception:
                     print_status(2, value[0])
@@ -169,7 +169,7 @@ def user_hooks(config):
                 path = value[1].get('directory', './')
                 arglist = value[1].get('command').split(' ')
                 try:
-                    p = subprocess.Popen(arglist, cwd=path)
+                    p = subprocess.Popen(arglist, cwd=path, stdout=subprocess.DEVNULL)
                     p.wait()
                 except Exception:
                     print_status(2, value[0])
@@ -215,7 +215,7 @@ def call_slickpywal(config):
     if 'slickpywal' in config:
         try:
             p = subprocess.Popen(
-                ['slick-pywal'], cwd=config['slickpywal']['path'])
+                ['slick-pywal'], cwd=config['slickpywal']['path'], stdout=subprocess.DEVNULL)
             p.wait()
         except Exception:
             print_status(1, 'SlickGreeter Pywal')
@@ -223,7 +223,7 @@ def call_slickpywal(config):
     # Check to see if it exists somewhere in the path
     elif is_tool('slick-pywal'):
         try:
-            p = subprocess.Popen(['slick-pywal'])
+            p = subprocess.Popen(['slick-pywal'], stdout=subprocess.DEVNULL)
             p.wait()
         except Exception:
             print_status(1, 'SlickGreeter Pywal')
@@ -267,12 +267,69 @@ def call_wal_discord(config):
     if 'wal-discord' in config:
         try:
             os.chdir(config['waldiscord']['path'])
-            m = subprocess.Popen(['./wal-discord'])
+            m = subprocess.Popen(['./wal-discord'], stdout=subprocess.DEVNULL)
             m.wait()
         except Exception:
             print_status(1, 'Discord')
             return
         print_status(0, 'Discord')
+    else:
+        return
+
+
+def call_pywal_discord(config):
+    # Check to see if the user defined a custom path
+    if("pywaldiscord" in config):
+        try:
+            m = subprocess.Popen(
+                ["pywal-discord"], cwd=config["pywaldiscord"]["path"], stdout=subprocess.DEVNULL)
+            m.wait()
+        except Exception:
+            print_status(1, "Discord")
+            return
+        print_status(0, "Discord")
+    # Check to see if it exists somewhere in the path
+    elif(is_tool("pywal-discord")):
+        try:
+            n = subprocess.Popen(["pywal-discord"], stdout=subprocess.DEVNULL)
+            n.wait()
+        except Exception:
+            print_status(1, "Discord")
+            return
+        print_status(0, "Discord")
+    else:
+        return
+
+
+def call_xmenu(config):
+    # Check to see if the user defined a custom path
+    if "xmenu" in config:
+        try:
+            null = open("/dev/null")
+            # change to the directory
+            os.chdir(config['xmenu']['path'])
+
+            # make xmenu
+            m = subprocess.Popen(['sudo', 'make', 'clean'], stdout=subprocess.DEVNULL)
+            m.wait()
+            m = subprocess.Popen(['sudo', 'make', 'install'], stdout=subprocess.DEVNULL)
+            m.wait()
+
+            # get the status code
+            retval = m.returncode
+            null.close()
+
+            # if making failed
+            if retval != 0:
+                print_status(1, "Xmenu")
+                return
+        # If we found a config but something went wrong
+        except Exception as e:
+            print(e)
+            print_status(1, "Xmenu")
+            return
+        print_status(0, "Xmenu")
+    # no config for xmenu, just return
     else:
         return
 
@@ -286,9 +343,10 @@ def call_cordless(config):
                       "w") as theme:
                 command_string = 'go run {}'.format(templatepath)
                 command_string = command_string.split(' ')
-                g = subprocess.Popen(commandstring, stdout=theme)
+                g = subprocess.Popen(command_string, stdout=theme)
                 g.wait()
-        except Exception:
+        except Exception as e:
+            print(e)
             print_status(1, 'cordless')
             return
         print_status(0, 'cordless')
@@ -298,14 +356,14 @@ def call_razercli(config):
     if 'razercli' in config:
         try:
             p = subprocess.Popen(
-                [config['razercli']['path']+'razer-cli', '-a'])
+                [config['razercli']['path']+'razer-cli', '-a'], stdout=subprocess.DEVNULL)
             p.wait()
         except Exception:
             print_status(1, 'Razer Devices')
             return
     elif is_tool('razer-cli'):
         try:
-            p = subprocess.Popen(['razer-cli', '-a'])
+            p = subprocess.Popen(['razer-cli', '-a'], stdout=subprocess.DEVNULL)
             p.wait()
         except Exception:
             print_status(1, 'Razer Devices')
@@ -347,7 +405,7 @@ def call_tellegrampallettegen(config):
             path = config['telegrampalletegen']['path']
             print(path)
             os.chdir(path)
-            p = subprocess.Popen(['./telegram-palette-gen', '--wal'])
+            p = subprocess.Popen(['./telegram-palette-gen', '--wal'], stdout=subprocess.DEVNULL)
             p.wait()
         except Exception as e:
             raise e
@@ -407,16 +465,12 @@ def call_oomoxspotify(config):
 def call_pywalfox(config):
     if 'pywalfox' in config:
         try:
-            path = config['pywalfox']['path']
-            p = subprocess.Popen(['{}pywalfox'.format(path), 'update'])
-            p.wait()
-        except Exception:
-            print_status(1, 'Pywalfox')
-            return
-    elif is_tool('pywalfox'):
-        try:
-            p = subprocess.Popen(['pywalfox', 'update'])
-            p.wait()
+            if config['pywalfox']['enable'] == True:
+                p = subprocess.Popen(['pywalfox', 'update'], stdout=subprocess.DEVNULL)
+                p.wait()
+            else:
+                print_status(1, 'Pywalfox')
+                return
         except Exception:
             print_status(1, 'Pywalfox')
             return
@@ -449,7 +503,7 @@ def call_starttree(config):
     if "starttree" in config:
         try:
             path = config['starttree']['path']
-            p = subprocess.Popen(['{}/generate.py'.format(path)])
+            p = subprocess.Popen(['{}/generate.py'.format(path)], stdout=subprocess.DEVNULL)
             p.wait()
         except Exception:
             print_status(1, 'StartTree')
@@ -471,6 +525,7 @@ def theme(config, args, walargs):
     call_slickpywal(config)
     call_pywalneopixels(config)
     call_wal_discord(config)
+    call_xmenu(config)
     call_cordless(config)
     call_razercli(config)
     call_spicetify(config)
