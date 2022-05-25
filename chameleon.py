@@ -106,11 +106,6 @@ def parse_args():
                         metavar='theme',
                         type=str, nargs='?',
                         help='a color scheme name to use as a theme')
-    parser.add_argument('--theme',
-                        '-t',
-                        metavar='theme',
-                        type=str, nargs='?',
-                        help='a color scheme name to use as a theme')
     parser.add_argument('--image',
                         '-i',
                         metavar='image',
@@ -316,6 +311,27 @@ def call_pywal_discord(config):
             print_status(1, "Discord")
             return
         print_status(0, "Discord")
+    else:
+        return
+
+
+def call_xfce4(config):
+    # Check to see if the user defined a custom path
+    if 'xfce4-terminal' in config:
+        try:
+            # Run the theme file
+            xfce4_pywal = subprocess.getoutput('{}/xfce4-terminal.sh'.format(scripts_location))
+            # Open file
+            file = open('{}/terminal/terminalrc'.format(config['xfce4-terminal']['path']), 'w+')
+            file.write(xfce4_pywal)
+            file.close()
+        # If we found a config but something went wrong
+        except Exception as e:
+            print(e)
+            print_status(1, 'Xfce4 Terminal')
+            return
+        print_status(0, 'Xfce4 Terminal')
+    # No config for xfce4-terminal, just return
     else:
         return
 
@@ -549,6 +565,7 @@ def call_starttree(config):
 def theme(config, args, walargs):
     call_wal(args, walargs)
     call_slickpywal(config)
+    call_xfce4(config)
     call_pywalneopixels(config)
     call_wal_discord(config)
     call_xmenu(config)

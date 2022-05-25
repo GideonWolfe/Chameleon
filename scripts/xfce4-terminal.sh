@@ -6,12 +6,11 @@
 
 cat <<CONF
 [Configuration]
-FontName=Hack Nerd Font 11
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBellUrgent=FALSE
 MiscBordersDefault=FALSE
-MiscCursorBlinks=TRUE
+MiscCursorBlinks=FALSE
 MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
 MiscDefaultGeometry=80x24
 MiscInheritGeometry=FALSE
@@ -30,15 +29,14 @@ MiscCopyOnSelect=FALSE
 MiscShowRelaunchDialog=TRUE
 MiscRewrapOnResize=TRUE
 MiscUseShiftArrowsToScroll=FALSE
-MiscSlimTabs=TRUE
+MiscSlimTabs=FALSE
 MiscNewTabAdjacent=FALSE
-TitleInitial=Main Term
-TitleMode=TERMINAL_TITLE_HIDE
-CommandLoginShell=TRUE
+MiscSearchDialogOpacity=100
+MiscShowUnsafePasteDialog=FALSE
+MiscRightClickAction=TERMINAL_RIGHT_CLICK_ACTION_CONTEXT_MENU
+FontName=Hack Nerd Font Mono 11
 ScrollingUnlimited=TRUE
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
-BackgroundDarkness=0.900000
-BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
 ColorCursor=${cursor}
 ColorForeground=${foreground}
 ColorBackground=${background}
