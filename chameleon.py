@@ -106,6 +106,11 @@ def parse_args():
                         metavar='theme',
                         type=str, nargs='?',
                         help='a color scheme name to use as a theme')
+    parser.add_argument('--theme',
+                        '-t',
+                        metavar='theme',
+                        type=str, nargs='?',
+                        help='a color scheme name to use as a theme')
     parser.add_argument('--image',
                         '-i',
                         metavar='image',
