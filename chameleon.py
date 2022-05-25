@@ -16,9 +16,7 @@ from whichcraft import which
 #  \___/ \__|_|_|_|\__|_|\___||___/
 
 class BColors:
-    """
-    Keeps all of the colors in one place.
-    """
+    """ Keeps all of the colors in one place. """
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
@@ -37,6 +35,7 @@ def print_status(status, program):
     2: Warning,
     3: Hooked
     """
+
     if status == 0:
         print('{} ⚡ {} Themed {} {}'.format(
             BColors.OKGREEN,
@@ -71,7 +70,8 @@ def print_status(status, program):
 
 
 def is_tool(name):
-    """Check whether `name` is on PATH and marked as executable."""
+    """ Check whether `name` is on PATH and marked as executable. """
+
     return which(name) is not None
 
 
@@ -95,9 +95,8 @@ scripts_location = home + '/Singularis/third-party-tools/chameleon/scripts'
 
 # Parse command line arguments
 def parse_args():
-    """
-    This function goes through all of the arguments using argparse.
-    """
+    """ This function goes through all of the arguments using argparse. """
+
     parser = argparse.ArgumentParser(
         description='Chameleon Arguments',
         usage='%(prog)s -i/t [image/theme] [arguments for wal]')
@@ -119,9 +118,8 @@ def parse_args():
 
 # Parse user config file
 def parse_yaml():
-    """
-    This function parses through the config.yaml file.
-    """
+    """ This function parses through the config.yaml file. """
+
     with open(config_path, mode='r') as file:
         file_dict = yaml.full_load(file)
         file.close()
@@ -130,9 +128,8 @@ def parse_yaml():
 
 # Print keys from a dictionary
 def print_keys(dictionary):
-    """
-    This function stores all of the keys in a dictionary.
-    """
+    """ This function stores all of the keys in a dictionary. """
+
     for key in dictionary:
         print(key)
         if isinstance(dictionary[key], dict):
@@ -148,9 +145,8 @@ def print_keys(dictionary):
 
 # Detects and runs hooks set by user
 def user_hooks(config):
-    """
-    Runs user hooks.
-    """
+    """ Runs user hooks. """
+
     # If the user has defined hooks
     if 'hooks' in config:
         # Iterate through the hooks
@@ -179,9 +175,8 @@ def user_hooks(config):
 
 
 def call_wal(args, walargs):
-    """
-    Runs wal.
-    """
+    """ Runs wal. """
+
     # If we are calling wal on an image
     if args.image:
         try:
@@ -209,9 +204,8 @@ def call_wal(args, walargs):
 
 
 def call_slickpywal(config):
-    """
-    Changes the theme for slickpywal.
-    """
+    """ Changes the theme for slickpywal. """
+
     # Check to see if the user defined a custom path
     if 'slickpywal' in config:
         try:
@@ -237,9 +231,8 @@ def call_slickpywal(config):
 
 
 def call_pywalneopixels(config):
-    """
-    Changes the theme for pywalneopixels.
-    """
+    """ Changes the theme for pywalneopixels. """
+
     # Check to see if the user defined a custom path
     if 'pywalneopixels' in config:
         try:
@@ -262,9 +255,7 @@ def call_pywalneopixels(config):
 
 
 def call_wal_discord(config):
-    """
-    Changes the theme for discord.
-    """
+    """ Changes the theme for discord. """
 
     if "waldiscord" in config:
         try:
@@ -291,6 +282,8 @@ def call_wal_discord(config):
 
 
 def call_pywal_discord(config):
+    """ Changes the theme for discord. """
+
     # Check to see if the user defined a custom path
     if "pywaldiscord" in config:
         try:
@@ -316,13 +309,17 @@ def call_pywal_discord(config):
 
 
 def call_xfce4(config):
+    """ Changes the theme for Xfce4 Terminal. """
+
     # Check to see if the user defined a custom path
     if 'xfce4-terminal' in config:
         try:
             # Run the theme file
-            xfce4_pywal = subprocess.getoutput('{}/xfce4-terminal.sh'.format(scripts_location))
+            xfce4_pywal = subprocess.getoutput(
+                '{}/xfce4-terminal.sh'.format(scripts_location))
             # Open file
-            file = open('{}/terminal/terminalrc'.format(config['xfce4-terminal']['path']), 'w+')
+            file = open('{}/terminal/terminalrc'.format(
+                config['xfce4-terminal']['path']), 'w+')
             file.write(xfce4_pywal)
             file.close()
         # If we found a config but something went wrong
@@ -337,6 +334,8 @@ def call_xfce4(config):
 
 
 def call_xmenu(config):
+    """ Changes the theme for XMenu and compiles XMenu. """
+
     # Check to see if the user defined a custom path
     if "xmenu" in config:
         try:
@@ -372,6 +371,8 @@ def call_xmenu(config):
 
 
 def call_cordless(config):
+    """ Changes the theme for cordless. """
+
     if 'cordless' in config:
         # The full path to the cordless theme template
         templatepath = config['cordless']['path']
@@ -390,6 +391,8 @@ def call_cordless(config):
 
 
 def call_razercli(config):
+    """ Changes the theme for razer-cli. """
+
     if 'razercli' in config:
         try:
             p = subprocess.Popen(
@@ -413,6 +416,8 @@ def call_razercli(config):
 
 
 def call_spicetify(config):
+    """ Changes the theme for spicetify. """
+
     if 'spicetify' in config:
         try:
             null = open('/dev/null')
@@ -439,6 +444,8 @@ def call_spicetify(config):
 
 
 def call_tellegrampallettegen(config):
+    """ Changes the theme for telegram. """
+
     if "telegrampalletegen" in config:
         try:
             path = config['telegrampalletegen']['path']
@@ -457,6 +464,8 @@ def call_tellegrampallettegen(config):
 
 
 def call_oomoxicons(config):
+    """ Changes the theme for oomox. """
+
     if "oomoxicons" in config:
         try:
             command = config['oomoxicons']['command']
@@ -470,6 +479,8 @@ def call_oomoxicons(config):
 
 
 def call_oomoxgtk(config):
+    """ Changes the theme for oomoxgtk. """
+
     if 'oomoxgtk' in config:
         try:
             os.system('rm -rf ~/.themes/oomox-xresources-reverse/')
@@ -483,8 +494,9 @@ def call_oomoxgtk(config):
     print_status(0, 'Oomox GTK')
 
 
-# Spicetify is preferred
 def call_oomoxspotify(config):
+    """ Changes the theme for spotify. """
+
     if 'oomoxspotify' in config:
         if config['oomoxspotify']['enabled']:
             try:
@@ -503,6 +515,8 @@ def call_oomoxspotify(config):
 
 
 def call_pywalfox(config):
+    """ Changes the theme for pywalfox. """
+
     if 'pywalfox' in config:
         try:
             if config['pywalfox']['enable']:
@@ -519,6 +533,8 @@ def call_pywalfox(config):
 
 
 def call_gnuplot_pywal(config):
+    """ Changes the theme for gnuplot. """
+
     # Check to see if the user defined a custom path
     if 'gnuplot' in config:
         try:
@@ -541,6 +557,8 @@ def call_gnuplot_pywal(config):
 
 
 def call_starttree(config):
+    """ Changes the theme for start-tree. """
+
     if "starttree" in config:
         try:
             path = config['starttree']['path']
