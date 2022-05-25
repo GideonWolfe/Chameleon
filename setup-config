@@ -11,55 +11,46 @@ oomoxgtk:
   # Path to the desired theme you want to apply
   themepath: "/opt/oomox/scripted_colors/xresources/xresources-reverse"
 
-# oomoxspotify:
-#   spotifypath: "/opt/spotify/Apps"
-#   enabled: "True"
+oomoxspotify:
+  spotifypath: "/opt/spotify/Apps"
+  enabled: True
 
 # slickpywal:
-  # path:
+#   path:
 
 # pywalneopixels:
-  # path:
+#   path:
 
-# waldiscord:
-  # path:
-
-# razer-cli:
-  # path:
+# razercli:
+#   path:
 
 # telegrampalletegen:
-  # path:
+#   path: ""
 
 # spicetify:
-  # path:
+#   path:
 
-# pywalfox:
-  # path:
+pywalfox:
+  enable: True
 
-zathura:
-  path: "${HOME}/.config/zathura"
-
-xfce4-terminal:
-  path: "${HOME}/.config/xfce4"
-
-rofi:
-  path: "${HOME}/.config/rofi"
-
-dunst:
-  path: "${HOME}/.config/dunst"
-
-dwm:
-  path: "${HOME}/.config/dwm/dwm-config"
-
-matplotlib:
-  path: "${HOME}/.config/matplotlib"
+waldiscord:
+  path: "$HOME/Singularis/third-party-tools/wal-discord"
 
 xmenu:
-  path: "${HOME}/Singularis/aspects/xmenu"
+  path: "$HOME/.config/xmenu"
 
 starttree:
-  path: "${HOME}/Singularis/third-party-tools/start-tree"
+  path: "$HOME/Singularis/third-party-tools/start-tree"
 
 gnuplot:
-  path: "${HOME}/.config/gnuplot"
+  path: "$HOME/Singularis/third-party-tools/gnuplot-pywal"
+
+xfce4-terminal:
+  path: "$HOME/.config/xfce4"
+
+hooks:
+  notify: "notify-send 'Success!' 'success, theme applied'"
+  startTree:
+    command: "docker-compose -f docker-compose.yaml restart StartTree"
+    directory: "$HOME/Singularis/third-party-tools/start-tree/docker/"
 EOF
