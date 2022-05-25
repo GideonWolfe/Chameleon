@@ -165,11 +165,12 @@ def user_hooks(config):
                     print_status(2, value[0])
                     return
             # User has specified options for the hook
-            elif(type(value[1]) == dict):
+            elif type(value[1]) == dict:
                 path = value[1].get('directory', './')
                 arglist = value[1].get('command').split(' ')
                 try:
-                    p = subprocess.Popen(arglist, cwd=path, stdout=subprocess.DEVNULL)
+                    p = subprocess.Popen(
+                        arglist, cwd=path, stdout=subprocess.DEVNULL)
                     p.wait()
                 except Exception:
                     print_status(2, value[0])
@@ -215,7 +216,8 @@ def call_slickpywal(config):
     if 'slickpywal' in config:
         try:
             p = subprocess.Popen(
-                ['slick-pywal'], cwd=config['slickpywal']['path'], stdout=subprocess.DEVNULL)
+                ['slick-pywal'], cwd=config['slickpywal']['path'],
+                stdout=subprocess.DEVNULL)
             p.wait()
         except Exception:
             print_status(1, 'SlickGreeter Pywal')
@@ -263,33 +265,45 @@ def call_wal_discord(config):
     """
     Changes the theme for discord.
     """
-    # Check to see if the user defined a custom path
-    if 'wal-discord' in config:
+
+    if "waldiscord" in config:
         try:
-            os.chdir(config['waldiscord']['path'])
-            m = subprocess.Popen(['./wal-discord'], stdout=subprocess.DEVNULL)
+            m = subprocess.Popen(["./wal-discord"],
+                                 cwd=config["waldiscord"]["path"])
             m.wait()
-        except Exception:
-            print_status(1, 'Discord')
+        except Exception as e:
+            print(e)
+            print_status(1, "Discord")
             return
-        print_status(0, 'Discord')
+        print_status(0, "Discord")
+    # Check to see if it exists somewhere in the path
+    elif is_tool("wal-discord"):
+        try:
+            n = subprocess.Popen(["wal-discord"])
+            n.wait()
+        except Exception as e:
+            print(e)
+            print_status(1, "Discord")
+            return
+        print_status(0, "Discord")
     else:
         return
 
 
 def call_pywal_discord(config):
     # Check to see if the user defined a custom path
-    if("pywaldiscord" in config):
+    if "pywaldiscord" in config:
         try:
             m = subprocess.Popen(
-                ["pywal-discord"], cwd=config["pywaldiscord"]["path"], stdout=subprocess.DEVNULL)
+                ["pywal-discord"], cwd=config["pywaldiscord"]["path"],
+                stdout=subprocess.DEVNULL)
             m.wait()
         except Exception:
             print_status(1, "Discord")
             return
         print_status(0, "Discord")
     # Check to see if it exists somewhere in the path
-    elif(is_tool("pywal-discord")):
+    elif is_tool("pywal-discord"):
         try:
             n = subprocess.Popen(["pywal-discord"], stdout=subprocess.DEVNULL)
             n.wait()
@@ -310,9 +324,11 @@ def call_xmenu(config):
             os.chdir(config['xmenu']['path'])
 
             # make xmenu
-            m = subprocess.Popen(['sudo', 'make', 'clean'], stdout=subprocess.DEVNULL)
+            m = subprocess.Popen(['sudo', 'make', 'clean'],
+                                 stdout=subprocess.DEVNULL)
             m.wait()
-            m = subprocess.Popen(['sudo', 'make', 'install'], stdout=subprocess.DEVNULL)
+            m = subprocess.Popen(
+                ['sudo', 'make', 'install'], stdout=subprocess.DEVNULL)
             m.wait()
 
             # get the status code
@@ -356,14 +372,16 @@ def call_razercli(config):
     if 'razercli' in config:
         try:
             p = subprocess.Popen(
-                [config['razercli']['path']+'razer-cli', '-a'], stdout=subprocess.DEVNULL)
+                [config['razercli']['path']+'razer-cli', '-a'],
+                stdout=subprocess.DEVNULL)
             p.wait()
         except Exception:
             print_status(1, 'Razer Devices')
             return
     elif is_tool('razer-cli'):
         try:
-            p = subprocess.Popen(['razer-cli', '-a'], stdout=subprocess.DEVNULL)
+            p = subprocess.Popen(['razer-cli', '-a'],
+                                 stdout=subprocess.DEVNULL)
             p.wait()
         except Exception:
             print_status(1, 'Razer Devices')
@@ -405,7 +423,8 @@ def call_tellegrampallettegen(config):
             path = config['telegrampalletegen']['path']
             print(path)
             os.chdir(path)
-            p = subprocess.Popen(['./telegram-palette-gen', '--wal'], stdout=subprocess.DEVNULL)
+            p = subprocess.Popen(
+                ['./telegram-palette-gen', '--wal'], stdout=subprocess.DEVNULL)
             p.wait()
         except Exception as e:
             raise e
@@ -450,7 +469,7 @@ def call_oomoxspotify(config):
             try:
                 spotifypath = config['oomoxspotify']['spotifypath']
                 full_command = 'oomoxify-cli {}/.cache/wal/colors-oomox' \
-                    '-s '.format(home, spotifypath)
+                    '-s '.format(spotifypath)
                 os.system(full_command)
             except Exception:
                 print_status(1, 'Oomox Spotify')
@@ -465,8 +484,9 @@ def call_oomoxspotify(config):
 def call_pywalfox(config):
     if 'pywalfox' in config:
         try:
-            if config['pywalfox']['enable'] == True:
-                p = subprocess.Popen(['pywalfox', 'update'], stdout=subprocess.DEVNULL)
+            if config['pywalfox']['enable']:
+                p = subprocess.Popen(
+                    ['pywalfox', 'update'], stdout=subprocess.DEVNULL)
                 p.wait()
             else:
                 print_status(1, 'Pywalfox')
@@ -503,7 +523,8 @@ def call_starttree(config):
     if "starttree" in config:
         try:
             path = config['starttree']['path']
-            p = subprocess.Popen(['{}/generate.py'.format(path)], stdout=subprocess.DEVNULL)
+            p = subprocess.Popen(
+                ['{}/generate.py'.format(path)], stdout=subprocess.DEVNULL)
             p.wait()
         except Exception:
             print_status(1, 'StartTree')
