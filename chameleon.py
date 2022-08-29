@@ -90,7 +90,7 @@ config_dir = home + '/.config/chameleon'
 config_path = home + '/.config/chameleon/config.yaml'
 
 # store location of the scripts file
-scripts_location = home + '/Singularis/third-party-tools/chameleon/scripts'
+scripts_location = home + '/.local/share/Singularis/third-party-tools/chameleon/scripts'
 
 
 # Parse command line arguments

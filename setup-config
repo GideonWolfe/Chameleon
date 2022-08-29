@@ -34,16 +34,16 @@ pywalfox:
   enable: True
 
 waldiscord:
-  path: "$HOME/Singularis/third-party-tools/wal-discord"
+  path: "$HOME/.local/share/Singularis/third-party-tools/wal-discord"
 
 xmenu:
   path: "$HOME/.config/xmenu"
 
 starttree:
-  path: "$HOME/Singularis/third-party-tools/start-tree"
+  path: "$HOME/.local/share/Singularis/third-party-tools/start-tree"
 
 gnuplot:
-  path: "$HOME/Singularis/third-party-tools/gnuplot-pywal"
+  path: "$HOME/.local/share/Singularis/third-party-tools/gnuplot-pywal"
 
 xfce4-terminal:
   path: "$HOME/.config/xfce4"
@@ -52,5 +52,5 @@ hooks:
   notify: "notify-send 'Success!' 'success, theme applied'"
   startTree:
     command: "docker-compose -f docker-compose.yaml restart StartTree"
-    directory: "$HOME/Singularis/third-party-tools/start-tree/docker/"
+    directory: "$HOME/.local/share/Singularis/third-party-tools/start-tree/docker/"
 EOF
