@@ -47,10 +47,4 @@ gnuplot:
 
 xfce4-terminal:
   path: "$HOME/.config/xfce4"
-
-hooks:
-  notify: "notify-send 'Success!' 'success, theme applied'"
-  startTree:
-    command: "docker-compose -f docker-compose.yaml restart StartTree"
-    directory: "$HOME/.local/share/Singularis/third-party-tools/start-tree/docker/"
 EOF

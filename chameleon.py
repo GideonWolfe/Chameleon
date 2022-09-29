@@ -586,7 +586,7 @@ def theme(config, args, walargs):
     call_xfce4(config)
     call_pywalneopixels(config)
     call_wal_discord(config)
-    call_xmenu(config)
+    # call_xmenu(config)
     call_cordless(config)
     call_razercli(config)
     call_spicetify(config)
