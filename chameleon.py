@@ -6,7 +6,6 @@ import yaml
 import argparse
 import subprocess
 from os.path import expanduser
-from whichcraft import which
 
 
 #  _   _ _   _ _ _ _   _
@@ -15,16 +14,18 @@ from whichcraft import which
 # | |_| | |_| | | | |_| |  __/\__ \
 #  \___/ \__|_|_|_|\__|_|\___||___/
 
+
 class BColors:
-    """ Keeps all of the colors in one place. """
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+    """Keeps all of the colors in one place."""
+
+    HEADER = "\033[95m"
+    OKBLUE = "\033[94m"
+    OKGREEN = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    ENDC = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
 
 
 def print_status(status, program):
@@ -36,43 +37,45 @@ def print_status(status, program):
     3: Hooked
     """
 
+    end = BColors.ENDC
+    fail = BColors.FAIL
+    warning = BColors.WARNING
+    green = BColors.OKGREEN
+    blue = BColors.OKBLUE
+
     if status == 0:
-        print('{} ⚡ {} Themed {} {}'.format(
-            BColors.OKGREEN,
-            BColors.ENDC,
-            program,
-            BColors.ENDC
-        ))
+        print(f"{green} ⚡ {end} Themed {program} {end}")
     elif status == 1:
-        print('{} X {} {} Failed to theme {} {}'.format(
-            BColors.FAIL,
-            BColors.ENDC,
-            BColors.WARNING,
-            program,
-            BColors.ENDC,
-        ))
+        print(f"{fail} X {end} {warning} Failed to theme {program} {end}")
     elif status == 2:
-        print('{} X {} {} User Hook {} failed {}'.format(
-              BColors.FAIL,
-              BColors.ENDC,
-              BColors.WARNING,
-              program,
-              BColors.ENDC
-              ))
+        print(f"{fail} X {end} {warning} User Hook {program} failed {end}")
     elif status == 3:
-        print('{} ⚡ {} {} {} User hook {} succeeded'.format(
-            BColors.OKGREEN,
-            BColors.ENDC,
-            BColors.OKBLUE,
-            program,
-            BColors.ENDC
-        ))
+        print(f"{green} ⚡ {end} {blue} {program} User hook {end} succeeded")
 
 
-def is_tool(name):
-    """ Check whether `name` is on PATH and marked as executable. """
+def run_command(commandlist, cwd=None, getoutput=None):
+    stdout = subprocess.PIPE if getoutput else subprocess.DEVNULL
 
-    return which(name) is not None
+    p = subprocess.Popen(
+        commandlist,
+        cwd=cwd,
+        stdout=stdout,
+    )
+    p.wait()
+
+    return p.communicate()[0].decode("utf-8") if getoutput else ""
+
+
+def get_info_for_item(config, item):
+    cwd = config[item]["path"]
+    exc = config[item]["executable"] or ""
+
+    if exc != "":
+        cmdList = (exc + " " + config[item]["arguments"]).split(" ")
+    else:
+        cmdList = config[item]["arguments"].split(" ")
+
+    return cwd, exc, cmdList
 
 
 #   ____             __ _
@@ -86,30 +89,37 @@ def is_tool(name):
 home = expanduser("~")
 
 # get config path
-config_dir = home + '/.config/chameleon'
-config_path = home + '/.config/chameleon/config.yaml'
+config_dir = home + "/.config/chameleon"
+config_path = home + "/.config/chameleon/config.yaml"
 
 # store location of the scripts file
-scripts_location = home + '/.local/share/Singularis/third-party-tools/chameleon/scripts'
+scripts_location = (
+    f"{home}/.local/share/Singularis/third-party-tools" + "/chameleon/scripts"
+)
 
 
 # Parse command line arguments
 def parse_args():
-    """ This function goes through all of the arguments using argparse. """
-
     parser = argparse.ArgumentParser(
-        description='Chameleon Arguments',
-        usage='%(prog)s -i/t [image/theme] [arguments for wal]')
-    parser.add_argument('--theme',
-                        '-t',
-                        metavar='theme',
-                        type=str, nargs='?',
-                        help='a color scheme name to use as a theme')
-    parser.add_argument('--image',
-                        '-i',
-                        metavar='image',
-                        type=str, nargs='?',
-                        help='an image file to use as a theme')
+        description="Chameleon Arguments",
+        usage="%(prog)s -i/t [image/theme] [arguments for wal]",
+    )
+    parser.add_argument(
+        "--theme",
+        "-t",
+        metavar="theme",
+        type=str,
+        nargs="?",
+        help="a color scheme name to use as a theme",
+    )
+    parser.add_argument(
+        "--image",
+        "-i",
+        metavar="image",
+        type=str,
+        nargs="?",
+        help="an image file to use as a theme",
+    )
 
     args = parser.parse_known_args()
 
@@ -118,9 +128,7 @@ def parse_args():
 
 # Parse user config file
 def parse_yaml():
-    """ This function parses through the config.yaml file. """
-
-    with open(config_path, mode='r') as file:
+    with open(config_path, mode="r") as file:
         file_dict = yaml.full_load(file)
         file.close()
     return file_dict
@@ -128,10 +136,7 @@ def parse_yaml():
 
 # Print keys from a dictionary
 def print_keys(dictionary):
-    """ This function stores all of the keys in a dictionary. """
-
     for key in dictionary:
-        print(key)
         if isinstance(dictionary[key], dict):
             print_keys(dictionary[key])
 
@@ -143,163 +148,37 @@ def print_keys(dictionary):
 #   |_| |_| |_|\___|_| |_| |_|_|_| |_|\__, |
 #                                     |___/
 
-# Detects and runs hooks set by user
-def user_hooks(config):
-    """ Runs user hooks. """
-
-    # If the user has defined hooks
-    if 'hooks' in config:
-        # Iterate through the hooks
-        for value in config['hooks'].items():
-            # If the user has a simple command to run
-            if type(value[1]) == str:
-                try:
-                    arglist = value[1].split(' ')
-                    p = subprocess.Popen(arglist, stdout=subprocess.DEVNULL)
-                    p.wait()
-                except Exception:
-                    print_status(2, value[0])
-                    return
-            # User has specified options for the hook
-            elif type(value[1]) == dict:
-                path = value[1].get('directory', './')
-                arglist = value[1].get('command').split(' ')
-                try:
-                    p = subprocess.Popen(
-                        arglist, cwd=path, stdout=subprocess.DEVNULL)
-                    p.wait()
-                except Exception:
-                    print_status(2, value[0])
-                    return
-            print_status(3, value[0])
-
 
 def call_wal(args, walargs):
-    """ Runs wal. """
-
-    # If we are calling wal on an image
+    # If we are calling wal on an image.
     if args.image:
         try:
             imagepath = os.path.abspath(args.image)
-            commandlist = ['wal', '-i', imagepath]
+            commandlist = ["wal", "-i", imagepath]
             commandlist.extend(walargs)
-            p = subprocess.Popen(commandlist)
-            p.wait()
-            os.system('feh --bg-scale {} && cp {} ~/.config/wall.jpg'.format(
-                args.image, args.image))
+            run_command(commandlist)
+            run_command(["feh", "--bg-scale", args.image])
+            run_command(["cp", args.image, "~/.config/wall.jpg"])
         except Exception:
-            print_status(1, 'pywal')
+            print_status(1, "pywal")
             return
-    # If we are using a prebuilt or custom colorscheme
+    # If we are using a prebuilt or custom colorscheme.
     elif args.theme:
         try:
-            commandlist = ['wal', '--theme', args.theme]
+            commandlist = ["wal", "--theme", args.theme]
             commandlist.extend(walargs)
-            p = subprocess.Popen(commandlist)
-            p.wait()
+            run_command(commandlist)
         except Exception:
-            print_status(1, 'pywal')
+            print_status(1, "pywal")
             return
-    print_status(0, 'pywal')
-
-
-def call_slickpywal(config):
-    """ Changes the theme for slickpywal. """
-
-    # Check to see if the user defined a custom path
-    if 'slickpywal' in config:
-        try:
-            p = subprocess.Popen(
-                ['slick-pywal'], cwd=config['slickpywal']['path'],
-                stdout=subprocess.DEVNULL)
-            p.wait()
-        except Exception:
-            print_status(1, 'SlickGreeter Pywal')
-            return
-    # Check to see if it exists somewhere in the path
-    elif is_tool('slick-pywal'):
-        try:
-            p = subprocess.Popen(['slick-pywal'], stdout=subprocess.DEVNULL)
-            p.wait()
-        except Exception:
-            print_status(1, 'SlickGreeter Pywal')
-            return
-    else:
-        return
-    print_status(0, 'SlickGreeter Pywal')
-    return
-
-
-def call_pywalneopixels(config):
-    """ Changes the theme for pywalneopixels. """
-
-    # Check to see if the user defined a custom path
-    if 'pywalneopixels' in config:
-        try:
-            command_string = '{}startLEDs'.format(
-                config['pywalneopixels']['path'])
-            os.system(command_string)
-        except Exception:
-            print_status(1, 'Pywal NeoPixel')
-    # Check to see if it exists somewhere in the path
-    elif is_tool('startLEDS'):
-        try:
-            os.system('startLEDS')
-        except Exception:
-            print_status(1, 'Pywal NeoPixel')
-            return
-    # It is not detected it all
-    else:
-        return
-    print_status(0, 'Pywal NeoPixel')
+    print_status(0, "pywal")
 
 
 def call_wal_discord(config):
-    """ Changes the theme for discord. """
-
-    if "waldiscord" in config:
+    if "wal-discord" in config:
         try:
-            m = subprocess.Popen(["./wal-discord"],
-                                 cwd=config["waldiscord"]["path"])
-            m.wait()
-        except Exception as e:
-            print(e)
-            print_status(1, "Discord")
-            return
-        print_status(0, "Discord")
-    # Check to see if it exists somewhere in the path
-    elif is_tool("wal-discord"):
-        try:
-            n = subprocess.Popen(["wal-discord"])
-            n.wait()
-        except Exception as e:
-            print(e)
-            print_status(1, "Discord")
-            return
-        print_status(0, "Discord")
-    else:
-        return
-
-
-def call_pywal_discord(config):
-    """ Changes the theme for discord. """
-
-    # Check to see if the user defined a custom path
-    if "pywaldiscord" in config:
-        try:
-            m = subprocess.Popen(
-                ["pywal-discord"], cwd=config["pywaldiscord"]["path"],
-                stdout=subprocess.DEVNULL)
-            m.wait()
-        except Exception:
-            print_status(1, "Discord")
-            return
-        print_status(0, "Discord")
-    # Check to see if it exists somewhere in the path
-    elif is_tool("pywal-discord"):
-        try:
-            n = subprocess.Popen(["pywal-discord"], stdout=subprocess.DEVNULL)
-            n.wait()
+            cwd, _, cmdList = get_info_for_item(config, "wal-discord")
+            run_command(cmdList, cwd=cwd)
         except Exception:
             print_status(1, "Discord")
             return
@@ -309,205 +188,101 @@ def call_pywal_discord(config):
 
 
 def call_xfce4(config):
-    """ Changes the theme for Xfce4 Terminal. """
+    cwd = scripts_location
 
-    # Check to see if the user defined a custom path
-    if 'xfce4-terminal' in config:
+    if "xfce4-terminal" in config:
         try:
-            # Run the theme file
-            xfce4_pywal = subprocess.getoutput(
-                '{}/xfce4-terminal.sh'.format(scripts_location))
-            # Open file
-            file = open('{}/terminal/terminalrc'.format(
-                config['xfce4-terminal']['path']), 'w+')
+            path = config["xfce4-terminal"]["path"]
+
+            xfce4_pywal = run_command(
+                ["./xfce4-terminal.sh"],
+                cwd=cwd,
+                getoutput=True,
+            )
+
+            file = open(f"{path}/terminal/terminalrc", "w+")
             file.write(xfce4_pywal)
             file.close()
-        # If we found a config but something went wrong
-        except Exception as e:
-            print(e)
-            print_status(1, 'Xfce4 Terminal')
+        except Exception:
+            print_status(1, "Xfce4 Terminal")
             return
-        print_status(0, 'Xfce4 Terminal')
-    # No config for xfce4-terminal, just return
+        print_status(0, "Xfce4 Terminal")
     else:
         return
 
 
 def call_xmenu(config):
-    """ Changes the theme for XMenu and compiles XMenu. """
-
-    # Check to see if the user defined a custom path
     if "xmenu" in config:
         try:
-            null = open("/dev/null")
-            # change to the directory
-            os.chdir(config['xmenu']['path'])
-
-            # make xmenu
-            m = subprocess.Popen(['sudo', 'make', 'clean'],
-                                 stdout=subprocess.DEVNULL)
-            m.wait()
-            m = subprocess.Popen(
-                ['sudo', 'make', 'install'], stdout=subprocess.DEVNULL)
-            m.wait()
-
-            # get the status code
-            retval = m.returncode
-            null.close()
-
-            # if making failed
-            if retval != 0:
-                print_status(1, "Xmenu")
-                return
-        # If we found a config but something went wrong
-        except Exception as e:
-            print(e)
+            cwd, _, cmdList = get_info_for_item(config, "xmenu")
+            run_command(cmdList, cwd=cwd)
+        except Exception:
             print_status(1, "Xmenu")
             return
         print_status(0, "Xmenu")
-    # no config for xmenu, just return
     else:
         return
-
-
-def call_cordless(config):
-    """ Changes the theme for cordless. """
-
-    if 'cordless' in config:
-        # The full path to the cordless theme template
-        templatepath = config['cordless']['path']
-        try:
-            with open('{}/.config/cordless/theme.json'.format(home),
-                      "w") as theme:
-                command_string = 'go run {}'.format(templatepath)
-                command_string = command_string.split(' ')
-                g = subprocess.Popen(command_string, stdout=theme)
-                g.wait()
-        except Exception as e:
-            print(e)
-            print_status(1, 'cordless')
-            return
-        print_status(0, 'cordless')
-
-
-def call_razercli(config):
-    """ Changes the theme for razer-cli. """
-
-    if 'razercli' in config:
-        try:
-            p = subprocess.Popen(
-                [config['razercli']['path']+'razer-cli', '-a'],
-                stdout=subprocess.DEVNULL)
-            p.wait()
-        except Exception:
-            print_status(1, 'Razer Devices')
-            return
-    elif is_tool('razer-cli'):
-        try:
-            p = subprocess.Popen(['razer-cli', '-a'],
-                                 stdout=subprocess.DEVNULL)
-            p.wait()
-        except Exception:
-            print_status(1, 'Razer Devices')
-            return
-    else:
-        return
-    print_status(0, 'Razer Devices')
 
 
 def call_spicetify(config):
-    """ Changes the theme for spicetify. """
+    name = "Spicetify"
 
-    if 'spicetify' in config:
+    if "spicetify" in config:
         try:
-            null = open('/dev/null')
-            path = config['spicetify']['path']
-            p = subprocess.Popen(['{}spicetify'.format(path), 'update'],
-                                 stdout=null)
-            p.wait()
-            null.close()
+            cwd, _, cmdList = get_info_for_item(config, "spicetify")
+            run_command(cmdList, cwd=cwd)
         except Exception:
-            print_status(1, 'Spicetify')
-            return
-    elif is_tool('spicetify'):
-        try:
-            null = open('/dev/null')
-            p = subprocess.Popen(['spicetify', 'apply'], stdout=null)
-            p.wait()
-            null.close()
-        except Exception:
-            print_status(1, 'Spicetify')
+            print_status(1, name)
             return
     else:
         return
-    print_status(0, 'Spicetify')
-
-
-def call_tellegrampallettegen(config):
-    """ Changes the theme for telegram. """
-
-    if "telegrampalletegen" in config:
-        try:
-            path = config['telegrampalletegen']['path']
-            print(path)
-            os.chdir(path)
-            p = subprocess.Popen(
-                ['./telegram-palette-gen', '--wal'], stdout=subprocess.DEVNULL)
-            p.wait()
-        except Exception as e:
-            raise e
-            print_status(1, 'Telegram Pallete')
-            return
-    else:
-        return
-    print_status(0, 'Telegram Pallete')
+    print_status(0, name)
 
 
 def call_oomoxicons(config):
-    """ Changes the theme for oomox. """
-
     if "oomoxicons" in config:
         try:
-            command = config['oomoxicons']['command']
-            theme_path = config['oomoxicons']['themepath']
-            full_command = '{} {} > /dev/null'.format(command, theme_path)
-            os.system(full_command)
+            command = config["oomoxicons"]["command"]
+            theme_path = config["oomoxicons"]["themepath"]
+            p = subprocess.Popen(
+                [command, theme_path],
+                stdout=subprocess.DEVNULL,
+            )
+            p.wait()
         except Exception:
-            print_status(1, 'Oomox Icons')
+            print_status(1, "Oomox Icons")
             return
-    print_status(0, 'Oomox Icons')
+    print_status(0, "Oomox Icons")
 
 
 def call_oomoxgtk(config):
-    """ Changes the theme for oomoxgtk. """
-
-    if 'oomoxgtk' in config:
+    if "oomoxgtk" in config:
         try:
-            os.system('rm -rf ~/.themes/oomox-xresources-reverse/')
-            os.system('rm -rf ~/.icons/oomox-xresources-reverse/')
-            theme_path = config['oomoxgtk']['themepath']
-            full_command = 'oomox-cli {} > /dev/null'.format(theme_path)
-            os.system(full_command)
+            theme_path = config["oomoxgtk"]["themepath"]
+            p = subprocess.Popen(
+                ["oomox-cli", theme_path],
+                stdout=subprocess.DEVNULL,
+            )
+            p.wait()
         except Exception:
-            print_status(1, 'Oomox GTK')
+            print_status(1, "Oomox GTK")
             return
-    print_status(0, 'Oomox GTK')
+    print_status(0, "Oomox GTK")
 
 
 def call_oomoxspotify(config):
-    """ Changes the theme for spotify. """
-
-    if 'oomoxspotify' in config:
-        if config['oomoxspotify']['enabled']:
+    if "oomoxspotify" in config:
+        if config["oomoxspotify"]["enabled"]:
             try:
-                spotifypath = config['oomoxspotify']['spotifypath']
-                full_command = 'oomoxify-cli {}/.cache/wal/colors-oomox' \
-                    '-s '.format(spotifypath)
+                spotifypath = config["oomoxspotify"]["spotifypath"]
+                full_command = (
+                    f"oomoxify-cli {spotifypath}/.cache/wal/colors-oomox" "-s "
+                )
                 os.system(full_command)
             except Exception:
-                print_status(1, 'Oomox Spotify')
+                print_status(1, "Oomox Spotify")
                 return
-            print_status(0, 'Oomox Spofify')
+            print_status(0, "Oomox Spofify")
         else:
             return
     else:
@@ -515,89 +290,49 @@ def call_oomoxspotify(config):
 
 
 def call_pywalfox(config):
-    """ Changes the theme for pywalfox. """
-
-    if 'pywalfox' in config:
+    if "pywalfox" in config:
         try:
-            if config['pywalfox']['enable']:
+            if config["pywalfox"]["enable"]:
                 p = subprocess.Popen(
-                    ['pywalfox', 'update'], stdout=subprocess.DEVNULL)
+                    ["pywalfox", "update"],
+                    stdout=subprocess.DEVNULL,
+                )
                 p.wait()
             else:
-                print_status(1, 'Pywalfox')
+                print_status(1, "Pywalfox")
                 return
         except Exception:
-            print_status(1, 'Pywalfox')
+            print_status(1, "Pywalfox")
             return
-    print_status(0, 'Pywalfox')
-
-
-def call_gnuplot_pywal(config):
-    """ Changes the theme for gnuplot. """
-
-    # Check to see if the user defined a custom path
-    if 'gnuplot' in config:
-        try:
-            # Run the theme file
-            gnuplot_pywal = subprocess.getoutput('{}/gnuplot.sh'.format(
-                scripts_location))
-            # Open file
-            file = open(
-                '{}/qtterminal.conf'.format(config['gnuplot']['path']), 'w+')
-            file.write(gnuplot_pywal)
-            file.close()
-        # If we found a config but something went wrong
-        except Exception:
-            print_status(1, "Gnuplot")
-            return
-        print_status(0, "Gnuplot")
-    # no config for gnuplot, just return
-    else:
-        return
+    print_status(0, "Pywalfox")
 
 
 def call_starttree(config):
-    """ Changes the theme for start-tree. """
-
     if "starttree" in config:
         try:
-            path = config['starttree']['path']
+            path = config["starttree"]["path"]
             p = subprocess.Popen(
-                ['{}/generate.py'.format(path)], stdout=subprocess.DEVNULL)
+                ["{}/generate.py".format(path)], stdout=subprocess.DEVNULL
+            )
             p.wait()
         except Exception:
-            print_status(1, 'StartTree')
-            return
-    elif is_tool('starttree.py'):
-        try:
-            p = subprocess.Popen(['starttree.py'], stdout=subprocess.DEVNULL)
-            p.wait()
-        except Exception:
-            print_status(1, 'StartTree')
+            print_status(1, "StartTree")
             return
     else:
         return
-    print_status(0, 'StartTree')
+    print_status(0, "StartTree")
 
 
 def theme(config, args, walargs):
     call_wal(args, walargs)
-    call_slickpywal(config)
-    call_xfce4(config)
-    call_pywalneopixels(config)
+    # call_xfce4(config)
     call_wal_discord(config)
-    # call_xmenu(config)
-    call_cordless(config)
-    call_razercli(config)
-    call_spicetify(config)
-    call_tellegrampallettegen(config)
-    call_oomoxicons(config)
-    call_oomoxgtk(config)
-    call_oomoxspotify(config)
-    call_pywalfox(config)
-    call_gnuplot_pywal(config)
-    call_starttree(config)
-    user_hooks(config)
+    call_xmenu(config)
+    # call_oomoxicons(config)
+    # call_oomoxgtk(config)
+    # call_oomoxspotify(config)
+    # call_pywalfox(config)
+    # call_starttree(config)
 
 
 def main():
@@ -606,5 +341,5 @@ def main():
     theme(config, args, walargs)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
