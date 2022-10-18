@@ -2,49 +2,63 @@
 
 cat <<EOF
 oomoxicons:
-  # This changes depending on your iconset
   command: "oomox-archdroid-icons-cli"
-  # Path to the desired theme you want to apply
   themepath: "/opt/oomox/scripted_colors/xresources/xresources-reverse"
 
 oomoxgtk:
-  # Path to the desired theme you want to apply
   themepath: "/opt/oomox/scripted_colors/xresources/xresources-reverse"
 
 oomoxspotify:
   spotifypath: "/opt/spotify/Apps"
   enabled: True
 
-# slickpywal:
-#   path:
+slickpywal:
+  path: ""
+  config_path: ""
+  executable: ""
+  arguments: ""
 
-# pywalneopixels:
-#   path:
+pywalneopixels:
+  path: ""
+  config_path: ""
+  executable: ""
+  arguments: ""
 
-# razercli:
-#   path:
+razercli:
+  path: ""
+  config_path: ""
+  executable: ""
+  arguments: ""
 
-# telegrampalletegen:
-#   path: ""
-
-# spicetify:
-#   path:
+telegrampalletegen:
+  path: ""
+  config_path: ""
+  executable: ""
+  arguments: ""
 
 pywalfox:
-  enable: True
+  path: ""
+  config_path: ""
+  executable: ""
+  arguments: ""
 
-waldiscord:
-  path: "$HOME/.local/share/Singularis/third-party-tools/wal-discord"
+wal-discord:
+  path: "/home/singularis/.local/bin"
+  executable: "wal-discord"
+  arguments: "beautifuldiscord --css ~/.cache/wal-discord/style.css"
 
 xmenu:
-  path: "$HOME/.config/xmenu"
+  path: "/home/singularis/.config/xmenu"
+  arguments: "sudo make clean install"
 
 starttree:
-  path: "$HOME/.local/share/Singularis/third-party-tools/start-tree"
+  path: "/home/singularis/.local/share/Singularis/third-party-tools/start-tree"
 
 gnuplot:
-  path: "$HOME/.local/share/Singularis/third-party-tools/gnuplot-pywal"
+  path: "/home/singularis/.local/share/Singularis/third-party-tools/gnuplot-pywal"
 
 xfce4-terminal:
-  path: "$HOME/.config/xfce4"
+  path: "/home/singularis/.local/share/Singularis/third-party-tools/chameleon/scripts"
+  config_path: "/home/singularis/.config/xfce4/terminal/terminalrc"
+  executable: "./xfce4-terminal.sh"
 EOF
