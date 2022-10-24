@@ -136,7 +136,7 @@ def call_starttree(config):
 
 def theme(config, args, walargs):
     call_wal(args, walargs)
-    # call_xfce4(config)
+    call_xfce4(config)
     theme_program(config, "wal-discord", "Discord")
     theme_program(config, "xmenu", "XMenu")
     theme_program(config, "oomoxicons", "Oomox Icons")
