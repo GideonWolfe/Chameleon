@@ -45,7 +45,7 @@ xmenu:
 As you can see, there're three parameters for each program:
 
 1. **path**: The path to the required destination. For example, if you would like to run a program you wrote, you pass that directory to this parameter.
-2. **command**: Obviously, this parameter is required for every program, if you want that program to be themed. If the command is a construction of multiple commands, like, for example, `echo "hi"; echo "bye"`, you must break that up as follows:
+2. **command**: Obviously, this parameter is required for every program, if you want that program to be themed. If the command is a construction of multiple commands, you must break it up. For example:
 ```yaml
 xmenu:
   path: "~/Desktop/Games/CPP/FirstPersonShooter"
