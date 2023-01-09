@@ -45,7 +45,16 @@ xmenu:
 As you can see, there're three parameters for each program:
 
 1. **path**: The path to the required destination. For example, if you would like to run a program you wrote, you pass that directory to this parameter.
-2. **command**: Obviously, this parameter is required for every program, if you want that program to be themed.
+2. **command**: Obviously, this parameter is required for every program, if you want that program to be themed. If the command is a construction of multiple commands, like, for example, `echo "hi"; echo "bye"`, you must break that up as follows:
+```yaml
+xmenu:
+  path: "~/Desktop/Games/CPP/FirstPersonShooter"
+  command:
+    - "sudo make clean install"
+    - "rm -rf build/"
+    - "./open-window"
+  name: "My Stupid Game"
+```
 3. **name**: The name of the program that you would like to be displayed if it was themed correctly/incorrectly.
 
 As long as you pass the correct information, you can practically get any program to be themed.
