@@ -156,9 +156,6 @@ def call_wal(args, walargs):
 
 
 def theme_program(config, name, program_name):
-    if name not in config:
-        return
-
     try:
         path, command = get_info_for_item(config, name)
 
