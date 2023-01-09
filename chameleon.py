@@ -167,8 +167,7 @@ def theme_program(config, name, program_name):
         elif isinstance(command, list):
             for cmd in command:
                 run_command(cmd, cwd=path)
-    except Exception as e:
-        print(e)
+    except Exception:
         print_status(1, program_name)
         return
 
