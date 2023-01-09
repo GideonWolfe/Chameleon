@@ -52,7 +52,7 @@ def run_command(command_list, cwd=None, get_output=None):
 
 def get_info_for_item(config, item):
     try:
-        path = config[item]["path"]
+        path = os.path.expanduser(config[item]["path"])
     except KeyError:
         path = ""
 
@@ -164,8 +164,12 @@ def theme_program(config, name, program_name):
         elif isinstance(command, list):
             for cmd in command:
                 run_command(cmd, cwd=path)
-    except Exception:
+    except Exception as error:
+        if config.debug:
+            print(error)
+
         print_status(1, program_name)
+
         return
 
     print_status(0, program_name)

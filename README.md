@@ -2,7 +2,6 @@
 
 ![alt-text](/demo.gif)
 
-
 This script acts as an extension to wal, by taking the generated colors and theming anything that can be themed, all in one script.
 
 If the script detects you have certain programs on your system, it will try to generate themes for them.
@@ -12,7 +11,6 @@ The current programs are ones that I use, but feel free to add more and send a P
 # Examples
 
 ![alt-text](https://i.imgur.com/araXbD4.jpg)
-
 
 Programs that use GTK themes like Thunar and Baobab should just pick up the theme, assuming you have selected the `oomox-xresources-reverse` theme in `lxappearance`. Spotify, Discord, Firefox, and gnuplot are shown here rocking their custom generated themes.
 
@@ -33,65 +31,21 @@ make install
 
 ## Configuration
 
-Configuration of `chameleon` is done through the file `$HOME/.config/chameleon/config.yaml`
+Configuration of `chameleon` is done through the file `~/.config/chameleon/config.yaml`.
 
-Here, one can specify options specific to a single program, or even specify custom commands to be run every time you apply a theme.
+Here, one can specify options specific to a single program, or even specify custom commands to be run every time you apply a theme. Here's an example:
 
-Most programs will have a `path` attribute which may or may not be necessary depending on your setup. For example, if you were using a cloned, local version of `wal-discord`, one
-might want to specify a specific path where `chameleon` can find this specific executable.
-
-If the `path` attribute is not given for a program, it is assumed that the program is located in your `$PATH` and will be run as a standalone command.
-
-## Programs supported
-* [oomox](https://github.com/themix-project/oomox) for GTK and Spotify
-
-* [Zathura-Pywal](https://github.com/GideonWolfe/Zathura-Pywal)
-
-* [Gnuplot-Pywal](https://github.com/GideonWolfe/Gnuplot-Pywal)
-
-* [pyWalNeopixels](https://github.com/Paul-Houser/pyWalNeopixels)
-
-* [slickgreeter-pywal](https://github.com/Paul-Houser/slickgreeter-pywal)
-
-* [StartTree](https://github.com/Paul-Houser/StartTree): Dynamic browser startpage
-
-* [ckb-next](https://github.com/ckb-next/ckb-next) for corsair keyboards
-
-* [razer-cli](https://github.com/LoLei/razer-cli) for razer devices
-
-* [telegram-palette-gen](https://github.com/matgua/telegram-palette-gen) for telegram-desktop
-
-* [spicetify](https://github.com/khanhas/spicetify-cli): CSS Customization engine for spotify
-
-* [Pywalfox](https://github.com/Frewacom/Pywalfox) to theme FireFox and DuckDuckGo on the fly
-
-* [pywal-discord](https://github.com/FilipLitwora/pywal-discord) to theme Discord
-
-* [wal-discord](https://github.com/guglicap/wal-discord) to theme Discord
-
-## Planned support
-
-## Notes
-To get the most complete theme possible, check out my [dotfiles](https://github.com/GideonWolfe/dots). Here you can find the configurations to get these colors on many other programs, such as rofi, polybar, firefox, and more. Since they update automatically, there was no need to include them in this script.
-
-To apply icon themes, you need one of the icon sets supported by oomox. Change the icons section of the config file to look for the folder your desired icons are in, and change the command to the appropriate variant.
-
-* [gnome-color-icons](https://aur.archlinux.org/packages/gnome-colors-icon-theme/)
-* [archdroid icons](https://aur.archlinux.org/packages/archdroid-icon-theme/)
-* [Materia icons](https://aur.archlinux.org/packages/materia-theme-git/)
-
-To use the new icon themes added to oomox, you have to create a executable file in ```$HOME/.local/bin``` with a similar naming schema like the example command used for gnome colors icon theme in ```config.yaml```. The content of the executable should be something like:
-
-```
-#!/bin/bash
-cd /opt/oomox
-exec ./plugins/{path to change_color.sh file for your respective icon theme under plugins} "$@"
+```yaml
+xmenu:
+  path: "~/.config/xmenu"
+  command: "sudo make clean install"
+  name: "XMenu"
 ```
 
-With the above executable created, all you have to do is to give it execute permission by using ```chmod +x``` and use the name of the executable as the command for your icon theme in the ```config.yaml``` file. **Note: Make sure ```$HOME/.local/bin``` is added to your PATH.**
+As you can see, there're three parameters for each program:
 
-## Upgrade from v1 to v2
+1. **path**: The path to the required destination. For example, if you would like to run a program you wrote, you pass that directory to this parameter.
+2. **command**: Obviously, this parameter is required for every program, if you want that program to be themed.
+3. **name**: The name of the program that you would like to be displayed if it was themed correctly/incorrectly.
 
-Simply delete the old `chameleon` executable at `/usr/local/bin/chameleon`. Now use `chameleon.py` which should be symlinked to `$HOME/.local/bin/chameleon.py`.
-
-`$HOME/.local/bin/` must be on your `$PATH`
+As long as you pass the correct information, you can practically get any program to be themed.

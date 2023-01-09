@@ -1,7 +1,7 @@
 PREFIX 			= ~/.local
 CONFIG 			= ~/.config
 PIPVER 			= `command -v pip3 || command -v pip`
-CONF_FILE 	= $(XDG_CONFIG_HOME)/chameleon/config.yml
+CONF_FILE 	= $(XDG_CONFIG_HOME)/chameleon/config.yaml
 CURRENT_DIR = $(PWD)
 
 install:
@@ -10,7 +10,7 @@ install:
 	@echo "chameleon.py has been installed to $(PREFIX)/bin/chameleon.py"
 	mkdir -p $(CONFIG)/chameleon
 	-mv $(CONF_FILE) $(CONF_FILE)-backup 2>/dev/null
-	-cp -r $(CURRENT_DIR)/config-template.yml $(CONF_FILE)
+	-cp -r $(CURRENT_DIR)/config-template.yaml $(CONF_FILE)
 	@echo "installing $(PIPVER) dependencies"
 	@$(PIPVER) install whichcraft || echo "dependencies couldn't be installed install pip and rerun"
 	@$(PIPVER) install pywal || echo "dependencies couldn't be installed install pip and rerun"

@@ -4,6 +4,9 @@
 # If the `command` is a collection of multiple commands, then you must break it
 # up into multiple commands, like shown in the `wal-discord` program .
 
+# If you want the errors to be displayed.
+debug: false
+
 oomoxicons:
   command: "oomox-archdroid-icons-cli /opt/oomox/scripted_colors/xresources/xresources-reverse"
   name: "Oomix Icons"
@@ -21,14 +24,14 @@ pywalfox:
   name: "Firefox"
 
 wal-discord:
-  path: "$HOME/.local/bin"
+  path: "~/.local/bin"
   command:
     - "wal-discord"
-    - "beautifuldiscord --css $HOME/.cache/wal-discord/style.css"
+    - "beautifuldiscord --css ~/.cache/wal-discord/style.css"
   name: "Discord"
 
 xmenu:
-  path: "$HOME/.config/xmenu"
+  path: "~/.config/xmenu"
   command: "sudo make clean install"
   name: "XMenu"
 
