@@ -1,30 +1,108 @@
 #!/usr/bin/env python3
 
-
-import os
 import argparse
+import os
 import subprocess
 from os.path import expanduser
-from utils import print_status as print_status
-from utils import run_command as run_command
-from utils import get_info_for_item as get_info_for_item
-from utils import parse_yaml
 
+import yaml
 
-# get home directory
 home = expanduser("~")
 
-# get config path
 config_dir = home + "/.config/chameleon"
 config_path = home + "/.config/chameleon/config.yaml"
 
-# store location of the scripts file
-scripts_location = (
-    f"{home}/.local/share/Singularis/third-party-tools" + "/chameleon/scripts"
-)
+
+class BColors:
+    """Keeps all of the colors in one place."""
+
+    HEADER = "\033[95m"
+    OKBLUE = "\033[94m"
+    OKGREEN = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    ENDC = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
 
 
-# Parse command line arguments
+###############################################################################
+#                                                                             #
+#                                    Utils                                    #
+#                                                                             #
+###############################################################################
+
+
+def run_command(command_list, cwd=None, get_output=None):
+    stdout = subprocess.PIPE if get_output else subprocess.DEVNULL
+
+    if cwd == "":
+        cwd = None
+
+    p = subprocess.Popen(
+        command_list,
+        cwd=cwd,
+        stdout=stdout,
+        shell=True,
+    )
+    p.wait()
+
+    return p.communicate()[0].decode("utf-8") if get_output else ""
+
+
+def get_info_for_item(config, item):
+    try:
+        path = config[item]["path"]
+    except KeyError:
+        path = ""
+
+    try:
+        command = config[item]["command"]
+    except KeyError:
+        command = ""
+
+    return path, command
+
+
+def parse_yaml(config_path):
+    with open(config_path, mode="r") as file:
+        file_dict = yaml.full_load(file)
+        file.close()
+    return file_dict
+
+
+def print_status(status, program):
+    """
+    Prints the status of the program.
+    0: Themed program,
+    1: Failed to theme program,
+    2: Warning,
+    3: Hooked
+    """
+
+    end = BColors.ENDC
+    fail = BColors.FAIL
+    warning = BColors.WARNING
+    green = BColors.OKGREEN
+    blue = BColors.OKBLUE
+
+    if status == 0:
+        print(f"{green} ⚡ {end} Themed {program} {end}")
+    elif status == 1:
+        print(f"{fail} X {end} {warning} Failed to theme {program} {end}")
+    elif status == 2:
+        print(f"{fail} X {end} {warning} User Hook {program} failed {end}")
+    elif status == 3:
+        print(f"{green} ⚡ {end} {blue} {program} User hook {end} succeeded")
+
+
+###############################################################################
+#                                                                             #
+#                                  Main Code                                  #
+#                                                                             #
+###############################################################################
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Chameleon Arguments",
@@ -53,19 +131,18 @@ def parse_args():
 
 
 def call_wal(args, walargs):
-    # If we are calling wal on an image.
     if args.image:
         try:
             imagepath = os.path.abspath(args.image)
             commandlist = ["wal", "-i", imagepath]
             commandlist.extend(walargs)
+
             run_command(commandlist)
             run_command(["feh", "--bg-scale", args.image])
             run_command(["cp", args.image, "~/.config/wall.jpg"])
         except Exception:
             print_status(1, "pywal")
             return
-    # If we are using a prebuilt or custom colorscheme.
     elif args.theme:
         try:
             commandlist = ["wal", "--theme", args.theme]
@@ -74,6 +151,7 @@ def call_wal(args, walargs):
         except Exception:
             print_status(1, "pywal")
             return
+
     print_status(0, "pywal")
 
 
@@ -82,74 +160,27 @@ def theme_program(config, name, program_name):
         return
 
     try:
-        cwd, _, _, cmdList = get_info_for_item(config, name)
-        run_command(cmdList, cwd=cwd)
-    except Exception:
+        path, command = get_info_for_item(config, name)
+
+        if isinstance(command, str):
+            run_command(command, cwd=path)
+        elif isinstance(command, list):
+            for cmd in command:
+                run_command(cmd, cwd=path)
+    except Exception as e:
+        print(e)
         print_status(1, program_name)
         return
 
     print_status(0, program_name)
 
 
-def call_xfce4(config):
-    if "xfce4-terminal" not in config:
-        return
-
-    name = "Xfce4 Terminal"
-    try:
-        cwd, config_path, _, cmdList = get_info_for_item(
-            config,
-            "xfce4-terminal",
-        )
-
-        xfce4_pywal = run_command(
-            cmdList,
-            cwd=cwd,
-            getoutput=True,
-        )
-
-        file = open(config_path, "w+")
-        file.write(xfce4_pywal)
-        file.close()
-    except Exception:
-        print_status(1, name)
-        return
-
-    print_status(0, name)
-
-
-def call_starttree(config):
-    if "starttree" in config:
-        try:
-            path = config["starttree"]["path"]
-            p = subprocess.Popen(
-                ["{}/generate.py".format(path)], stdout=subprocess.DEVNULL
-            )
-            p.wait()
-        except Exception:
-            print_status(1, "StartTree")
-            return
-    else:
-        return
-    print_status(0, "StartTree")
-
-
-def theme(config, args, walargs):
-    call_wal(args, walargs)
-    call_xfce4(config)
-    theme_program(config, "wal-discord", "Discord")
-    theme_program(config, "xmenu", "XMenu")
-    theme_program(config, "oomoxicons", "Oomox Icons")
-    theme_program(config, "oomoxgtk", "Oomox GTK")
-    theme_program(config, "oomoxspotify", "Spotify")
-    theme_program(config, "pywalfox", "Pywal Fox")
-    theme_program(config, "starttree", "Start Tree")
-
-
 def main():
     config = parse_yaml(config_path)
     args, walargs = parse_args()
-    theme(config, args, walargs)
+    call_wal(args, walargs)
+    for conf in config:
+        theme_program(config, conf, config[conf]["name"])
 
 
 if __name__ == "__main__":

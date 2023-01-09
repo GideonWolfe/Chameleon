@@ -1,0 +1,53 @@
+# You can add as many things here as you want.
+# As long as you provide the needed path, and command, it should work.
+# Also, every program requires `name`.
+# If the `command` is a collection of multiple commands, then you must break it
+# up into multiple commands, like shown in the `wal-discord` program .
+
+oomoxicons:
+  command: "oomox-archdroid-icons-cli /opt/oomox/scripted_colors/xresources/xresources-reverse"
+  name: "Oomix Icons"
+
+oomoxgtk:
+  command: "oomox-cli /opt/oomox/scripted_colors/xresources/xresources-reverse"
+  name: "Oomix GTK"
+
+oomoxspotify:
+  command: "oomoxify-cli /opt/spotify/Apps/.cache/wal/colors-oomox -s"
+  name: "Oomix Spotify"
+
+pywalfox:
+  command: "pywalfox update"
+  name: "Firefox"
+
+wal-discord:
+  path: "$HOME/.local/bin"
+  command:
+    - "wal-discord"
+    - "beautifuldiscord --css $HOME/.cache/wal-discord/style.css"
+  name: "Discord"
+
+xmenu:
+  path: "$HOME/.config/xmenu"
+  command: "sudo make clean install"
+  name: "XMenu"
+
+# slickpywal:
+#   path: ""
+#   command: ""
+#   name: ""
+
+# pywalneopixels:
+#   path: ""
+#   command: ""
+#   name: ""
+
+# razercli:
+#   path: ""
+#   command: ""
+#   name: ""
+
+# telegrampalletegen:
+#   path: ""
+#   command: ""
+#   name: ""
