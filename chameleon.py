@@ -180,7 +180,8 @@ def main():
     args, walargs = parse_args()
     call_wal(args, walargs)
     for conf in config:
-        theme_program(config, conf, config[conf]["name"])
+        if conf != "debug":
+            theme_program(config, conf, config[conf]["name"])
 
 
 if __name__ == "__main__":
