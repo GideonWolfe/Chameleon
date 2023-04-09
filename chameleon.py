@@ -138,8 +138,9 @@ def call_wal(args, walargs):
             commandlist.extend(walargs)
 
             run_command(commandlist)
-            run_command(["feh", "--bg-scale", args.image])
-            run_command(["cp", args.image, "~/.config/wall.jpg"])
+            os.system(f"feh --bg-scale {args.image}")
+            if args.image != "~/.config/wall.jpg":
+                os.system(f"cp {args.image} ~/.config/wall.jpg")
         except Exception:
             print_status(1, "pywal")
             return
